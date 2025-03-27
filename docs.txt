@@ -1,0 +1,52 @@
+
+Backend (Java):*
+*Package Structure:*
+- `com.petservicesimulation.backend`
+    - `database`: SQLite database interactions
+        - `DatabaseManager.java`: Manages database connections and queries
+        - `SQLiteDB.java`: SQLite database implementation
+    - `entities`: Data models for pets, owners, services, and appointments
+        - `Pet.java`: Pet data model
+        - `Owner.java`: Owner data model
+        - `Service.java`: Service data model
+        - `Appointment.java`: Appointment data model
+    - `services`: Business logic for managing pets, owners, services, and appointments
+        - `PetService.java`: Pet management service
+        - `OwnerService.java`: Owner management service
+        - `ServiceService.java`: Service management service
+        - `AppointmentService.java`: Appointment management service
+
+*Database (SQLite):*
+- `pets.db`: SQLite database file
+- `schema.sql`: Database schema definition
+
+*Frontend (Android Studio):*
+*Package Structure:*
+- `com.petservicesimulation.frontend`
+    - `activities`: Android activities for user interaction
+        - `MainActivity.java`: Main application activity
+        - `PetActivity.java`: Pet management activity
+        - `OwnerActivity.java`: Owner management activity
+        - `ServiceActivity.java`: Service management activity
+        - `AppointmentActivity.java`: Appointment management activity
+    - `adapters`: Android adapters for data binding
+        - `PetAdapter.java`: Pet data adapter
+        - `OwnerAdapter.java`: Owner data adapter
+        - `ServiceAdapter.java`: Service data adapter
+        - `AppointmentAdapter.java`: Appointment data adapter
+    - `fragments`: Android fragments for user interface
+        - `PetFragment.java`: Pet management fragment
+        - `OwnerFragment.java`: Owner management fragment
+        - `ServiceFragment.java`: Service management fragment
+        - `AppointmentFragment.java`: Appointment management fragment
+
+*Layouts:*
+- `activity_main.xml`: Main application layout
+- `activity_pet.xml`: Pet management layout
+- `activity_owner.xml`: Owner management layout
+- `activity_service.xml`: Service management layout
+- `activity_appointment.xml`: Appointment management layout
+
+*Database Helper:*
+- `DatabaseHelper.java`: Helper class for database interactions
+
