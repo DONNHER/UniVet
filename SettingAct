@@ -10,11 +10,21 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 
 private void handleLogout() {
-    SessionManager.getInstance().saveSessionData();
+    SessionManager.getInstance().saveSessionData(); // Save unsaved changes
     clearUserSession();
 
-    Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
+    // Redirect to Login & prevent going back
+    Intent intent = new Intent(this, LoginActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
     startActivity(intent);
     finish();
 }
+
+// Clear stored session
+private void clearUserSession() {
+    SharedPreferences sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
+    SharedPreferences.Editor editor = sharedPreferences.edit();
+    editor.clear();
+    editor.apply();
+}
+
