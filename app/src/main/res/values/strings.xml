@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">uni</string>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="password">Password</string>
+    <string name="vaccination">Vaccination</string>
+    <string name="feed">Feed</string>
+    <string name="services">Services</string>
+    <string name="products">Products</string>
+    <string name="Other">Other</string>
+</resources>
