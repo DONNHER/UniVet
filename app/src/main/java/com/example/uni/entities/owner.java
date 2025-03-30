@@ -1,5 +1,9 @@
 package com.example.uni.entities;
 
+import com.example.uni.serviceType;
+
+import java.util.ArrayList;
+
 public class owner {
     private int id;
     private String name;
@@ -8,6 +12,7 @@ public class owner {
     private String address;
 
     private String password;
+    private  ArrayList<serviceType> transactions;
     // Constructor
     public owner( String name, String password) {
         this.name = name;
@@ -76,6 +81,14 @@ public class owner {
         this.password = password;
     }
 
+    public ArrayList<serviceType> getTransactions() {
+        return transactions;
+    }
+
+    private void addService(String email, serviceType.Services type, String description){
+            serviceType newTransaction = new serviceType(email,type,description);
+            transactions.add(newTransaction);
+        }
     @Override
     public String toString() {
         return "Owner{" +

@@ -6,8 +6,7 @@ public class Appointment {
     private String serviceType;
     private String appointmentDate;
     private String status;
-    private Integer technicianId; // Nullable
-    private String paymentStatus;
+    private final String paymentMethod;
     private double totalCost;
     private String createdAt;
     private String updatedAt;
@@ -19,7 +18,7 @@ public class Appointment {
         this.serviceType = serviceType;
         this.appointmentDate = appointmentDate;
         this.status = "Pending";
-        this.paymentStatus = "Unpaid";
+        this.paymentMethod = "COD";
         this.totalCost = totalCost;
     }
 
@@ -42,12 +41,7 @@ public class Appointment {
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
 
-    public Integer getTechnicianId() { return technicianId; }
-    public void setTechnicianId(Integer technicianId) { this.technicianId = technicianId; }
-
-    public String getPaymentStatus() { return paymentStatus; }
-    public void setPaymentStatus(String paymentStatus) { this.paymentStatus = paymentStatus; }
-
+    public String getPaymentMethod() { return paymentMethod; }
     public double getTotalCost() { return totalCost; }
     public void setTotalCost(double totalCost) { this.totalCost = totalCost; }
 

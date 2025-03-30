@@ -3,16 +3,14 @@ package com.example.uni.entities;
 public class Service {
     private int id;
     private String name;
-    private String description;
     private double price;
     private int estimatedDuration; // Duration in minutes
     private String serviceType; // Example: "Grooming", "Veterinary", "Transportation"
 
     // Constructor
-    public Service(int id, String name, String description, double price, int estimatedDuration, String serviceType) {
+    public Service(int id, String name,  double price, int estimatedDuration, String serviceType) {
         this.id = id;
         this.name = name;
-        this.description = description;
         this.price = price;
         this.estimatedDuration = estimatedDuration;
         this.serviceType = serviceType;
@@ -33,14 +31,6 @@ public class Service {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public double getPrice() {
@@ -72,7 +62,6 @@ public class Service {
         return "Service{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
                 ", price=" + price +
                 ", estimatedDuration=" + estimatedDuration +
                 ", serviceType='" + serviceType + '\'' +
