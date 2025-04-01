@@ -27,9 +27,8 @@ public class medServiceAct extends AppCompatActivity {
 //        }
 
         // Load Main UI for the logged-in user
-        setContentView(R.layout.activity_main);
-        initializeServices();
-        loadUserRoleUI();
+        setContentView(R.layout.med_service);
+
     }
 
     private void initializeServices() {

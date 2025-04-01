@@ -29,9 +29,7 @@ public class groomServiceAct extends AppCompatActivity {
         }
 
         // Load Main UI for the logged-in user
-        setContentView(R.layout.activity_main);
-        initializeServices();
-        loadUserRoleUI();
+        setContentView(R.layout.groom_service);
     }
 
     private void initializeServices() {

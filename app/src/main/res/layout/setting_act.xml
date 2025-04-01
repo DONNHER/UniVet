@@ -17,8 +17,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:paddingBottom="16dp"
-            android:background="">
+            android:paddingBottom="16dp">
 
             <!-- Profile Image -->
             <ImageView
@@ -26,16 +25,15 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/profile_placeholder"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/circle_background"/>
+                android:src="@drawable/logo"
+                android:layout_marginTop="16dp" />
 
             <!-- Name -->
             <TextView
                 android:id="@+id/profile_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Melissa Peters"
+                android:text="Username"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp"/>
@@ -45,7 +43,7 @@
                 android:id="@+id/profile_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="melpeters@gmail.com"
+                android:text="UserEmail"
                 android:textSize="14sp"
                 android:textColor="@android:color/darker_gray"
                 android:layout_marginBottom="12dp"/>
@@ -56,7 +54,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Edit Profile"
-                android:layout_marginBottom="12dp"/>
+                android:layout_marginBottom="12dp"
+                />
         </LinearLayout>
 
         <!-- Settings Section -->
@@ -83,14 +82,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/rounded_background"
             android:padding="12dp">
 
             <TextView
                 android:id="@+id/security"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Security"
+                android:text="@string/security"
                 android:textSize="14sp"
                 android:padding="10dp"/>
 
@@ -115,7 +113,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Support & About"
+            android:text="@string/support_about"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@android:color/darker_gray"
@@ -126,14 +124,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/rounded_background"
             android:padding="12dp">
 
             <TextView
                 android:id="@+id/help_support"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Help & Support"
+                android:text="@string/help_support"
                 android:textSize="14sp"
                 android:padding="10dp"/>
 
@@ -141,7 +138,7 @@
                 android:id="@+id/terms_policies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Terms and Policies"
+                android:text="@string/terms_and_policies"
                 android:textSize="14sp"
                 android:padding="10dp"/>
         </LinearLayout>
@@ -150,7 +147,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Actions"
+            android:text="@string/actions"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@android:color/darker_gray"
@@ -161,17 +158,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/rounded_background"
             android:padding="12dp">
 
             <TextView
                 android:id="@+id/logout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Log Out"
-                android:textSize="14sp"
+                android:text="@string/log_out"
+                android:textSize="30dp"
                 android:textColor="@android:color/holo_red_dark"
-                android:padding="10dp"/>
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:onClick="logoutClick"/>
         </LinearLayout>
 
     </LinearLayout>

@@ -27,9 +27,7 @@ public class productServiceAct extends AppCompatActivity {
 //        }
 
         // Load Main UI for the logged-in user
-        setContentView(R.layout.activity_main);
-        initializeServices();
-        loadUserRoleUI();
+        setContentView(R.layout.productservice);
     }
 
     private void initializeServices() {

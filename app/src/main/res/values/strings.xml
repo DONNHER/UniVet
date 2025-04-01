@@ -21,4 +21,11 @@
     <string name="menu">menu</string>
     <string name="confirm_pass">Confirm Passwor</string>
     <string name="confirm_pas">Confirm Password</string>
+    <string name="help_support"><![CDATA[Help & Support]]></string>
+    <string name="support_about"><![CDATA[Support & About]]></string>
+    <string name="security">Security</string>
+    <string name="log_out">Log Out</string>
+    <string name="actions">Actions</string>
+    <string name="terms_and_policies">Terms and Policies</string>
+    <string name="back_button">Back Button</string>
 </resources>
