@@ -9,11 +9,14 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.uni.R;
+import com.example.uni.entities.owner;
 import com.example.uni.management.SQLiteDB;
 import com.example.uni.serviceType;
 //import com.example.uni.management.SessionManager;
 
 public class main_act extends AppCompatActivity {
+    private ownerLoginAct ownerLogin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,19 +78,53 @@ public class main_act extends AppCompatActivity {
         }
     }
     public void onMedClick(View view) {
+        if(ownerLogin.isLoggedIn()==null){
+            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
+            startActivity(intent);
+        }
         Intent intent = new Intent(this, groomServiceAct.class); // Replace with actual target
         startActivity(intent);
     }
     public void onGroomClick(View view) {
+        if(ownerLogin.isLoggedIn()==null){
+            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
+            startActivity(intent);
+        }
         Intent intent = new Intent(this, medServiceAct.class); // Replace with actual target
         startActivity(intent);
     }
     public void onProductClick(View view) {
+        if(ownerLogin.isLoggedIn()==null){
+            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
+            startActivity(intent);
+
+        }
         Intent intent = new Intent(this, productServiceAct.class); // Replace with actual target
         startActivity(intent);
     }
     public void onOtherClick(View view) {
+        if(ownerLogin.isLoggedIn()==null){
+            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
+            startActivity(intent);
+
+        }
         Intent intent = new Intent(this, otherServiceAct.class); // Replace with actual target
         startActivity(intent);
+
+    }
+    public void onBtnClick(View view) {
+        Intent intent = new Intent(this, settingAct.class); // Replace with actual target
+        startActivity(intent);
+
+    }
+    public void onLogClick(View view) {
+        Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
+        startActivity(intent);
+        finish();
+    }
+    public void onResClick(View view) {
+        Intent intent = new Intent(this, ownerRegisterAct.class); // Replace with actual target
+        startActivity(intent);
+        finish();
     }
 }

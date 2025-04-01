@@ -3,6 +3,7 @@ package com.example.uni.acts;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,11 +14,20 @@ import com.example.uni.entities.owner;
 import java.util.ArrayList;
 
 public class ownerLoginAct extends AppCompatActivity {
+    private owner isLoggedIn = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.owner_login_act);
+        Button btnGetStarted = findViewById(R.id.btnLogin);
+        btnGetStarted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Redirect to Login or next activity, for example
+                loginUser();
+            }
+        });
     }
 
 
@@ -33,26 +43,27 @@ public class ownerLoginAct extends AppCompatActivity {
     public void loginUser() {
         String username = findViewById(R.id.username).toString().trim();
         String password = findViewById(R.id.pass).toString().trim();
+        owner logUser = ownerRegisterAct.getUser(new owner(username, password));
 
-        if (authenticateUser(username, password)) {
-            saveSession(username, getUserRole(username));
-
-            Intent intent = new Intent(this, main_act.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        if (logUser != null) {
+//            saveSession(username, getUserRole(username));
+            setLoggedIn(logUser);
+            Intent intent = new Intent(this, OwnerDashboardAct.class);
             startActivity(intent);
-            finish();
         }
     }
 
-    // Dummy authentication logic (replace with real one)
-    private boolean authenticateUser(String username, String password) {
-        owner user =  new ownerRegisterAct().register();
-        // Replace this with your actual authentication logic
-        return user.getName().equals(username) && user.getPassword().equals(password);
-    }
 
     private String getUserRole(String username) {
         // Replace this with real logic to fetch user role
         return "owner";
+    }
+
+    public owner isLoggedIn() {
+        return isLoggedIn;
+    }
+
+    public void setLoggedIn(owner loggedIn) {
+        isLoggedIn = loggedIn;
     }
 }

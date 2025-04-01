@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.text.Editable;
 import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +14,7 @@ import com.example.uni.management.SQLiteDB;
 import com.example.uni.serviceType;
 //import com.example.uni.management.SessionManager;
 
-public class OwnerDashboardAct extends AppCompatActivity {
+public class settingAct extends AppCompatActivity {
     private ownerLoginAct ownerLogin;
 
 
@@ -33,10 +32,9 @@ public class OwnerDashboardAct extends AppCompatActivity {
 //        }
 
         // Load Main UI for the logged-in user
-        setContentView(R.layout.user_d_board);
+        setContentView(R.layout.setting_act);
         initializeServices();
-        TextView name = findViewById(R.id.name);
-        name.setText(ownerLogin.isLoggedIn().getName());
+        loadUserRoleUI();
     }
 
     private void initializeServices() {
@@ -62,6 +60,23 @@ public class OwnerDashboardAct extends AppCompatActivity {
         return sharedPreferences.getBoolean("isLoggedIn", false);
     }
 
+    private void loadUserRoleUI() {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
+        String role = sharedPreferences.getString("role", "");
+
+        Intent intent;
+        if ("admin".equals(role)) {
+            intent = new Intent(this, OwnerDashboardAct.class);
+//        else if ("technician".equals(role)) {
+//            intent = new Intent(this, TechnicianDashboardActivity.class);
+//        } else {
+//            intent = new Intent(this, OwnerDashboardActivity.class);
+//        }
+            startActivity(intent);
+            finish(); // Close MainActivity after redirection
+
+        }
+    }
     public void onMedClick(View view) {
         if(ownerLogin.isLoggedIn()==null){
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
@@ -97,11 +112,6 @@ public class OwnerDashboardAct extends AppCompatActivity {
             finish();
         }
         Intent intent = new Intent(this, otherServiceAct.class); // Replace with actual target
-        startActivity(intent);
-        finish();
-    }
-    public void onBtnClick(View view) {
-        Intent intent = new Intent(this, settingAct.class); // Replace with actual target
         startActivity(intent);
         finish();
     }
