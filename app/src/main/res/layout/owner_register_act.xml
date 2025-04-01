@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:background="@android:color/system_text_secondary_and_tertiary_inverse_disabled_light"/>
+            android:background="@android:color/white"/>
 
         <!--            android:drawableStart="@drawable/ic_user" -->
 
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:padding="12dp"
             android:layout_marginTop="12dp"
-            android:background="@android:color/system_text_secondary_and_tertiary_inverse_disabled_light"/>
+            android:background="@android:color/white"/>
 
 
         <!--            android:drawableStart="@drawable/ic_lock" -->
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:padding="12dp"
             android:layout_marginTop="12dp"
-            android:background="@android:color/system_text_secondary_and_tertiary_inverse_disabled_light"/>
+            android:background="@android:color/white"/>
         <!--            android:drawableStart="@drawable/ic_lock" -->
         <!--            android:drawableStart="@drawable/edittext_background" -->
 

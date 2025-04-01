@@ -1,9 +1,12 @@
 package com.example.uni.entities;
+
+import com.example.uni.serviceType;
+
 public class Appointment {
     private int id;
     private int userId;
     private int petId;
-    private String serviceType;
+    private serviceType service;
     private String appointmentDate;
     private String status;
     private final String paymentMethod;
@@ -12,10 +15,8 @@ public class Appointment {
     private String updatedAt;
 
     // Constructor
-    public Appointment(int userId, int petId, String serviceType, String appointmentDate, double totalCost) {
-        this.userId = userId;
-        this.petId = petId;
-        this.serviceType = serviceType;
+    public Appointment(String email, serviceType service, String appointmentDate, double totalCost) {
+        this.service = service;
         this.appointmentDate = appointmentDate;
         this.status = "Pending";
         this.paymentMethod = "COD";
@@ -32,8 +33,8 @@ public class Appointment {
     public int getPetId() { return petId; }
     public void setPetId(int petId) { this.petId = petId; }
 
-    public String getServiceType() { return serviceType; }
-    public void setServiceType(String serviceType) { this.serviceType = serviceType; }
+    public serviceType getServiceType() { return service; }
+    public void setServiceType(serviceType serviceType) { this.service = serviceType; }
 
     public String getAppointmentDate() { return appointmentDate; }
     public void setAppointmentDate(String appointmentDate) { this.appointmentDate = appointmentDate; }

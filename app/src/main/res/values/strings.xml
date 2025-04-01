@@ -8,4 +8,15 @@
     <string name="services">Services</string>
     <string name="products">Products</string>
     <string name="Other">Other</string>
+    <string name="hi_bella">Hi, bella</string>
+    <string name="hi">Hi</string>
+    <string name="search">Search</string>
+    <string name="how_can_we_assist_you">How can we assist you?</string>
+    <string name="dog_image">Dog Image</string>
+    <string name="todo">TODO</string>
+    <string name="grooming_services">Grooming Services</string>
+    <string name="MedicalServices">Medical Services</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="menu">menu</string>
 </resources>

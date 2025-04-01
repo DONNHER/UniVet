@@ -13,20 +13,20 @@ import com.example.uni.management.SQLiteDB;
 import com.example.uni.serviceType;
 //import com.example.uni.management.SessionManager;
 
-public class main_act extends AppCompatActivity {
+public class groomServiceAct extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//
-//        if (!isSessionActive()) {
-//            // Redirect to Login if session is not found
-//            Intent intent = new Intent(this, ownerLoginAct.class);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            startActivity(intent);
-//            finish();
-//            return; // Prevent further execution
-//        }
+
+        if (!isSessionActive()) {
+            // Redirect to Login if session is not found
+            Intent intent = new Intent(this, ownerLoginAct.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+            return; // Prevent further execution
+        }
 
         // Load Main UI for the logged-in user
         setContentView(R.layout.activity_main);
@@ -79,15 +79,11 @@ public class main_act extends AppCompatActivity {
         startActivity(intent);
     }
     public void onGroomClick(View view) {
-        Intent intent = new Intent(this, medServiceAct.class); // Replace with actual target
+        Intent intent = new Intent(this, serviceType.Services.grooming.class); // Replace with actual target
         startActivity(intent);
     }
     public void onProductClick(View view) {
-        Intent intent = new Intent(this, productServiceAct.class); // Replace with actual target
-        startActivity(intent);
-    }
-    public void onOtherClick(View view) {
-        Intent intent = new Intent(this, otherServiceAct.class); // Replace with actual target
+        Intent intent = new Intent(this, serviceType.Services.grooming.class); // Replace with actual target
         startActivity(intent);
     }
 }

@@ -13,20 +13,13 @@ import com.example.uni.R;
 
 public class start_act extends AppCompatActivity {
 
-    private ImageView imagePet;
-    private TextView titleText, subtitleText;
-    private Button btnGetStarted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.start_act);
 
-        // Initialize UI elements
-        imagePet = findViewById(R.id.imagePet);
-        titleText = findViewById(R.id.titleText);
-        subtitleText = findViewById(R.id.subtitleText);
-        btnGetStarted = findViewById(R.id.btnGetStarted);
+        Button btnGetStarted = findViewById(R.id.btnGetStarted);
 
         // Set the action for the "Get Started" button
         btnGetStarted.setOnClickListener(new View.OnClickListener() {
@@ -34,7 +27,7 @@ public class start_act extends AppCompatActivity {
             public void onClick(View v) {
                 // Action to perform when "Get Started" is clicked
                 // Redirect to Login or next activity, for example
-                Intent intent = new Intent(start_act.this, ownerLoginAct.class);
+                Intent intent = new Intent(start_act.this, main_act.class);
                 startActivity(intent);
             }
         });
