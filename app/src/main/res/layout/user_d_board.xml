@@ -77,7 +77,8 @@
             android:drawablePadding="8dp"
             android:textColorHint="#888888"
             android:layout_marginBottom="24dp"
-            tools:ignore="RtlSymmetry" />
+            tools:ignore="RtlSymmetry"
+            android:singleLine="true"/>
 
         <!-- Services Grid -->
         <GridLayout

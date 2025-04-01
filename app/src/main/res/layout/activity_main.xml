@@ -73,7 +73,8 @@
             android:hint="@string/search"
             android:paddingStart="40dp"
             android:textColorHint="#888888"
-            tools:ignore="RtlSymmetry" />
+            tools:ignore="RtlSymmetry"
+            android:singleLine="true"/>
 
         <GridLayout
             android:layout_width="match_parent"

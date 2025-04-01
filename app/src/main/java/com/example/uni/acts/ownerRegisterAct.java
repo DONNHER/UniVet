@@ -1,11 +1,12 @@
 package com.example.uni.acts;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,19 +27,25 @@ public class ownerRegisterAct extends AppCompatActivity {
 
         // Set the action for the "Get Started" button
         btnGetStarted.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
                 // Redirect to Login or next activity, for example
-                register();
-                Intent intent = new Intent(ownerRegisterAct.this, ownerLoginAct.class);
-                startActivity(intent);
-                finish();
+                if (register()) {
+                    Intent intent = new Intent(ownerRegisterAct.this, ownerLoginAct.class);
+                    startActivity(intent);
+                    finish();
+                }
+                TextView pass = findViewById(R.id.pass);
+                TextView conPass = findViewById(R.id.conPass);
+                pass.setText("Incorrect password");
+                conPass.setText("Incorrect password");
             }
         });
     }
 
 
-    public owner register(){
+    public boolean register(){
         String name = findViewById(R.id.username).toString().trim();
         String password = findViewById(R.id.pass).toString().trim();
         String confirmation = findViewById(R.id.conPass).toString().trim();
@@ -46,9 +53,9 @@ public class ownerRegisterAct extends AppCompatActivity {
             owner newUser = new owner(name, password);
             int index = findIndexInsertion(newUser);
             users.add(index,newUser);
-            return newUser;
+            return true;
         }
-        return null;
+        return false;
     }
     private void addUser(String username, String role) {
         SharedPreferences sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
