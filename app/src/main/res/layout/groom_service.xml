@@ -90,106 +90,55 @@
 
             <!-- Grooming -->
             <LinearLayout
-
+                android:id="@+id/Trim"
                 android:layout_width="9dp"
                 android:layout_height="120dp"
                 android:layout_columnWeight="1"
-                android:background="@drawable/logo"
+                android:background="@drawable/edit_background"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="12dp"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:onClick="onTrimClick">
 
                 <ImageView
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    />
-                <!--                android:src="@drawable/ic_grooming"-->
+                    android:src="@drawable/logo" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="8dp"
-                    android:text="@string/grooming_services"
+                    android:text="@string/T"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <!-- Boarding -->
             <LinearLayout
+                android:id="@+id/Clean"
                 android:layout_width="0dp"
                 android:layout_height="120dp"
                 android:layout_columnWeight="1"
-                android:background="@drawable/logo"
+                android:background="@drawable/edit_background"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="12dp"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:onClick="onCleanClick">
 
                 <ImageView
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    />
-                <!--                android:src="@drawable/ic_boarding"-->
+                    android:src="@drawable/logo"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="8dp"
-                    android:text="@string/MedicalServices"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <!-- Dog Walking -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="113dp"
-                android:layout_columnWeight="1"
-                android:background="@drawable/logo"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="12dp"
-                android:clickable="true"
-                android:focusable="true">
-
-                <ImageView
-                    android:layout_width="64dp"
-                    android:layout_height="64dp" />
-                <!--                android:src="@drawable/ic_dog_walking"-->
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:text="@string/products"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <!-- Pet Training -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="113dp"
-                android:layout_columnWeight="1"
-                android:background="@drawable/logo"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="12dp"
-                android:clickable="true"
-                android:focusable="true">
-
-                <ImageView
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:contentDescription="@string/todo" />
-
-                <!--                android:src="@drawable/ic_training"-->
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:text="@string/Other"
+                    android:text="@string/Cleaning"
                     android:textStyle="bold" />
             </LinearLayout>
         </GridLayout>

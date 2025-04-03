@@ -72,6 +72,12 @@
             android:exported="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         </activity>
+        <activity
+            android:name=".acts.appAct"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            tools:ignore="Instantiatable">
+        </activity>
     </application>
 
 </manifest>

@@ -1,45 +1,80 @@
-<!-- res/layout/activity_main.xml -->
+<!-- UI Layout XML -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#C86C3A"
-    android:gravity="center"
-    android:padding="24dp">
+    android:background="@drawable/dialog_background"
+    >
 
-    <ImageView
-        android:id="@+id/imagePet"
-        android:layout_width="350dp"
-        android:layout_height="250dp"
-        android:src="@drawable/logo"
-        android:scaleType="centerCrop"
-        android:layout_marginBottom="24dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/doctorImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Dr. Nishant Clinician\nKids Care Clinic"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp" />
 
     <TextView
-        android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Find Your Best Pet!"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="12dp" />
+        android:text="Morning Slots (9:00 AM - 12:00 PM)"
+        android:textColor="@color/black"
+        android:layout_marginTop="16dp"
+        android:paddingStart="16dp" />
+
+    <GridLayout
+        android:id="@+id/morningSlots"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="4"
+        android:padding="16dp">
+        <!-- Time slot buttons go here -->
+    </GridLayout>
 
     <TextView
-        android:id="@+id/subtitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Now, you can find pet for your lovely family in just few minutes."
-        android:textColor="@android:color/white"
-        android:textSize="14sp"
-        android:gravity="center"
-        android:layout_marginBottom="24dp" />
+        android:text="Evening Slots (5:00 PM - 9:00 PM)"
+        android:textColor="@color/black"
+        android:layout_marginTop="16dp"
+        android:paddingStart="16dp" />
+
+    <GridLayout
+        android:id="@+id/eveningSlots"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="4"
+        android:padding="16dp">
+        <!-- Time slot buttons go here -->
+    </GridLayout>
 
     <Button
-        android:id="@+id/btnGetStarted"
+        android:id="@+id/scheduleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Get Started"
-        android:backgroundTint="#5A2F17"
-        android:textColor="@android:color/white" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/black"
+        android:text="SCHEDULE"
+        android:textColor="@color/white" />
 </LinearLayout>

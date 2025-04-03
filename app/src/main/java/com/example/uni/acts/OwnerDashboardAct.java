@@ -1,5 +1,6 @@
 package com.example.uni.acts;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ public class OwnerDashboardAct extends AppCompatActivity {
     private ownerLoginAct ownerLogin;
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +37,7 @@ public class OwnerDashboardAct extends AppCompatActivity {
         // Load Main UI for the logged-in user
         setContentView(R.layout.user_d_board);
         TextView name = findViewById(R.id.name);
-        name.setText(ownerLoginAct.isLoggedIn().getEmail());
+        name.setText( "Hi, "+ ownerLoginAct.isLoggedIn().getEmail());
     }
 
     private void initializeServices() {
@@ -62,11 +64,11 @@ public class OwnerDashboardAct extends AppCompatActivity {
     }
 
     public void onMedClick(View view) {
-        Intent intent = new Intent(this, groomServiceAct.class); // Replace with actual target
+        Intent intent = new Intent(this, medServiceAct.class); // Replace with actual target
         startActivity(intent);
     }
     public void onGroomClick(View view) {
-        Intent intent = new Intent(this, medServiceAct.class); // Replace with actual target
+        Intent intent = new Intent(this, groomServiceAct.class); // Replace with actual target
         startActivity(intent);
     }
     public void onProductClick(View view) {

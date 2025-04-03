@@ -1,5 +1,6 @@
 package com.example.uni.acts;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.view.View;
 import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.uni.R;
 import com.example.uni.management.SQLiteDB;
@@ -15,21 +18,15 @@ import com.example.uni.serviceType;
 
 public class groomServiceAct extends AppCompatActivity {
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (!isSessionActive()) {
-            // Redirect to Login if session is not found
-            Intent intent = new Intent(this, ownerLoginAct.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
-            return; // Prevent further execution
-        }
-
         // Load Main UI for the logged-in user
         setContentView(R.layout.groom_service);
+        TextView name = findViewById(R.id.name);
+        name.setText( "Hi, "+ ownerLoginAct.isLoggedIn().getEmail());
     }
 
     private void initializeServices() {
@@ -72,16 +69,12 @@ public class groomServiceAct extends AppCompatActivity {
 
         }
     }
-    public void onMedClick(View view) {
-        Intent intent = new Intent(this, groomServiceAct.class); // Replace with actual target
-        startActivity(intent);
+    public void onTrimClick(View view) {
+        appAct dialogFragment = new appAct();
+        dialogFragment.show(getSupportFragmentManager(), "appointmentDialog");
     }
-    public void onGroomClick(View view) {
-        Intent intent = new Intent(this, serviceType.Services.grooming.class); // Replace with actual target
-        startActivity(intent);
-    }
-    public void onProductClick(View view) {
-        Intent intent = new Intent(this, serviceType.Services.grooming.class); // Replace with actual target
-        startActivity(intent);
+    public void onCleanClick(View view) {
+        appAct dialogFragment = new appAct();
+        dialogFragment.show(getSupportFragmentManager(), "appointmentDialog");
     }
 }

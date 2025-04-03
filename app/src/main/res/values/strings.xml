@@ -29,4 +29,7 @@
     <string name="terms_and_policies">Terms and Policies</string>
     <string name="back_button">Back Button</string>
     <string name="pass">Password</string>
+    <string name="Trimming" />
+    <string name="T">Trimming</string>
+    <string name="Cleaning">Cleaning</string>
 </resources>

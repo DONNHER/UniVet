@@ -94,18 +94,18 @@
                 android:layout_width="9dp"
                 android:layout_height="120dp"
                 android:layout_columnWeight="1"
-                android:background="@drawable/logo"
+                android:background="@drawable/edit_background"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="12dp"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:onClick="onGroomClick">
 
                 <ImageView
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    />
-                <!--                android:src="@drawable/ic_grooming"-->
+                    android:src="@drawable/logo" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -120,18 +120,18 @@
                 android:layout_width="0dp"
                 android:layout_height="120dp"
                 android:layout_columnWeight="1"
-                android:background="@drawable/logo"
+                android:background="@drawable/edit_background"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="12dp"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:onClick="onMedClick">
 
                 <ImageView
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    />
-                <!--                android:src="@drawable/ic_boarding"-->
+                    android:src="@drawable/logo" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -146,17 +146,18 @@
                 android:layout_width="0dp"
                 android:layout_height="113dp"
                 android:layout_columnWeight="1"
-                android:background="@drawable/logo"
+                android:background="@drawable/edit_background"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="12dp"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:onClick="onProductClick">
 
                 <ImageView
                     android:layout_width="64dp"
-                    android:layout_height="64dp" />
-                <!--                android:src="@drawable/ic_dog_walking"-->
+                    android:layout_height="64dp"
+                    android:src="@drawable/logo"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -171,19 +172,19 @@
                 android:layout_width="0dp"
                 android:layout_height="113dp"
                 android:layout_columnWeight="1"
-                android:background="@drawable/logo"
+                android:background="@drawable/edit_background"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="12dp"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:onClick="onOtherClick">
 
                 <ImageView
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:contentDescription="@string/todo" />
-
-                <!--                android:src="@drawable/ic_training"-->
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/logo"/>
 
                 <TextView
                     android:layout_width="wrap_content"
