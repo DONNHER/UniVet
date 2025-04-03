@@ -14,8 +14,8 @@ public class owner {
     private String password;
     private  ArrayList<serviceType> transactions;
     // Constructor
-    public owner( String name, String password) {
-        this.name = name;
+    public owner( String email, String password) {
+        this.email = email;
         this.password = password;
     }
     public owner(int id, String name, String email, String phone, String address) {

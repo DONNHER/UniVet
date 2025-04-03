@@ -34,9 +34,8 @@ public class OwnerDashboardAct extends AppCompatActivity {
 
         // Load Main UI for the logged-in user
         setContentView(R.layout.user_d_board);
-        initializeServices();
         TextView name = findViewById(R.id.name);
-        name.setText(ownerLogin.isLoggedIn().getName());
+        name.setText(ownerLoginAct.isLoggedIn().getEmail());
     }
 
     private void initializeServices() {
@@ -63,56 +62,23 @@ public class OwnerDashboardAct extends AppCompatActivity {
     }
 
     public void onMedClick(View view) {
-        if(ownerLogin.isLoggedIn()==null){
-            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-            startActivity(intent);
-        }
         Intent intent = new Intent(this, groomServiceAct.class); // Replace with actual target
         startActivity(intent);
     }
     public void onGroomClick(View view) {
-        if(ownerLogin.isLoggedIn()==null){
-            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-            startActivity(intent);
-            finish();
-        }
         Intent intent = new Intent(this, medServiceAct.class); // Replace with actual target
         startActivity(intent);
-        finish();
     }
     public void onProductClick(View view) {
-        if(ownerLogin.isLoggedIn()==null){
-            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-            startActivity(intent);
-            finish();
-        }
         Intent intent = new Intent(this, productServiceAct.class); // Replace with actual target
         startActivity(intent);
-        finish();
     }
     public void onOtherClick(View view) {
-        if(ownerLogin.isLoggedIn()==null){
-            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-            startActivity(intent);
-            finish();
-        }
         Intent intent = new Intent(this, otherServiceAct.class); // Replace with actual target
         startActivity(intent);
-        finish();
     }
     public void onBtnClick(View view) {
         Intent intent = new Intent(this, settingAct.class); // Replace with actual target
         startActivity(intent);
-        finish();
-    }
-    public void onLogClick(View view) {
-        Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-        startActivity(intent);
-        finish();
-    }
-    public void onResClick(View view) {
-        Intent intent = new Intent(this, ownerRegisterAct.class); // Replace with actual target
-        startActivity(intent);
-        finish();
     }
 }

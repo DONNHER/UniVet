@@ -7,16 +7,18 @@ import android.view.View;
 import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.example.uni.R;
 import com.example.uni.entities.owner;
 import com.example.uni.management.SQLiteDB;
 import com.example.uni.serviceType;
+
+import java.util.ArrayList;
 //import com.example.uni.management.SessionManager;
 
 public class main_act extends AppCompatActivity {
     private ownerLoginAct ownerLogin;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +35,6 @@ public class main_act extends AppCompatActivity {
 
         // Load Main UI for the logged-in user
         setContentView(R.layout.activity_main);
-        initializeServices();
-        loadUserRoleUI();
     }
 
     private void initializeServices() {
@@ -106,20 +106,18 @@ public class main_act extends AppCompatActivity {
         if(ownerLogin.isLoggedIn()==null){
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
-
         }
         Intent intent = new Intent(this, otherServiceAct.class); // Replace with actual target
         startActivity(intent);
-
     }
     public void onBtnClick(View view) {
         Intent intent = new Intent(this, settingAct.class); // Replace with actual target
         startActivity(intent);
-
     }
     public void onLogClick(View view) {
         Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
         startActivity(intent);
+
     }
     public void onResClick(View view) {
         Intent intent = new Intent(this, ownerRegisterAct.class); // Replace with actual target

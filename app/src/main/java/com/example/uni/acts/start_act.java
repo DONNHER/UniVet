@@ -29,6 +29,7 @@ public class start_act extends AppCompatActivity {
                 // Redirect to Login or next activity, for example
                 Intent intent = new Intent(start_act.this, main_act.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

@@ -83,6 +83,9 @@ public class settingAct extends AppCompatActivity {
 
         }
     }
+    public void back(View view) {
+        finish();
+    }
     public void logoutClick(View view) {
         ownerLogin.setLoggedIn(null);
         Intent intent = new Intent(this, main_act.class); // Replace with actual target

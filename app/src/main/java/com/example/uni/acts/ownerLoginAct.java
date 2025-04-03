@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +16,10 @@ import com.example.uni.entities.owner;
 import java.util.ArrayList;
 
 public class ownerLoginAct extends AppCompatActivity {
-    private owner isLoggedIn = null;
+    private static TempStorage temp = ownerRegisterAct.getTemp();
+
+    private static owner isLoggedIn = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +30,7 @@ public class ownerLoginAct extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Redirect to Login or next activity, for example
-                loginUser();
+               loginUser();
             }
         });
     }
@@ -41,16 +46,25 @@ public class ownerLoginAct extends AppCompatActivity {
     }
 
     public void loginUser() {
-        String username = findViewById(R.id.username).toString().trim();
-        String password = findViewById(R.id.pass).toString().trim();
-        owner logUser = ownerRegisterAct.getUser(new owner(username, password));
+        EditText name =  findViewById(R.id.Email);
+        String username = name.getText().toString().trim();
+        EditText pass =  findViewById(R.id.Pass);
+        String password = pass.getText().toString().trim();
+        owner newUser =   new owner(username, password);
+        int n= temp.getUsers().size();
+        Toast.makeText(getApplicationContext(),"Locessful" + n,Toast.LENGTH_SHORT).show();
+        owner logUser = temp.getUser(newUser, temp.getUsers());
 
         if (logUser != null) {
-//            saveSession(username, getUserRole(username));
-            setLoggedIn(logUser);
-            Intent intent = new Intent(this, OwnerDashboardAct.class);
+//            saveSession(username, getU+serRole(username));
+            ownerLoginAct.setLoggedIn(logUser);
+            Toast.makeText(getApplicationContext(),"Login Successful",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this,    OwnerDashboardAct.class);
             startActivity(intent);
+            finish();
+            return;
         }
+        Toast.makeText(getApplicationContext(),"Invalid Credentials",Toast.LENGTH_SHORT).show();
     }
 
 
@@ -59,11 +73,19 @@ public class ownerLoginAct extends AppCompatActivity {
         return "owner";
     }
 
-    public owner isLoggedIn() {
+    public static owner isLoggedIn() {
         return isLoggedIn;
     }
 
-    public void setLoggedIn(owner loggedIn) {
+    public static void setLoggedIn(owner loggedIn) {
         isLoggedIn = loggedIn;
+    }
+
+    public TempStorage getTemp() {
+        return temp;
+    }
+
+    public void setTemp(TempStorage temp) {
+        ownerLoginAct.temp = temp;
     }
 }
