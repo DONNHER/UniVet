@@ -3,38 +3,27 @@ package com.example.uni.entities;
 import com.example.uni.serviceType;
 
 public class Appointment {
-    private int id;
-    private int userId;
-    private int petId;
-    private serviceType service;
+
+    private String email;
+    private serviceType.Services service;
     private String appointmentDate;
     private String status;
     private final String paymentMethod;
-    private double totalCost;
+    private double totalCost = 500.0;
     private String createdAt;
     private String updatedAt;
 
     // Constructor
-    public Appointment(String email, serviceType service, String appointmentDate, double totalCost) {
+    public Appointment(String email, serviceType.Services service, String appointmentDate) {
+        this.email = email;
         this.service = service;
         this.appointmentDate = appointmentDate;
         this.status = "Pending";
         this.paymentMethod = "COD";
-        this.totalCost = totalCost;
     }
 
-    // Getters and Setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-
-    public int getUserId() { return userId; }
-    public void setUserId(int userId) { this.userId = userId; }
-
-    public int getPetId() { return petId; }
-    public void setPetId(int petId) { this.petId = petId; }
-
-    public serviceType getServiceType() { return service; }
-    public void setServiceType(serviceType serviceType) { this.service = serviceType; }
+    public serviceType.Services getServiceType() { return service; }
+    public void setServiceType(serviceType.Services serviceType) { this.service = serviceType; }
 
     public String getAppointmentDate() { return appointmentDate; }
     public void setAppointmentDate(String appointmentDate) { this.appointmentDate = appointmentDate; }
@@ -51,4 +40,12 @@ public class Appointment {
 
     public String getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(String updatedAt) { this.updatedAt = updatedAt; }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

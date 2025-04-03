@@ -2,6 +2,7 @@ package com.example.uni.acts;
 
 import android.widget.Toast;
 
+import com.example.uni.entities.Appointment;
 import com.example.uni.entities.owner;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 public class TempStorage {
     private static TempStorage temp;
     private  ArrayList<owner> users;
+    private  ArrayList<Appointment> appointments;
     private TempStorage(){
         users = new ArrayList<>();
     }
@@ -20,6 +22,7 @@ public class TempStorage {
         return  temp;
     }
     public ArrayList<owner> getUsers(){return users;}
+    public ArrayList<Appointment>getAppointments(){return appointments;}
     public owner getUser(owner user, ArrayList<owner> users){
         int l = 0;
         int r = users.size() -1;
@@ -55,5 +58,8 @@ public class TempStorage {
             return true;
         }
         return false;
+    }
+    public void addAppointment(Appointment appointment){
+        appointments.add(appointment);
     }
 }

@@ -9,8 +9,8 @@ public class AppointmentManager {
     private ArrayList<Appointment> appointments;
 
 
-    public void create(String email, serviceType service, String date, double cost) {
-        Appointment newApp = new Appointment(email, service, date, cost);
+    public void create(String email, serviceType.Services service, String date, double cost) {
+        Appointment newApp = new Appointment(email, service, date);
         appointments.add(newApp);
     }
 

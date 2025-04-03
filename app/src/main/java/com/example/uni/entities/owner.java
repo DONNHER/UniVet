@@ -86,7 +86,7 @@ public class owner {
     }
 
     private void addService(String email, serviceType.Services type, String description){
-            serviceType newTransaction = new serviceType(email,type,description);
+            serviceType newTransaction = new serviceType(type,description);
             transactions.add(newTransaction);
         }
     @Override

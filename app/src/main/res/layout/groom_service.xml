@@ -90,7 +90,6 @@
 
             <!-- Grooming -->
             <LinearLayout
-                android:id="@+id/Trim"
                 android:layout_width="9dp"
                 android:layout_height="120dp"
                 android:layout_columnWeight="1"
@@ -102,23 +101,33 @@
                 android:focusable="true"
                 android:onClick="onTrimClick">
 
+                <TextView
+                    android:id="@+id/cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_margin="0dp"
+                    android:padding="0dp"
+                    android:paddingTop="8dp"
+                    android:text="500"
+                    android:textStyle="bold"
+                    tools:ignore="RtlHardcoded" />
+
                 <ImageView
                     android:layout_width="64dp"
-                    android:layout_height="64dp"
+                    android:layout_height="47dp"
                     android:src="@drawable/logo" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="38dp"
                     android:paddingTop="8dp"
-                    android:text="@string/T"
-                    android:textStyle="bold" />
+                    android:text="Trimming"
+                    android:textStyle="bold"
+                    android:id="@+id/Trim"/>
             </LinearLayout>
-
-            <!-- Boarding -->
             <LinearLayout
-                android:id="@+id/Clean"
-                android:layout_width="0dp"
+                android:layout_width="9dp"
                 android:layout_height="120dp"
                 android:layout_columnWeight="1"
                 android:background="@drawable/edit_background"
@@ -127,18 +136,31 @@
                 android:padding="12dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:onClick="onCleanClick">
+                android:onClick="onTrimClick">
+
+                <TextView
+                    android:id="@+id/cost1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_margin="0dp"
+                    android:padding="0dp"
+                    android:paddingTop="8dp"
+                    android:text="400"
+                    android:textStyle="bold"
+                    tools:ignore="RtlHardcoded" />
 
                 <ImageView
                     android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:src="@drawable/logo"/>
+                    android:layout_height="47dp"
+                    android:src="@drawable/logo" />
 
                 <TextView
+                    android:id="@+id/Clean"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="38dp"
                     android:paddingTop="8dp"
-                    android:text="@string/Cleaning"
+                    android:text="Cleaning"
                     android:textStyle="bold" />
             </LinearLayout>
         </GridLayout>

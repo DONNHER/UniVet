@@ -32,4 +32,8 @@
     <string name="Trimming" />
     <string name="T">Trimming</string>
     <string name="Cleaning">Cleaning</string>
+    <string name="Ceckup">Checkup</string>
+    <string name="Checkup">CheckUp</string>
+    <string name="Check">Checkup</string>
+    <string name="Tr">Trimming \nCost: 500 php</string>
 </resources>

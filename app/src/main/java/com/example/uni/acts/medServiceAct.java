@@ -1,9 +1,11 @@
 package com.example.uni.acts;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +15,7 @@ public class medServiceAct extends AppCompatActivity {
     private ownerLoginAct ownerLogin;
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +31,8 @@ public class medServiceAct extends AppCompatActivity {
 
         // Load Main UI for the logged-in user
         setContentView(R.layout.med_service);
-
+        TextView name = findViewById(R.id.name);
+        name.setText( "Hi, "+ ownerLoginAct.isLoggedIn().getEmail());
     }
 
     private void initializeServices() {
@@ -71,57 +75,20 @@ public class medServiceAct extends AppCompatActivity {
 
         }
     }
-    public void onMedClick(View view) {
-        if(ownerLogin.isLoggedIn()==null){
-            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-            startActivity(intent);
-        }
-        Intent intent = new Intent(this, groomServiceAct.class); // Replace with actual target
-        startActivity(intent);
+    public void onCheckupClick(View view) {
+        appAct dialogFragment = new appAct();
+        dialogFragment.show(getSupportFragmentManager(), "appointmentDialog");
     }
-    public void onGroomClick(View view) {
-        if(ownerLogin.isLoggedIn()==null){
-            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-            startActivity(intent);
-            finish();
-        }
-        Intent intent = new Intent(this, medServiceAct.class); // Replace with actual target
-        startActivity(intent);
-        finish();
+    public void onVaccineClick(View view) {
+        appAct dialogFragment = new appAct();
+        dialogFragment.show(getSupportFragmentManager(), "appointmentDialog");
     }
-    public void onProductClick(View view) {
-        if(ownerLogin.isLoggedIn()==null){
-            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-            startActivity(intent);
-            finish();
-        }
-        Intent intent = new Intent(this, productServiceAct.class); // Replace with actual target
-        startActivity(intent);
-        finish();
-    }
-    public void onOtherClick(View view) {
-        if(ownerLogin.isLoggedIn()==null){
-            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-            startActivity(intent);
-            finish();
-        }
-        Intent intent = new Intent(this, otherServiceAct.class); // Replace with actual target
-        startActivity(intent);
-        finish();
+    public void onSurgeryClick(View view) {
+        appAct dialogFragment = new appAct();
+        dialogFragment.show(getSupportFragmentManager(), "appointmentDialog");
     }
     public void onBtnClick(View view) {
         Intent intent = new Intent(this, settingAct.class); // Replace with actual target
         startActivity(intent);
-        finish();
-    }
-    public void onLogClick(View view) {
-        Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-        startActivity(intent);
-        finish();
-    }
-    public void onResClick(View view) {
-        Intent intent = new Intent(this, ownerRegisterAct.class); // Replace with actual target
-        startActivity(intent);
-        finish();
     }
 }

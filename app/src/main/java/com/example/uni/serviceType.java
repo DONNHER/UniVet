@@ -1,13 +1,13 @@
 package com.example.uni;
 
 public class  serviceType {
-    public enum Services {
+    public static enum Services {
         grooming, medical;
-        public enum grooming{
+        public static enum grooming{
         Trimming,
         Cleaning
         }
-        public enum medical{
+        public static enum medical{
             Checkup,
             Vaccination,
             Surgeries
@@ -27,8 +27,7 @@ public class  serviceType {
      */
     public String description;
 
-    public serviceType(String email, Services transactionType, String description) {
-        this.email = email;
+    public serviceType( Services transactionType, String description) {
         this.serviceType = transactionType;
         this.description = description;
     }

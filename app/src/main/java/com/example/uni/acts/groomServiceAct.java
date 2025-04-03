@@ -17,8 +17,7 @@ import com.example.uni.serviceType;
 //import com.example.uni.management.SessionManager;
 
 public class groomServiceAct extends AppCompatActivity {
-
-    @SuppressLint("SetTextI18n")
+    private serviceType serviceType ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,5 +75,9 @@ public class groomServiceAct extends AppCompatActivity {
     public void onCleanClick(View view) {
         appAct dialogFragment = new appAct();
         dialogFragment.show(getSupportFragmentManager(), "appointmentDialog");
+    }
+
+    public static serviceType.Services getServiceType() {
+        return com.example.uni.serviceType.Services.grooming;
     }
 }

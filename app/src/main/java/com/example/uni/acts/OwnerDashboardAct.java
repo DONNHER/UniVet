@@ -17,7 +17,6 @@ import com.example.uni.serviceType;
 //import com.example.uni.management.SessionManager;
 
 public class OwnerDashboardAct extends AppCompatActivity {
-    private ownerLoginAct ownerLogin;
 
 
     @SuppressLint("SetTextI18n")
@@ -37,7 +36,7 @@ public class OwnerDashboardAct extends AppCompatActivity {
         // Load Main UI for the logged-in user
         setContentView(R.layout.user_d_board);
         TextView name = findViewById(R.id.name);
-        name.setText( "Hi, "+ ownerLoginAct.isLoggedIn().getEmail());
+        name.setText( "Hi" + ownerLoginAct.isLoggedIn().getEmail());
     }
 
     private void initializeServices() {

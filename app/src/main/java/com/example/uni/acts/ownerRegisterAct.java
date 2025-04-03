@@ -40,7 +40,6 @@ public class ownerRegisterAct extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ownerRegisterAct.this, ownerLoginAct.class);
                 startActivity(intent);
-                finish();
             } else {
                 Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
             }
