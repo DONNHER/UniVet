@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="#F6D4B8">
 
     <LinearLayout
@@ -47,8 +48,7 @@
             android:padding="12dp"
             android:layout_marginTop="12dp"
             android:background="@android:color/white"
-            android:singleLine="true"/>
-
+            android:singleLine="true" />
 
         <!--            android:drawableStart="@drawable/ic_lock" -->
         <!--            android:drawableStart="@drawable/edittext_background" -->
@@ -63,15 +63,23 @@
             android:padding="12dp"
             android:layout_marginTop="12dp"
             android:background="@android:color/white"
-            android:singleLine="true"/>
+            android:singleLine="true"
+            />
+
+        <CheckBox
+            android:id="@+id/showPasswordCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show Password"
+            android:padding="5dp"/>
         <!--            android:drawableStart="@drawable/ic_lock" -->
         <!--            android:drawableStart="@drawable/edittext_background" -->
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="I accept Privacy Policy &amp; Term of Use"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="12dp"
+            android:text="I accept Privacy Policy &amp; Term of Use" />
 
         <Button
             android:id="@+id/btnSignUp"

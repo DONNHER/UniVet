@@ -3,8 +3,12 @@ package com.example.uni.acts;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,19 +23,27 @@ public class ownerLoginAct extends AppCompatActivity {
     private static TempStorage temp = ownerRegisterAct.getTemp();
 
     private static owner isLoggedIn = null;
+    private EditText passwordEditText;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.owner_login_act);
+        setContentView(R.layout.owner_login_act); // Ensure this is correct
+
         Button btnGetStarted = findViewById(R.id.btnLogin);
-        btnGetStarted.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Redirect to Login or next activity, for example
-               loginUser();
+        EditText passwordEditText = findViewById(R.id.Pass);
+        CheckBox showPasswordCheckBox = findViewById(R.id.showPasswordCheckBox);
+
+        btnGetStarted.setOnClickListener(v -> loginUser());
+
+        showPasswordCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            } else {
+                passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
             }
+            passwordEditText.post(() -> passwordEditText.setSelection(passwordEditText.getText().length()));
         });
     }
 
@@ -45,7 +57,7 @@ public class ownerLoginAct extends AppCompatActivity {
         editor.apply();
     }
 
-    public void loginUser() {
+    protected void loginUser() {
         EditText name =  findViewById(R.id.Email);
         String username = name.getText().toString().trim();
         EditText pass =  findViewById(R.id.Pass);
