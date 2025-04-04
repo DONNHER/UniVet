@@ -72,15 +72,5 @@ public class appAct extends DialogFragment {
         });
         return view;
     }
-//
-//    private void setupSlots(GridLayout gridLayout, String timeOfDay) {
-//        // You can dynamically populate time slots based on the grid layout for morning or evening
-//        // Example: Add buttons for time slots dynamically
-//        for (int i = 0; i < 4; i++) {
-//            Button slotButton = new Button(getActivity());
-//            slotButton.setText(timeOfDay + " Slot " + (i + 1));
-//            // Set up button listeners if needed
-//            gridLayout.addView(slotButton);
-//        }
-//    }
+
 }
