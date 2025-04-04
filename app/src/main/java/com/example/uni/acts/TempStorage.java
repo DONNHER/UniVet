@@ -13,11 +13,12 @@ public class TempStorage {
     private  ArrayList<Appointment> appointments;
     private TempStorage(){
         users = new ArrayList<>();
+        appointments = new ArrayList<>();
     }
 
     public static synchronized  TempStorage getInstance(){
         if (temp == null){
-            temp = new TempStorage();
+            temp = new TempStorage() ;
         }
         return  temp;
     }

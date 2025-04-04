@@ -75,17 +75,15 @@ public class ownerAct extends AppCompatActivity {
         finish();
     }
     public void onGroomClick(View view) {
-        if(ownerLogin.isLoggedIn()==null){
+        if(OwnerDashboardAct.getLogged()==null){
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
-            finish();
         }
         Intent intent = new Intent(this, medServiceAct.class); // Replace with actual target
         startActivity(intent);
-        finish();
     }
     public void onProductClick(View view) {
-        if(ownerLogin.isLoggedIn()==null){
+        if(OwnerDashboardAct.getLogged()==null){
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
             finish();
@@ -95,7 +93,7 @@ public class ownerAct extends AppCompatActivity {
         finish();
     }
     public void onOtherClick(View view) {
-        if(ownerLogin.isLoggedIn()==null){
+        if(OwnerDashboardAct.getLogged()==null){
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
             finish();

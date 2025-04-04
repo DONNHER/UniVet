@@ -1,6 +1,7 @@
 package com.example.uni.acts;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,12 +13,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.uni.R;
+import com.example.uni.entities.owner;
 import com.example.uni.management.SQLiteDB;
 import com.example.uni.serviceType;
 //import com.example.uni.management.SessionManager;
 
-public class groomServiceAct extends AppCompatActivity {
-    private serviceType serviceType ;
+public  class groomServiceAct extends AppCompatActivity {
+    private owner logged =  OwnerDashboardAct.getLogged();
+    private static final serviceType.Services serviceType = com.example.uni.serviceType.Services.grooming ;
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +29,9 @@ public class groomServiceAct extends AppCompatActivity {
         // Load Main UI for the logged-in user
         setContentView(R.layout.groom_service);
         TextView name = findViewById(R.id.name);
-        name.setText( "Hi, "+ ownerLoginAct.isLoggedIn().getEmail());
+        name.setText( "Hi, "+ logged.getEmail());
+        Toast.makeText(getApplicationContext(), "Invalid Credentials "+
+                ownerRegisterAct.getTemp().getAppointments().size() , Toast.LENGTH_SHORT).show();
     }
 
     private void initializeServices() {
@@ -77,7 +83,20 @@ public class groomServiceAct extends AppCompatActivity {
         dialogFragment.show(getSupportFragmentManager(), "appointmentDialog");
     }
 
+
+    public Context getContext(){
+        return this.getApplicationContext();
+    }
+
     public static serviceType.Services getServiceType() {
-        return com.example.uni.serviceType.Services.grooming;
+        return serviceType;
+    }
+
+    public owner getLogged() {
+        return logged;
+    }
+
+    public void setLogged(owner logged) {
+        this.logged = logged;
     }
 }

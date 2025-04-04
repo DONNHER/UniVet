@@ -32,7 +32,7 @@ public class medServiceAct extends AppCompatActivity {
         // Load Main UI for the logged-in user
         setContentView(R.layout.med_service);
         TextView name = findViewById(R.id.name);
-        name.setText( "Hi, "+ ownerLoginAct.isLoggedIn().getEmail());
+        name.setText( "Hi, "+ OwnerDashboardAct.getLogged().getEmail());
     }
 
     private void initializeServices() {

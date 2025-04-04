@@ -78,7 +78,7 @@ public class main_act extends AppCompatActivity {
         }
     }
     public void onMedClick(View view) {
-        if(ownerLogin.isLoggedIn()==null){
+        if(OwnerDashboardAct.getLogged()==null){
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
         }
@@ -86,7 +86,7 @@ public class main_act extends AppCompatActivity {
         startActivity(intent);
     }
     public void onGroomClick(View view) {
-        if(ownerLogin.isLoggedIn()==null){
+        if(OwnerDashboardAct.getLogged()==null){
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
         }
@@ -94,7 +94,7 @@ public class main_act extends AppCompatActivity {
         startActivity(intent);
     }
     public void onProductClick(View view) {
-        if(ownerLogin.isLoggedIn()==null){
+        if(OwnerDashboardAct.getLogged()==null){
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
 
@@ -103,7 +103,7 @@ public class main_act extends AppCompatActivity {
         startActivity(intent);
     }
     public void onOtherClick(View view) {
-        if(ownerLogin.isLoggedIn()==null){
+        if(OwnerDashboardAct.getLogged()==null){
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
         }
@@ -117,7 +117,6 @@ public class main_act extends AppCompatActivity {
     public void onLogClick(View view) {
         Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
         startActivity(intent);
-
     }
     public void onResClick(View view) {
         Intent intent = new Intent(this, ownerRegisterAct.class); // Replace with actual target

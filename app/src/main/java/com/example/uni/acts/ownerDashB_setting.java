@@ -87,7 +87,7 @@ public class ownerDashB_setting extends AppCompatActivity {
         finish();
     }
     public void logoutClick(View view) {
-        ownerLogin.setLoggedIn(null);
+        OwnerDashboardAct.setLogged(null);
         Intent intent = new Intent(this, main_act.class); // Replace with actual target
         startActivity(intent);
         finish();
@@ -98,7 +98,7 @@ public class ownerDashB_setting extends AppCompatActivity {
         finish();
     }
     public void onProductClick(View view) {
-        if(ownerLogin.isLoggedIn()==null){
+        if(OwnerDashboardAct.getLogged()==null){
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
             finish();
@@ -108,7 +108,7 @@ public class ownerDashB_setting extends AppCompatActivity {
         finish();
     }
     public void onOtherClick(View view) {
-        if(ownerLogin.isLoggedIn()==null){
+        if(OwnerDashboardAct.getLogged()==null){
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
             finish();

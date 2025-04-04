@@ -136,7 +136,7 @@
                 android:padding="12dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:onClick="onTrimClick">
+                android:onClick="onCleanClick">
 
                 <TextView
                     android:id="@+id/cost1"

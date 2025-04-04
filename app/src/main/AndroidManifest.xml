@@ -25,7 +25,8 @@
         <activity
             android:name=".acts.main_act"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:launchMode="singleTop">
         </activity>
         <activity
             android:name=".acts.ownerLoginAct"
@@ -45,38 +46,45 @@
         <activity
             android:name=".acts.groomServiceAct"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:launchMode="singleTop">
         </activity>
         <activity
             android:name=".acts.medServiceAct"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:launchMode="singleTop">
         </activity>
         <activity
             android:name=".acts.productServiceAct"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:launchMode="singleTop">
         </activity>
         <activity
             android:name=".acts.otherServiceAct"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:launchMode="singleTop">
         </activity>
         <activity
             android:name=".acts.OwnerDashboardAct"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:launchMode="singleTop">
         </activity>
         <activity
             android:name=".acts.ownerAct"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:launchMode="singleTop">
         </activity>
         <activity
             android:name=".acts.appAct"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-            tools:ignore="Instantiatable">
+            tools:ignore="Instantiatable"
+            android:launchMode="singleTop">
         </activity>
     </application>
 

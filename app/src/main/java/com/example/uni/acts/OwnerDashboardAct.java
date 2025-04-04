@@ -14,10 +14,13 @@ import com.example.uni.R;
 import com.example.uni.entities.owner;
 import com.example.uni.management.SQLiteDB;
 import com.example.uni.serviceType;
+
+import java.security.acl.LastOwnerException;
 //import com.example.uni.management.SessionManager;
 
 public class OwnerDashboardAct extends AppCompatActivity {
 
+    private static owner logged = null;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -36,7 +39,14 @@ public class OwnerDashboardAct extends AppCompatActivity {
         // Load Main UI for the logged-in user
         setContentView(R.layout.user_d_board);
         TextView name = findViewById(R.id.name);
-        name.setText( "Hi" + ownerLoginAct.isLoggedIn().getEmail());
+        name.setText( "Hi, " + logged.getEmail());
+    }
+    public static owner getLogged() {
+        return logged;
+    }
+
+    public static void setLogged(owner o){
+        logged = o;
     }
 
     private void initializeServices() {

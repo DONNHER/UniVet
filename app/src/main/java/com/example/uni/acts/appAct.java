@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.uni.adapters.recycler;
 
 import androidx.fragment.app.DialogFragment;
@@ -36,7 +38,7 @@ public class appAct extends DialogFragment {
     private RecyclerView recyclerView2;
     private ArrayList<Item> items;
 
-    private TempStorage temp = ownerRegisterAct.getTemp();
+    private TempStorage temp = ownerLoginAct.getTemp() ;
 
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
@@ -47,13 +49,26 @@ public class appAct extends DialogFragment {
 //        recyclerView = view.findViewById(R.id.recycleView);
 //        recyclerView2 = view.findViewById(R.id.recycleView2);
         // Initialize UI elements
+
         calendarView = view.findViewById(R.id.calendarView);
         scheduleButton = view.findViewById(R.id.scheduleButton);
         EditText time = view.findViewById(R.id.time);
-        String dateTime = calendarView.getDate() + " "+ time.getText().toString();
         scheduleButton.setOnClickListener(v -> {
             // Handle button click to schedule appointment
-            temp.addAppointment(new Appointment (ownerLoginAct.isLoggedIn().getEmail(),groomServiceAct.getServiceType(),dateTime));
+            if (time == null || time.getText().toString().isEmpty()) {
+                Toast.makeText(getContext(), "Please enter a valid time.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            String dateTime = calendarView.getDate() + " " + time.getText().toString();
+            Appointment newAppointment = new Appointment(
+                    OwnerDashboardAct.getLogged().getEmail(),
+                    groomServiceAct.getServiceType(),
+                    dateTime
+            );
+            temp.addAppointment(newAppointment);
+            Toast.makeText(getContext(), "Successful Appointment", Toast.LENGTH_SHORT).show();
+            dismiss();
         });
         return view;
     }

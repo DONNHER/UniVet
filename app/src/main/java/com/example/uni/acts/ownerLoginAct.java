@@ -21,8 +21,7 @@ import java.util.ArrayList;
 
 public class ownerLoginAct extends AppCompatActivity {
     private static TempStorage temp = ownerRegisterAct.getTemp();
-
-    private static owner isLoggedIn;
+    private OwnerDashboardAct ownerDashboardAct;
     private EditText passwordEditText;
 
 
@@ -69,10 +68,11 @@ public class ownerLoginAct extends AppCompatActivity {
 
         if (logUser != null) {
 //            saveSession(username, getU+serRole(username));
-            ownerLoginAct.setLoggedIn(logUser);
+            OwnerDashboardAct.setLogged(logUser);
             Toast.makeText(getApplicationContext(),"Login Successful",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this,    OwnerDashboardAct.class);
             startActivity(intent);
+            finish();
             return;
         }
         Toast.makeText(getApplicationContext(),"Invalid Credentials",Toast.LENGTH_SHORT).show();
@@ -84,15 +84,8 @@ public class ownerLoginAct extends AppCompatActivity {
         return "owner";
     }
 
-    public static owner isLoggedIn() {
-        return isLoggedIn;
-    }
 
-    public static void setLoggedIn(owner loggedIn) {
-        isLoggedIn = loggedIn;
-    }
-
-    public TempStorage getTemp() {
+    public static TempStorage getTemp() {
         return temp;
     }
 
