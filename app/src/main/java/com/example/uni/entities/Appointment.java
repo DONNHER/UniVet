@@ -9,13 +9,12 @@ public class Appointment {
     private String appointmentDate;
     private String status;
     private final String paymentMethod;
-    private double totalCost = 500.0;
+    private double totalCost = 0.0;
     private String createdAt;
     private String updatedAt;
 
     // Constructor
-    public Appointment(String email, serviceType.Services service, String appointmentDate) {
-        this.email = email;
+    public Appointment( serviceType.Services service, String appointmentDate) {
         this.service = service;
         this.appointmentDate = appointmentDate;
         this.status = "Pending";
@@ -47,5 +46,13 @@ public class Appointment {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    public String toString(){
+        String s = "";
+        s += appointmentDate +"\n";
+        s += service +"\n";
+        s += this.totalCost + "\n";
+        s += status +"\n";
+        return s;
     }
 }

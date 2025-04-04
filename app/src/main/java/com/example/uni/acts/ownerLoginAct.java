@@ -5,31 +5,30 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.uni.R;
 import com.example.uni.entities.owner;
-
-import java.util.ArrayList;
+import com.example.uni.viewModel.*;
 
 public class ownerLoginAct extends AppCompatActivity {
     private static TempStorage temp = ownerRegisterAct.getTemp();
     private OwnerDashboardAct ownerDashboardAct;
     private EditText passwordEditText;
+    private ownerVModel ownerVModel;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.owner_login_act); // Ensure this is correct
-
+        ownerVModel = new ViewModelProvider(this).get(com.example.uni.viewModel.ownerVModel.class);
         Button btnGetStarted = findViewById(R.id.btnLogin);
         EditText passwordEditText = findViewById(R.id.Pass);
         CheckBox showPasswordCheckBox = findViewById(R.id.showPasswordCheckBox);
@@ -62,17 +61,14 @@ public class ownerLoginAct extends AppCompatActivity {
         EditText pass =  findViewById(R.id.Pass);
         String password = pass.getText().toString().trim();
         owner newUser =   new owner(username, password);
-        int n= temp.getUsers().size();
-        Toast.makeText(getApplicationContext(),"Locessful" + n,Toast.LENGTH_SHORT).show();
         owner logUser = temp.getUser(newUser, temp.getUsers());
 
         if (logUser != null) {
 //            saveSession(username, getU+serRole(username));
-            OwnerDashboardAct.setLogged(logUser);
+            ownerVModel.setuserdata(logUser);
             Toast.makeText(getApplicationContext(),"Login Successful",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this,    OwnerDashboardAct.class);
             startActivity(intent);
-            finish();
             return;
         }
         Toast.makeText(getApplicationContext(),"Invalid Credentials",Toast.LENGTH_SHORT).show();

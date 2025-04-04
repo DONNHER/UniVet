@@ -10,7 +10,7 @@ public class AppointmentManager {
 
 
     public void create(String email, serviceType.Services service, String date, double cost) {
-        Appointment newApp = new Appointment(email, service, date);
+        Appointment newApp = new Appointment( service, date);
         appointments.add(newApp);
     }
 

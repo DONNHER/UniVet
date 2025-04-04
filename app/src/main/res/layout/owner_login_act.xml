@@ -95,7 +95,7 @@
 
        <!--  android:drawableStart="@drawable/ic_google" -->
         <Button
-            android:text="Log in with Apple"
+            android:text="Log in with FaceBoook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp" />

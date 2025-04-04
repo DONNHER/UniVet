@@ -5,21 +5,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.*;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.uni.R;
-import com.example.uni.entities.Appointment;
 import com.example.uni.entities.owner;
-import com.example.uni.viewModel.ownerVModel;
-//import com.example.uni.management.SessionManager;
 
-public class OwnerDashboardAct extends AppCompatActivity {
-//    private ownerVModel ownerVModel;
+public class TechnicianDashB extends AppCompatActivity {
+
     private static owner logged = null;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +31,9 @@ public class OwnerDashboardAct extends AppCompatActivity {
 //        }
 
         // Load Main UI for the logged-in user
-        setContentView(R.layout.user_d_board);
-//        ownerVModel = new ViewModelProvider(this).get(ownerVModel.class);
-
-//      ownerVModel.getuserdata().observe(this, owner -> {
-//          TextView name = findViewById(R.id.name1);
-//          name.setText( "low " + owner.getEmail());
-//      });
-        appointments();
+        setContentView(R.layout.technician_dash);
+        TextView name = findViewById(R.id.name);
+        name.setText( "Hi, " + logged.getEmail());
     }
     public static owner getLogged() {
         return logged;
@@ -94,13 +85,5 @@ public class OwnerDashboardAct extends AppCompatActivity {
     public void onBtnClick(View view) {
         Intent intent = new Intent(this, settingAct.class); // Replace with actual target
         startActivity(intent);
-    }
-
-    private void appointments(){
-        Toast.makeText(getApplicationContext()," "+ appAct.getTemp().getAppointments().size(),Toast.LENGTH_SHORT).show();
-        TextView app = findViewById(R.id.appointments);
-        for(Appointment appointment: appAct.getTemp().getAppointments()){
-            app.append(appointment.toString() +"\n");
-        }
     }
 }

@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -18,7 +21,7 @@ import java.util.ArrayList;
 //import com.example.uni.management.SessionManager;
 
 public class main_act extends AppCompatActivity {
-    private ownerLoginAct ownerLogin;
+    private owner ownerLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,8 @@ public class main_act extends AppCompatActivity {
 
         // Load Main UI for the logged-in user
         setContentView(R.layout.activity_main);
+        start_act dialogFragment = new start_act();
+        dialogFragment.show(getSupportFragmentManager(), "StartDialog");
     }
 
     private void initializeServices() {

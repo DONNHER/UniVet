@@ -9,17 +9,17 @@ import android.view.View;
 import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.uni.R;
 import com.example.uni.entities.owner;
-import com.example.uni.management.SQLiteDB;
 import com.example.uni.serviceType;
+import com.example.uni.viewModel.ownerVModel;
 //import com.example.uni.management.SessionManager;
 
 public  class groomServiceAct extends AppCompatActivity {
-    private owner logged =  OwnerDashboardAct.getLogged();
+//    private ownerVModel ownerVModel;
     private static final serviceType.Services serviceType = com.example.uni.serviceType.Services.grooming ;
     @SuppressLint("SetTextI18n")
     @Override
@@ -28,10 +28,17 @@ public  class groomServiceAct extends AppCompatActivity {
 
         // Load Main UI for the logged-in user
         setContentView(R.layout.groom_service);
-        TextView name = findViewById(R.id.name);
-        name.setText( "Hi, "+ logged.getEmail());
-        Toast.makeText(getApplicationContext(), "Invalid Credentials "+
-                ownerRegisterAct.getTemp().getAppointments().size() , Toast.LENGTH_SHORT).show();
+//        ownerVModel = new ViewModelProvider(this).get(ownerVModel.class);
+//        TextView cost = findViewById(R.id.cost);
+//        TextView cost1 = findViewById(R.id.cost1);
+        Toast.makeText(getApplicationContext()," "+ appAct.getTemp().getAppointments().size(),Toast.LENGTH_SHORT).show();
+
+//        ownerVModel.getuserdata().observe(this, owner -> {
+//            TextView name = findViewById(R.id.name2);
+//            Toast.makeText(getApplicationContext(),"I" + owner.getEmail() + owner.getPassword(),Toast.LENGTH_SHORT).show();
+//
+//            name.setText( "low, " + owner.getEmail());
+//        });
     }
 
     private void initializeServices() {
@@ -90,13 +97,5 @@ public  class groomServiceAct extends AppCompatActivity {
 
     public static serviceType.Services getServiceType() {
         return serviceType;
-    }
-
-    public owner getLogged() {
-        return logged;
-    }
-
-    public void setLogged(owner logged) {
-        this.logged = logged;
     }
 }
