@@ -31,14 +31,16 @@ public  class groomServiceAct extends AppCompatActivity {
 //        ownerVModel = new ViewModelProvider(this).get(ownerVModel.class);
 //        TextView cost = findViewById(R.id.cost);
 //        TextView cost1 = findViewById(R.id.cost1);
-        Toast.makeText(getApplicationContext()," "+ appAct.getTemp().getAppointments().size(),Toast.LENGTH_SHORT).show();
-
 //        ownerVModel.getuserdata().observe(this, owner -> {
-//            TextView name = findViewById(R.id.name2);
+        if (main_act.getOwnerLogin()!= null) {
+            TextView name = findViewById(R.id.name2);//
+            name.setText( "Hi, " + main_act.getOwnerLogin().getEmail());
+            return;
+        }
 //            Toast.makeText(getApplicationContext(),"I" + owner.getEmail() + owner.getPassword(),Toast.LENGTH_SHORT).show();
-//
-//            name.setText( "low, " + owner.getEmail());
 //        });
+        TextView name = findViewById(R.id.name2);//
+        name.setText( "Hi, ");
     }
 
     private void initializeServices() {
@@ -82,12 +84,26 @@ public  class groomServiceAct extends AppCompatActivity {
         }
     }
     public void onTrimClick(View view) {
+        if(main_act.getOwnerLogin() == null){
+            ownerLoginAct dialogFragment = new ownerLoginAct();
+            dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
+            return;
+        }
         appAct dialogFragment = new appAct();
         dialogFragment.show(getSupportFragmentManager(), "appointmentDialog");
     }
     public void onCleanClick(View view) {
+        if(main_act.getOwnerLogin() == null){
+            ownerLoginAct dialogFragment = new ownerLoginAct();
+            dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
+            return;
+        }
         appAct dialogFragment = new appAct();
         dialogFragment.show(getSupportFragmentManager(), "appointmentDialog");
+    }
+    public void onResClick(View view) {
+        ownerRegisterAct dialogFragment = new ownerRegisterAct();
+        dialogFragment.show(dialogFragment.getParentFragmentManager(), "RegisterDialog");
     }
 
 

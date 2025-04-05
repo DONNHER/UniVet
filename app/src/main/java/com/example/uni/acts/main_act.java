@@ -1,10 +1,13 @@
 package com.example.uni.acts;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+
+import com.example.uni.helper.TempStorage;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -21,7 +24,16 @@ import java.util.ArrayList;
 //import com.example.uni.management.SessionManager;
 
 public class main_act extends AppCompatActivity {
-    private owner ownerLogin;
+    private static owner ownerLogin;
+
+    private static final TempStorage temp = TempStorage.getInstance();
+    public static owner getOwnerLogin() {
+        return ownerLogin;
+    }
+
+    public static void setOwnerLogin(owner ownerLogin) {
+        main_act.ownerLogin = ownerLogin;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,22 +49,18 @@ public class main_act extends AppCompatActivity {
 //        }
 
         // Load Main UI for the logged-in user
+        if(ownerLogin != null){
+            Intent intent = new Intent(this, OwnerDashboardAct.class); // Replace with actual target
+            startActivity(intent);
+            finish();
+        }
         setContentView(R.layout.activity_main);
         start_act dialogFragment = new start_act();
         dialogFragment.show(getSupportFragmentManager(), "StartDialog");
     }
-
-    private void initializeServices() {
-
-//        com.univet.service.PetService petService = new com.univet.service.PetService(dbHelper);
-//        com.univet.service.OwnerService ownerService = new com.univet.service.OwnerService(dbHelper);
-//        com.univet.service.ServiceService serviceService = new com.univet.service.ServiceService(dbHelper);
-//        com.univet.service.AppointmentService appointmentService = new com.univet.service.AppointmentService(dbHelper);
-//
-//        // Initialize SessionManager
-//        SessionManager.initialize(petService, ownerService, serviceService, appointmentService);
+    public Context getContext(){
+        return this.getApplicationContext();
     }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -83,35 +91,18 @@ public class main_act extends AppCompatActivity {
         }
     }
     public void onMedClick(View view) {
-        if(OwnerDashboardAct.getLogged()==null){
-            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-            startActivity(intent);
-        }
-        Intent intent = new Intent(this, groomServiceAct.class); // Replace with actual target
+        Intent intent = new Intent(this,  medServiceAct.class); // Replace with actual target
         startActivity(intent);
     }
     public void onGroomClick(View view) {
-        if(OwnerDashboardAct.getLogged()==null){
-            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-            startActivity(intent);
-        }
-        Intent intent = new Intent(this, medServiceAct.class); // Replace with actual target
+        Intent intent = new Intent(this, groomServiceAct.class); // Replace with actual target
         startActivity(intent);
     }
     public void onProductClick(View view) {
-        if(OwnerDashboardAct.getLogged()==null){
-            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-            startActivity(intent);
-
-        }
         Intent intent = new Intent(this, productServiceAct.class); // Replace with actual target
         startActivity(intent);
     }
     public void onOtherClick(View view) {
-        if(OwnerDashboardAct.getLogged()==null){
-            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-            startActivity(intent);
-        }
         Intent intent = new Intent(this, otherServiceAct.class); // Replace with actual target
         startActivity(intent);
     }
@@ -120,12 +111,16 @@ public class main_act extends AppCompatActivity {
         startActivity(intent);
     }
     public void onLogClick(View view) {
-        Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-        startActivity(intent);
+        ownerLoginAct dialogFragment = new ownerLoginAct();
+        dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
     }
     public void onResClick(View view) {
-        Intent intent = new Intent(this, ownerRegisterAct.class); // Replace with actual target
-        startActivity(intent);
+        ownerRegisterAct dialogFragment = new ownerRegisterAct();
+        dialogFragment.show(getSupportFragmentManager(), "RegisterDialog");
 
     }
+    public static TempStorage getTemp(){
+        return temp;
+    }
+
 }

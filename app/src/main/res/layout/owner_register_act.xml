@@ -1,6 +1,6 @@
 <!-- res/layout/activity_signup.xml -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="335dp"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="#F6D4B8">
@@ -77,8 +77,9 @@
 
         <CheckBox
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="0dp"
             android:text="I accept Privacy Policy &amp; Term of Use" />
 
         <Button
@@ -112,11 +113,28 @@
             android:layout_marginTop="8dp" />
         <!--            android:drawableStart="@drawable/ic_apple" -->
 
-        <TextView
-            android:text="Already have an account? Log In"
-            android:layout_width="wrap_content"
+        <GridLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp" />
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="191dp"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:text="         Already have an account?"/>
+
+            <TextView
+                android:layout_width="84dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:text=" Login"
+                android:onClick="onLogClick" />
+
+        </GridLayout>
     </LinearLayout>
 </ScrollView>

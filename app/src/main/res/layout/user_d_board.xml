@@ -200,7 +200,7 @@
             android:id="@+id/appointments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Upcoming Appointments"
+            android:text="@string/upcoming_appointments"
             android:textStyle="bold"
             android:textSize="18sp"
             android:textColor="#000000"

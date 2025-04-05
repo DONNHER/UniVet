@@ -14,12 +14,14 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.uni.R;
 import com.example.uni.entities.Appointment;
 import com.example.uni.entities.owner;
+import com.example.uni.helper.TempStorage;
 import com.example.uni.viewModel.ownerVModel;
 //import com.example.uni.management.SessionManager;
 
 public class OwnerDashboardAct extends AppCompatActivity {
 //    private ownerVModel ownerVModel;
     private static owner logged = null;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +41,8 @@ public class OwnerDashboardAct extends AppCompatActivity {
 //        ownerVModel = new ViewModelProvider(this).get(ownerVModel.class);
 
 //      ownerVModel.getuserdata().observe(this, owner -> {
-//          TextView name = findViewById(R.id.name1);
-//          name.setText( "low " + owner.getEmail());
+          TextView name = findViewById(R.id.name1);
+          name.setText( "Hi, " + main_act.getOwnerLogin().getEmail());
 //      });
         appointments();
     }
@@ -97,10 +99,12 @@ public class OwnerDashboardAct extends AppCompatActivity {
     }
 
     private void appointments(){
-        Toast.makeText(getApplicationContext()," "+ appAct.getTemp().getAppointments().size(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext()," "+ main_act.getTemp().getAppointments().size(),Toast.LENGTH_SHORT).show();
         TextView app = findViewById(R.id.appointments);
-        for(Appointment appointment: appAct.getTemp().getAppointments()){
-            app.append(appointment.toString() +"\n");
+        String s = app.getText().toString();
+        for(Appointment appointment: main_act.getTemp().getAppointments()){
+            s += appointment.toString() +"\n";
         }
+        app.setText(s);
     }
 }

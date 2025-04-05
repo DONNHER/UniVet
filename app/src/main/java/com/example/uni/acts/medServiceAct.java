@@ -76,14 +76,29 @@ public class medServiceAct extends AppCompatActivity {
         }
     }
     public void onCheckupClick(View view) {
+        if(main_act.getOwnerLogin() != null){
+            ownerLoginAct dialogFragment = new ownerLoginAct();
+            dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
+            finish();
+        }
         appAct dialogFragment = new appAct();
         dialogFragment.show(getSupportFragmentManager(), "appointmentDialog");
     }
     public void onVaccineClick(View view) {
+        if(main_act.getOwnerLogin() != null){
+            ownerLoginAct dialogFragment = new ownerLoginAct();
+            dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
+            finish();
+        }
         appAct dialogFragment = new appAct();
         dialogFragment.show(getSupportFragmentManager(), "appointmentDialog");
     }
     public void onSurgeryClick(View view) {
+        if(main_act.getOwnerLogin() != null){
+            ownerLoginAct dialogFragment = new ownerLoginAct();
+            dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
+            finish();
+        }
         appAct dialogFragment = new appAct();
         dialogFragment.show(getSupportFragmentManager(), "appointmentDialog");
     }

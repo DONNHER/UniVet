@@ -23,16 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".acts.ownerLoginAct"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        </activity>
-        <activity
-            android:name=".acts.ownerRegisterAct"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        </activity>
+
         <activity
             android:name=".acts.settingAct"
             android:exported="true"

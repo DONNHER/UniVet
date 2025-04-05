@@ -8,35 +8,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.uni.adapters.recycler;
-
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.uni.R;
 import com.example.uni.entities.Appointment;
-import com.example.uni.entities.Item;
-import com.example.uni.entities.Service;
-import com.example.uni.viewModel.ownerVModel;
-
-import java.util.ArrayList;
+import com.example.uni.helper.TempStorage;
 
 public class appAct extends DialogFragment {
-
-    private ImageView doctorImage;
-    private TextView doctorInfo;
     private CalendarView calendarView;
     private Button scheduleButton;
-
-    private static TempStorage temp = ownerLoginAct.getTemp() ;
 
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
@@ -59,14 +43,11 @@ public class appAct extends DialogFragment {
             }
             String dateTime = calendarView.getDate() + " " + time.getText().toString();
             Appointment newAppointment = new Appointment(groomServiceAct.getServiceType(),dateTime);
-            temp.addAppointment(newAppointment);
+            main_act.getTemp().addAppointment(newAppointment);
             Toast.makeText(getContext(), "Successful Appointment", Toast.LENGTH_SHORT).show();
             dismiss();
         });
         return view;
-    }
-    public static TempStorage getTemp(){
-        return temp;
     }
 
 }
