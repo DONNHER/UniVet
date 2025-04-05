@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "401401189236",
+    "project_id": "univet-2eb9e",
+    "storage_bucket": "univet-2eb9e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401401189236:android:37f32f61b28f2e86261221",
+        "android_client_info": {
+          "package_name": "com.example.uni"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA95ExnND-Fp3Yvf88PmEIMaBnSZDZ8Po0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
