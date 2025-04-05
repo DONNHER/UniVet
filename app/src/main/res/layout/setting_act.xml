@@ -18,14 +18,15 @@
             android:orientation="vertical"
             android:gravity="center_horizontal"
             android:paddingBottom="16dp">
+
             <ImageView
                 android:id="@+id/back_button"
                 android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/logo"
+                android:layout_height="27dp"
                 android:layout_gravity="start"
                 android:contentDescription="@string/back_button"
-                android:onClick="back"/>
+                android:onClick="back"
+                android:src="@drawable/logo" />
 
             <!-- Profile Image -->
             <ImageView

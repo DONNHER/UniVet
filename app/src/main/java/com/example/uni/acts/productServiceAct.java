@@ -4,14 +4,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.uni.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class productServiceAct extends AppCompatActivity {
-    private ownerLoginAct ownerLogin;
-
+    private FirebaseAuth myAuth= FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,15 @@ public class productServiceAct extends AppCompatActivity {
 
         // Load Main UI for the logged-in user
         setContentView(R.layout.productservice);
+        if (myAuth.getCurrentUser() != null) {
+            TextView name = findViewById(R.id.name3);//
+            name.setText( "Hi, " + myAuth.getCurrentUser().getDisplayName());
+            return;
+        }
+//            Toast.makeText(getApplicationContext(),"I" + owner.getEmail() + owner.getPassword(),Toast.LENGTH_SHORT).show();
+//        });
+        TextView name = findViewById(R.id.name3);//
+        name.setText( "Hi, ");
     }
 
     private void initializeServices() {
@@ -71,7 +81,7 @@ public class productServiceAct extends AppCompatActivity {
         }
     }
     public void onMedClick(View view) {
-        if(OwnerDashboardAct.getLogged()==null){
+        if(myAuth.getCurrentUser() ==null){
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
         }
@@ -79,7 +89,7 @@ public class productServiceAct extends AppCompatActivity {
         startActivity(intent);
     }
     public void onGroomClick(View view) {
-        if(OwnerDashboardAct.getLogged()==null){
+        if(myAuth.getCurrentUser() ==null){
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
             finish();
@@ -89,7 +99,7 @@ public class productServiceAct extends AppCompatActivity {
         finish();
     }
     public void onProductClick(View view) {
-        if(OwnerDashboardAct.getLogged()==null){
+        if(myAuth.getCurrentUser() ==null){
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
             finish();
@@ -99,7 +109,7 @@ public class productServiceAct extends AppCompatActivity {
         finish();
     }
     public void onOtherClick(View view) {
-        if(OwnerDashboardAct.getLogged()==null){
+        if(myAuth.getCurrentUser() ==null){
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
             finish();

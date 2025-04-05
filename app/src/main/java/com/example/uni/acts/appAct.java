@@ -21,7 +21,7 @@ import com.example.uni.helper.TempStorage;
 public class appAct extends DialogFragment {
     private CalendarView calendarView;
     private Button scheduleButton;
-
+    private static TempStorage temp = TempStorage.getInstance();
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
@@ -41,9 +41,9 @@ public class appAct extends DialogFragment {
                 Toast.makeText(getContext(), "Please enter a valid time.", Toast.LENGTH_SHORT).show();
                 return;
             }
-            String dateTime = calendarView.getDate() + " " + time.getText().toString();
+            String dateTime = calendarView.getDate() + "[" + time.getText().toString() + "]";
             Appointment newAppointment = new Appointment(groomServiceAct.getServiceType(),dateTime);
-            main_act.getTemp().addAppointment(newAppointment);
+            temp.addAppointment(newAppointment);
             Toast.makeText(getContext(), "Successful Appointment", Toast.LENGTH_SHORT).show();
             dismiss();
         });

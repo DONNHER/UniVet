@@ -12,12 +12,11 @@ import com.example.uni.R;
 import com.example.uni.entities.owner;
 import com.example.uni.management.SQLiteDB;
 import com.example.uni.serviceType;
+import com.google.firebase.auth.FirebaseAuth;
 //import com.example.uni.management.SessionManager;
 
 public class ownerDashB_setting extends AppCompatActivity {
-    private ownerLoginAct ownerLogin;
-
-
+    private FirebaseAuth myAuth= FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,15 +35,12 @@ public class ownerDashB_setting extends AppCompatActivity {
         Button btnGetStarted = findViewById(R.id.btn_edit_profile);
 
         // Set the action for the "Get Started" button
-        btnGetStarted.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Action to perform when "Get Started" is clicked
-                // Redirect to Login or next activity, for example
-                Intent intent = new Intent(ownerDashB_setting.this, ownerAct.class);
-                startActivity(intent);
-                finish();
-            }
+        btnGetStarted.setOnClickListener(v -> {
+            // Action to perform when "Get Started" is clicked
+            // Redirect to Login or next activity, for example
+            Intent intent = new Intent(ownerDashB_setting.this, ownerAct.class);
+            startActivity(intent);
+            finish();
         });
     }
 
@@ -87,43 +83,8 @@ public class ownerDashB_setting extends AppCompatActivity {
         finish();
     }
     public void logoutClick(View view) {
-        OwnerDashboardAct.setLogged(null);
+       myAuth.signOut();
         Intent intent = new Intent(this, main_act.class); // Replace with actual target
-        startActivity(intent);
-        finish();
-    }
-    public void editProfileClick(View view) {
-        Intent intent = new Intent(this, ownerAct.class); // Replace with actual target
-        startActivity(intent);
-        finish();
-    }
-    public void onProductClick(View view) {
-        if(OwnerDashboardAct.getLogged()==null){
-            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-            startActivity(intent);
-            finish();
-        }
-        Intent intent = new Intent(this, productServiceAct.class); // Replace with actual target
-        startActivity(intent);
-        finish();
-    }
-    public void onOtherClick(View view) {
-        if(OwnerDashboardAct.getLogged()==null){
-            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-            startActivity(intent);
-            finish();
-        }
-        Intent intent = new Intent(this, otherServiceAct.class); // Replace with actual target
-        startActivity(intent);
-        finish();
-    }
-    public void onLogClick(View view) {
-        Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-        startActivity(intent);
-        finish();
-    }
-    public void onResClick(View view) {
-        Intent intent = new Intent(this, ownerRegisterAct.class); // Replace with actual target
         startActivity(intent);
         finish();
     }

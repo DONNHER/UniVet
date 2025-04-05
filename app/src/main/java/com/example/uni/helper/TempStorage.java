@@ -6,7 +6,6 @@ import com.example.uni.entities.owner;
 import java.util.ArrayList;
 
 public class TempStorage {
-    private static TempStorage temp;
     private  ArrayList<owner> users;
     private  ArrayList<Appointment> appointments;
     private TempStorage(){
@@ -14,11 +13,11 @@ public class TempStorage {
         appointments = new ArrayList<>();
     }
 
-    public static synchronized  TempStorage getInstance(){
-        if (temp == null){
-            temp = new TempStorage() ;
-        }
-        return  temp;
+    private static class TempStorageHelper {
+        private static final TempStorage instance = new TempStorage();
+    }
+    public static TempStorage getInstance(){
+        return TempStorageHelper.instance;
     }
     public ArrayList<owner> getUsers(){return users;}
     public ArrayList<Appointment>getAppointments(){return appointments;}

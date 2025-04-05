@@ -8,10 +8,11 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.uni.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class otherServiceAct extends AppCompatActivity {
     private ownerLoginAct ownerLogin;
-
+    private FirebaseAuth myAuth= FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,7 @@ public class otherServiceAct extends AppCompatActivity {
         }
     }
     public void onMedClick(View view) {
-        if(OwnerDashboardAct.getLogged()==null){
+        if(myAuth.getCurrentUser() ==null){
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
         }
@@ -81,7 +82,7 @@ public class otherServiceAct extends AppCompatActivity {
         startActivity(intent);
     }
     public void onGroomClick(View view) {
-        if(OwnerDashboardAct.getLogged()==null){
+        if(myAuth.getCurrentUser() ==null){
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
             finish();
@@ -91,7 +92,7 @@ public class otherServiceAct extends AppCompatActivity {
         finish();
     }
     public void onProductClick(View view) {
-        if(OwnerDashboardAct.getLogged()==null){
+        if(myAuth.getCurrentUser()==null){
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
             finish();
@@ -101,7 +102,7 @@ public class otherServiceAct extends AppCompatActivity {
         finish();
     }
     public void onOtherClick(View view) {
-        if(OwnerDashboardAct.getLogged()==null){
+        if(myAuth.getCurrentUser()==null){
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
             finish();

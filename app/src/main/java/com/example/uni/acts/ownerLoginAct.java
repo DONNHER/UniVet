@@ -1,6 +1,7 @@
 package com.example.uni.acts;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
@@ -19,11 +20,20 @@ import com.example.uni.R;
 import com.example.uni.entities.owner;
 import com.example.uni.helper.TempStorage;
 import com.example.uni.viewModel.*;
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Objects;
+import java.util.concurrent.Executor;
 
 public class ownerLoginAct extends DialogFragment {
     private OwnerDashboardAct ownerDashboardAct;
     private EditText passwordEditText;
     private ownerVModel ownerVModel;
+    private TempStorage temp = TempStorage.getInstance();
+
+    private FirebaseAuth myAuth= FirebaseAuth.getInstance();;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
@@ -64,15 +74,22 @@ public class ownerLoginAct extends DialogFragment {
         EditText pass =  btn.findViewById(R.id.pass);
         String password = pass.getText().toString().trim();
         owner newUser =   new owner(username, password);
-        owner logUser = main_act.getTemp().getUser(newUser, main_act.getTemp().getUsers());
-
+        owner logUser = temp.getUser(newUser, temp.getUsers());
         if (logUser != null) {
-//            saveSession(username, getU+serRole(username));
-            main_act.setOwnerLogin(logUser);
-            Toast.makeText(getContext(),"Login Successful",Toast.LENGTH_SHORT).show();
+            myAuth.createUserWithEmailAndPassword(username,password).addOnCompleteListener(requireActivity(), task -> {
+                if(task.isSuccessful()){
+                    dismiss();
+                }
+
+            });
+             myAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener(requireActivity(), task -> {
+                    if(task.isSuccessful()){
+                        Toast.makeText(getContext(),"Login Successful",Toast.LENGTH_SHORT).show();
+                        dismiss();
+                    }
+                });
             Intent intent = new Intent(getContext(), OwnerDashboardAct.class); // Replace with actual target
             startActivity(intent);
-            dismiss();
             return;
         }
         Toast.makeText( getContext(),"Invalid Credentials",Toast.LENGTH_SHORT).show();

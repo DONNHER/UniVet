@@ -16,12 +16,14 @@ import com.example.uni.entities.Appointment;
 import com.example.uni.entities.owner;
 import com.example.uni.helper.TempStorage;
 import com.example.uni.viewModel.ownerVModel;
+import com.google.firebase.auth.FirebaseAuth;
 //import com.example.uni.management.SessionManager;
 
 public class OwnerDashboardAct extends AppCompatActivity {
 //    private ownerVModel ownerVModel;
-    private static owner logged = null;
+    private static  TempStorage temp = TempStorage.getInstance();
 
+    private FirebaseAuth myAuth= FirebaseAuth.getInstance();
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,18 +44,10 @@ public class OwnerDashboardAct extends AppCompatActivity {
 
 //      ownerVModel.getuserdata().observe(this, owner -> {
           TextView name = findViewById(R.id.name1);
-          name.setText( "Hi, " + main_act.getOwnerLogin().getEmail());
+          name.setText( "Hi, " + myAuth.getCurrentUser().getDisplayName());
 //      });
         appointments();
     }
-    public static owner getLogged() {
-        return logged;
-    }
-
-    public static void setLogged(owner o){
-        logged = o;
-    }
-
     private void initializeServices() {
 
 //        com.univet.service.PetService petService = new com.univet.service.PetService(dbHelper);
@@ -99,11 +93,12 @@ public class OwnerDashboardAct extends AppCompatActivity {
     }
 
     private void appointments(){
-        Toast.makeText(getApplicationContext()," "+ main_act.getTemp().getAppointments().size(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext()," "+ temp.getAppointments().size(),Toast.LENGTH_SHORT).show();
         TextView app = findViewById(R.id.appointments);
         String s = app.getText().toString();
-        for(Appointment appointment: main_act.getTemp().getAppointments()){
+        for(Appointment appointment: temp.getAppointments()){
             s += appointment.toString() +"\n";
+            Toast.makeText( getApplicationContext()," " + appointment,Toast.LENGTH_SHORT).show();
         }
         app.setText(s);
     }

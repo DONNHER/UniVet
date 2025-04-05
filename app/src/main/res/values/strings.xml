@@ -37,4 +37,5 @@
     <string name="Check">Checkup</string>
     <string name="Tr">Trimming \nCost: 500 php</string>
     <string name="upcoming_appointments">Upcoming Appointments</string>
+    <string name="UniVet">UniVet</string>
 </resources>

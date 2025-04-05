@@ -10,10 +10,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.uni.R;
+import com.example.uni.helper.TempStorage;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class medServiceAct extends AppCompatActivity {
-    private ownerLoginAct ownerLogin;
-
+    private static final TempStorage temp = TempStorage.getInstance();
+    private FirebaseAuth myAuth= FirebaseAuth.getInstance();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -31,8 +33,15 @@ public class medServiceAct extends AppCompatActivity {
 
         // Load Main UI for the logged-in user
         setContentView(R.layout.med_service);
-        TextView name = findViewById(R.id.name);
-        name.setText( "Hi, "+ OwnerDashboardAct.getLogged().getEmail());
+        if (myAuth.getCurrentUser() != null) {
+            TextView name = findViewById(R.id.name);//
+            name.setText( "Hi, " + myAuth.getCurrentUser().getDisplayName());
+            return;
+        }
+//            Toast.makeText(getApplicationContext(),"I" + owner.getEmail() + owner.getPassword(),Toast.LENGTH_SHORT).show();
+//        });
+        TextView name = findViewById(R.id.name);//
+        name.setText( "Hi, ");
     }
 
     private void initializeServices() {
@@ -76,7 +85,7 @@ public class medServiceAct extends AppCompatActivity {
         }
     }
     public void onCheckupClick(View view) {
-        if(main_act.getOwnerLogin() != null){
+        if(myAuth.getCurrentUser() == null){
             ownerLoginAct dialogFragment = new ownerLoginAct();
             dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
             finish();
@@ -85,7 +94,7 @@ public class medServiceAct extends AppCompatActivity {
         dialogFragment.show(getSupportFragmentManager(), "appointmentDialog");
     }
     public void onVaccineClick(View view) {
-        if(main_act.getOwnerLogin() != null){
+        if(myAuth.getCurrentUser() == null){
             ownerLoginAct dialogFragment = new ownerLoginAct();
             dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
             finish();
@@ -94,7 +103,7 @@ public class medServiceAct extends AppCompatActivity {
         dialogFragment.show(getSupportFragmentManager(), "appointmentDialog");
     }
     public void onSurgeryClick(View view) {
-        if(main_act.getOwnerLogin() != null){
+        if(myAuth.getCurrentUser() == null){
             ownerLoginAct dialogFragment = new ownerLoginAct();
             dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
             finish();

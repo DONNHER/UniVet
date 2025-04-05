@@ -8,11 +8,11 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.uni.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ownerAct extends AppCompatActivity {
-    private ownerLoginAct ownerLogin;
 
-
+    private FirebaseAuth myAuth= FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +75,7 @@ public class ownerAct extends AppCompatActivity {
         finish();
     }
     public void onGroomClick(View view) {
-        if(OwnerDashboardAct.getLogged()==null){
+        if(myAuth.getCurrentUser() ==null){
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
         }
@@ -83,7 +83,7 @@ public class ownerAct extends AppCompatActivity {
         startActivity(intent);
     }
     public void onProductClick(View view) {
-        if(OwnerDashboardAct.getLogged()==null){
+        if(myAuth.getCurrentUser() ==null){
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
             finish();
@@ -93,7 +93,7 @@ public class ownerAct extends AppCompatActivity {
         finish();
     }
     public void onOtherClick(View view) {
-        if(OwnerDashboardAct.getLogged()==null){
+        if(myAuth.getCurrentUser() ==null){
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
             finish();

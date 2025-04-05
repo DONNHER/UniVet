@@ -1,6 +1,7 @@
 package com.example.uni.acts;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -17,8 +18,10 @@ import androidx.fragment.app.DialogFragment;
 import com.example.uni.R;
 import com.example.uni.entities.owner;
 import com.example.uni.helper.TempStorage;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ownerRegisterAct extends DialogFragment {
+    private FirebaseAuth myAuth= FirebaseAuth.getInstance();;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
@@ -73,13 +76,11 @@ public class ownerRegisterAct extends DialogFragment {
         String confirmation = confirm.getText().toString().trim();
         if (password.equals(confirmation)){
             owner newUser = new owner(username, password);
-            return main_act.getTemp().addUser(newUser);
-
-        }else {
+            TempStorage.getInstance().addUser(newUser);
+            return true;
+        }
             return false;
         }
-
-    }
 //    private void addUser(String username, String role) {
 //        SharedPreferences sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
 //        SharedPreferences.Editor editor = sharedPreferences.edit();

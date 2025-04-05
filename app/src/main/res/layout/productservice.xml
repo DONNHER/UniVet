@@ -34,15 +34,15 @@
                 <GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <TextView
-                        android:id="@+id/name"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/name3"
+                        android:layout_width="196dp"
                         android:layout_height="wrap_content"
                         android:text="@string/hi"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
                         android:textColor="#222222"
-                        />
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
                     <Button
                         android:layout_width="47dp"
                         android:layout_height="25dp"

@@ -14,12 +14,16 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.uni.R;
 import com.example.uni.entities.owner;
+import com.example.uni.helper.TempStorage;
 import com.example.uni.serviceType;
 import com.example.uni.viewModel.ownerVModel;
+import com.google.firebase.auth.FirebaseAuth;
 //import com.example.uni.management.SessionManager;
 
 public  class groomServiceAct extends AppCompatActivity {
 //    private ownerVModel ownerVModel;
+    private static final TempStorage temp = TempStorage.getInstance();
+    private FirebaseAuth myAuth= FirebaseAuth.getInstance();
     private static final serviceType.Services serviceType = com.example.uni.serviceType.Services.grooming ;
     @SuppressLint("SetTextI18n")
     @Override
@@ -32,9 +36,9 @@ public  class groomServiceAct extends AppCompatActivity {
 //        TextView cost = findViewById(R.id.cost);
 //        TextView cost1 = findViewById(R.id.cost1);
 //        ownerVModel.getuserdata().observe(this, owner -> {
-        if (main_act.getOwnerLogin()!= null) {
+        if (myAuth.getCurrentUser() != null) {
             TextView name = findViewById(R.id.name2);//
-            name.setText( "Hi, " + main_act.getOwnerLogin().getEmail());
+            name.setText( "Hi, " + myAuth.getCurrentUser().getDisplayName());
             return;
         }
 //            Toast.makeText(getApplicationContext(),"I" + owner.getEmail() + owner.getPassword(),Toast.LENGTH_SHORT).show();
@@ -84,7 +88,7 @@ public  class groomServiceAct extends AppCompatActivity {
         }
     }
     public void onTrimClick(View view) {
-        if(main_act.getOwnerLogin() == null){
+        if(myAuth.getCurrentUser()  == null){
             ownerLoginAct dialogFragment = new ownerLoginAct();
             dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
             return;
@@ -93,7 +97,7 @@ public  class groomServiceAct extends AppCompatActivity {
         dialogFragment.show(getSupportFragmentManager(), "appointmentDialog");
     }
     public void onCleanClick(View view) {
-        if(main_act.getOwnerLogin() == null){
+        if(myAuth.getCurrentUser()  == null){
             ownerLoginAct dialogFragment = new ownerLoginAct();
             dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
             return;
@@ -106,12 +110,11 @@ public  class groomServiceAct extends AppCompatActivity {
         dialogFragment.show(dialogFragment.getParentFragmentManager(), "RegisterDialog");
     }
 
-
-    public Context getContext(){
-        return this.getApplicationContext();
-    }
-
     public static serviceType.Services getServiceType() {
         return serviceType;
+    }
+    public void onBtnClick(View view) {
+        Intent intent = new Intent(this, settingAct.class); // Replace with actual target
+        startActivity(intent);
     }
 }
