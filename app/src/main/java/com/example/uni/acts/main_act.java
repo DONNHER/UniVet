@@ -1,28 +1,20 @@
 package com.example.uni.acts;
 
-import com.google.firebase.auth.*;
-import android.content.Context;
+import com.example.uni.fragments.ownerLoginAct;
+import com.example.uni.fragments.ownerRegisterAct;
+import com.example.uni.fragments.start_act;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.*;
 
-import com.example.uni.helper.TempStorage;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import com.example.uni.R;
-import com.example.uni.entities.owner;
-import com.example.uni.management.SQLiteDB;
-import com.example.uni.serviceType;
-
-import java.util.ArrayList;
 //import com.example.uni.management.SessionManager;
 
 public class main_act extends AppCompatActivity {

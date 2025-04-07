@@ -19,47 +19,57 @@
             android:gravity="center_vertical"
             android:layout_marginBottom="16dp">
 
-            <ImageView
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                android:src="@drawable/logo"
-                android:contentDescription="@string/dog_image"
-                android:layout_marginEnd="12dp" />
-
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
+
                 <GridLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:id="@+id/name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/hi"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        android:textColor="#222222"
-                        />
+                    android:layout_height="86dp">
+
                     <Button
                         android:layout_width="47dp"
-                        android:layout_height="25dp"
+                        android:layout_height="34dp"
                         android:layout_row="0"
-                        android:layout_column="3"
+                        android:layout_column="0"
                         android:background="@drawable/edit_background"
                         android:onClick="onBtnClick"
                         android:textStyle="bold" />
 
-                </GridLayout>
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_row="0"
+                        android:layout_column="3"
+                        android:layout_gravity="right"
+                        android:layout_marginEnd="12dp"
+                        android:contentDescription="@string/dog_image"
+                        android:src="@drawable/logo" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/how_can_we_assist_you"
-                    android:textSize="16sp"
-                    android:textColor="#444444" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="1"
+                        android:layout_column="0"
+                        android:text="Hi, "
+                        android:textColor="#444444"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        />
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="1"
+                        android:layout_column="3"
+                        android:text="December 12,1923"
+                        android:textColor="#444444"
+                        android:textSize="14sp" />
+
+                </GridLayout>
 
 
             </LinearLayout>
@@ -111,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="8dp"
-                    android:text="@string/grooming_services"
+                    android:text="Total Visitors"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -137,7 +147,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="8dp"
-                    android:text="@string/MedicalServices"
+                    android:text="Total Pets"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -196,13 +206,61 @@
         </GridLayout>
 
         <!-- Upcoming Appointments Section Title -->
-        <TextView
+        <GridLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Upcoming Appointments"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="#000000" />
+            android:layout_height="wrap_content">
+
+            <!-- Upcoming Appointments Section Title -->
+            <TextView
+                android:id="@+id/appointments"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_gravity="center"
+                android:scrollbars="vertical"
+                android:text="Upcoming Appointments"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+
+            <!-- Upcoming Appointments Section Title -->
+            <TextView
+                android:id="@+id/appointments3"
+                android:layout_width="204dp"
+                android:layout_height="match_parent"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:layout_gravity="center"
+                android:scrollbars="vertical"
+                android:text="Pending Appointments"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+        </GridLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/appointmentsView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:padding="16dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/appointmentsView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:padding="16dp" />
+        </GridLayout>
     </LinearLayout>
 
 </ScrollView>

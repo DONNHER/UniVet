@@ -1,6 +1,6 @@
 package com.example.uni.entities;
 
-import com.example.uni.serviceType;
+import com.example.uni.management.serviceType;
 
 import java.util.ArrayList;
 

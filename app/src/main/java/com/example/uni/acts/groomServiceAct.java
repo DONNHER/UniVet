@@ -1,7 +1,6 @@
 package com.example.uni.acts;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,14 +8,13 @@ import android.view.View;
 import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.uni.R;
-import com.example.uni.entities.owner;
+import com.example.uni.fragments.appAct;
+import com.example.uni.fragments.ownerLoginAct;
+import com.example.uni.fragments.ownerRegisterAct;
 import com.example.uni.helper.TempStorage;
-import com.example.uni.serviceType;
-import com.example.uni.viewModel.ownerVModel;
+import com.example.uni.management.serviceType;
 import com.google.firebase.auth.FirebaseAuth;
 //import com.example.uni.management.SessionManager;
 
@@ -24,7 +22,7 @@ public  class groomServiceAct extends AppCompatActivity {
 //    private ownerVModel ownerVModel;
     private static final TempStorage temp = TempStorage.getInstance();
     private FirebaseAuth myAuth= FirebaseAuth.getInstance();
-    private static final serviceType.Services serviceType = com.example.uni.serviceType.Services.grooming ;
+    private static com.example.uni.management.serviceType.Services.Grooming serviceType;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +43,7 @@ public  class groomServiceAct extends AppCompatActivity {
 //        });
         TextView name = findViewById(R.id.name2);//
         name.setText( "Hi, ");
+        Toast.makeText(this,"Invalid Credentials" +TempStorage.getInstance().getAppointments().size(),Toast.LENGTH_SHORT).show();
     }
 
     private void initializeServices() {
@@ -58,10 +57,13 @@ public  class groomServiceAct extends AppCompatActivity {
 //        SessionManager.initialize(petService, ownerService, serviceService, appointmentService);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-//        SessionManager.getInstance().saveSessionData();
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+////        SessionManager.getInstance().saveSessionData();
+//    }
+    public void back(View view) {
+        finish();
     }
 
     // Check if a session exists
@@ -89,6 +91,7 @@ public  class groomServiceAct extends AppCompatActivity {
     }
     public void onTrimClick(View view) {
         if(myAuth.getCurrentUser()  == null){
+            setServiceType(com.example.uni.management.serviceType.Services.Grooming.Trimming);
             ownerLoginAct dialogFragment = new ownerLoginAct();
             dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
             return;
@@ -98,6 +101,7 @@ public  class groomServiceAct extends AppCompatActivity {
     }
     public void onCleanClick(View view) {
         if(myAuth.getCurrentUser()  == null){
+            setServiceType(com.example.uni.management.serviceType.Services.Grooming.Cleaning);
             ownerLoginAct dialogFragment = new ownerLoginAct();
             dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
             return;
@@ -109,12 +113,18 @@ public  class groomServiceAct extends AppCompatActivity {
         ownerRegisterAct dialogFragment = new ownerRegisterAct();
         dialogFragment.show(dialogFragment.getParentFragmentManager(), "RegisterDialog");
     }
-
-    public static serviceType.Services getServiceType() {
+    public static com.example.uni.management.serviceType.Services.Grooming getServiceType() {
         return serviceType;
+    }
+    public static void setServiceType(com.example.uni.management.serviceType.Services.Grooming service){
+        serviceType = service;
     }
     public void onBtnClick(View view) {
         Intent intent = new Intent(this, settingAct.class); // Replace with actual target
         startActivity(intent);
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
     }
 }

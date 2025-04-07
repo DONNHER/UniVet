@@ -8,6 +8,8 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.uni.R;
+import com.example.uni.fragments.ownerLoginAct;
+import com.example.uni.fragments.ownerRegisterAct;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ownerAct extends AppCompatActivity {

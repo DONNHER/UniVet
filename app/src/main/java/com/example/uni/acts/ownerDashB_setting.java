@@ -9,9 +9,6 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.uni.R;
-import com.example.uni.entities.owner;
-import com.example.uni.management.SQLiteDB;
-import com.example.uni.serviceType;
 import com.google.firebase.auth.FirebaseAuth;
 //import com.example.uni.management.SessionManager;
 

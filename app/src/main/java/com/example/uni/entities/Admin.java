@@ -1,9 +1,5 @@
 package com.example.uni.entities;
 
-import com.example.uni.serviceType;
-
-import java.util.ArrayList;
-
 public class Admin {
     private int id;
     private String name;

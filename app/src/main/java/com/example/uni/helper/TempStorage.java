@@ -1,6 +1,7 @@
 package com.example.uni.helper;
 
 import com.example.uni.entities.Appointment;
+import com.example.uni.entities.Service;
 import com.example.uni.entities.owner;
 
 import java.util.ArrayList;
@@ -8,9 +9,13 @@ import java.util.ArrayList;
 public class TempStorage {
     private  ArrayList<owner> users;
     private  ArrayList<Appointment> appointments;
+    private  ArrayList<Appointment> pAppointments;
+    private  ArrayList<Service> services;
     private TempStorage(){
         users = new ArrayList<>();
         appointments = new ArrayList<>();
+        services = new ArrayList<>();
+        pAppointments = new ArrayList<>();
     }
 
     private static class TempStorageHelper {
@@ -21,6 +26,7 @@ public class TempStorage {
     }
     public ArrayList<owner> getUsers(){return users;}
     public ArrayList<Appointment>getAppointments(){return appointments;}
+    public ArrayList<Appointment>getPAppointments(){return appointments;}
     public owner getUser(owner user, ArrayList<owner> users){
         int l = 0;
         int r = users.size() -1;
@@ -60,4 +66,11 @@ public class TempStorage {
     public void addAppointment(Appointment appointment){
         appointments.add(appointment);
     }
+    public void addAppointment(Service service){
+        services.add(service);
+    }
+    public void addPAppointment(Appointment appointment){
+        pAppointments.add(appointment);
+    }
+
 }

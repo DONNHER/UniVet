@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.uni.R;
 import com.example.uni.entities.owner;
+import com.example.uni.fragments.Menu;
+import com.example.uni.fragments.ownerRegisterAct;
 
 public class AdminDashB extends AppCompatActivity {
 
@@ -83,7 +85,7 @@ public class AdminDashB extends AppCompatActivity {
         startActivity(intent);
     }
     public void onBtnClick(View view) {
-        Intent intent = new Intent(this, settingAct.class); // Replace with actual target
-        startActivity(intent);
+        Menu menu = new Menu();
+        menu.show(menu.getParentFragmentManager(), "MenuDialog");
     }
 }

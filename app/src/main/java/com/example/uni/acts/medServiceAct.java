@@ -10,12 +10,16 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.uni.R;
+import com.example.uni.fragments.appAct;
+import com.example.uni.fragments.ownerLoginAct;
 import com.example.uni.helper.TempStorage;
+import com.example.uni.management.serviceType;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class medServiceAct extends AppCompatActivity {
     private static final TempStorage temp = TempStorage.getInstance();
     private FirebaseAuth myAuth= FirebaseAuth.getInstance();
+    private static com.example.uni.management.serviceType.Services.Medical serviceType;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -87,6 +91,7 @@ public class medServiceAct extends AppCompatActivity {
     public void onCheckupClick(View view) {
         if(myAuth.getCurrentUser() == null){
             ownerLoginAct dialogFragment = new ownerLoginAct();
+            setServiceType(com.example.uni.management.serviceType.Services.Medical.Checkup);
             dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
             finish();
         }
@@ -95,6 +100,7 @@ public class medServiceAct extends AppCompatActivity {
     }
     public void onVaccineClick(View view) {
         if(myAuth.getCurrentUser() == null){
+            setServiceType(com.example.uni.management.serviceType.Services.Medical.Vaccination);
             ownerLoginAct dialogFragment = new ownerLoginAct();
             dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
             finish();
@@ -104,6 +110,7 @@ public class medServiceAct extends AppCompatActivity {
     }
     public void onSurgeryClick(View view) {
         if(myAuth.getCurrentUser() == null){
+            setServiceType(com.example.uni.management.serviceType.Services.Medical.Surgeries);
             ownerLoginAct dialogFragment = new ownerLoginAct();
             dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
             finish();
@@ -114,5 +121,15 @@ public class medServiceAct extends AppCompatActivity {
     public void onBtnClick(View view) {
         Intent intent = new Intent(this, settingAct.class); // Replace with actual target
         startActivity(intent);
+    }
+    public static com.example.uni.management.serviceType.Services.Medical getServiceType() {
+        return serviceType;
+    }
+    public static void setServiceType(com.example.uni.management.serviceType.Services.Medical service){
+        serviceType = service;
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
     }
 }

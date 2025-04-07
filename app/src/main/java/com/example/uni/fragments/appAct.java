@@ -1,4 +1,5 @@
-package com.example.uni.acts;
+package com.example.uni.fragments;
+
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -8,21 +9,29 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 
 import com.example.uni.R;
+import com.example.uni.acts.OwnerDashboardAct;
+import com.example.uni.acts.groomServiceAct;
+import com.example.uni.adapters.appAdapt;
 import com.example.uni.entities.Appointment;
 import com.example.uni.helper.TempStorage;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class appAct extends DialogFragment {
     private CalendarView calendarView;
     private Button scheduleButton;
     private static TempStorage temp = TempStorage.getInstance();
-
+    private FirebaseAuth myAuth= FirebaseAuth.getInstance();
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,9 +50,13 @@ public class appAct extends DialogFragment {
                 Toast.makeText(getContext(), "Please enter a valid time.", Toast.LENGTH_SHORT).show();
                 return;
             }
-            String dateTime = calendarView.getDate() + "[" + time.getText().toString() + "]";
-            Appointment newAppointment = new Appointment(groomServiceAct.getServiceType(),dateTime);
+            long date = calendarView.getDate();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, MMMM dd ,yyyy");
+            String Date = simpleDateFormat.format(date);
+            String Time = time.getText().toString();
+            Appointment newAppointment = new Appointment(myAuth.getCurrentUser().getEmail(), groomServiceAct.getServiceType(), Date, Time);
             temp.addAppointment(newAppointment);
+            temp.addPAppointment(newAppointment);
             Toast.makeText(getContext(), "Successful Appointment", Toast.LENGTH_SHORT).show();
             dismiss();
         });

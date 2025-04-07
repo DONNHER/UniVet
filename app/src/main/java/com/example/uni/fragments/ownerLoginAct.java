@@ -1,7 +1,6 @@
-package com.example.uni.acts;
+package com.example.uni.fragments;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
@@ -17,15 +16,11 @@ import android.widget.Toast;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.uni.R;
+import com.example.uni.acts.OwnerDashboardAct;
 import com.example.uni.entities.owner;
 import com.example.uni.helper.TempStorage;
 import com.example.uni.viewModel.*;
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import java.util.Objects;
-import java.util.concurrent.Executor;
 
 public class ownerLoginAct extends DialogFragment {
     private OwnerDashboardAct ownerDashboardAct;

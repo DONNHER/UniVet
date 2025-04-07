@@ -1,23 +1,26 @@
-package com.example.uni;
+package com.example.uni.management;
 
 public class  serviceType {
     public static enum Services {
-        grooming, medical;
-        public static enum grooming{
+        grooming, medical,products, Services;
+        public static enum Grooming{
         Trimming,
         Cleaning
         }
-        public static enum medical{
+        public static enum Medical{
             Checkup,
             Vaccination,
             Surgeries
         }
+        public static enum Products{
+            Feeds,
+            Accessories
+        }
+        public static enum Other{
+            inquiries,
+            contacts
+        }
     }
-
-    /**
-     * Email address that triggered this transaction.
-     */
-    public String email;
     /**
      * Type of transcation that was triggered.
      */

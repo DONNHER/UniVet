@@ -27,7 +27,7 @@ public class recycler extends RecyclerView.Adapter<recycler.ViewHolder> {
     @NonNull
     @Override
     public recycler.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        @SuppressLint("ResourceType") View view = LayoutInflater.from(context).inflate((R.id.eveSlots),parent,false);
+        @SuppressLint("ResourceType") View view = LayoutInflater.from(context).inflate((R.id.appointments),parent,false);
         return new ViewHolder(view);
     }
 
