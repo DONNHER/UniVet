@@ -1,6 +1,7 @@
 package com.example.uni.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -11,23 +12,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 
 import com.example.uni.R;
+import com.example.uni.acts.TechnicianDashB;
 import com.example.uni.entities.owner;
 import com.example.uni.helper.TempStorage;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ownerRegisterAct extends DialogFragment {
+public class TechRegister extends DialogFragment {
     private FirebaseAuth myAuth= FirebaseAuth.getInstance();;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceStat) {
-        View view = inflater.inflate(R.layout.owner_register_act, container, false);
-
+        View view = inflater.inflate(R.layout.tech_register, container, false);
+        TextView btm_login = view.findViewById(R.id.btm_login);
         EditText passwordEditText = view.findViewById(R.id.pass);
         EditText conpasswordEditText = view.findViewById(R.id.conPass);
         CheckBox showPasswordCheckBox = view.findViewById(R.id.showPasswordCheckBox);
@@ -39,7 +42,7 @@ public class ownerRegisterAct extends DialogFragment {
             if (res) {
                 Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
                 dismiss();
-                ownerLoginAct dialogFragment = new ownerLoginAct();
+                TechnicianLogin dialogFragment = new TechnicianLogin();
                 dialogFragment.show(getParentFragmentManager(), "LogInDialog");
 
             } else {
@@ -62,6 +65,12 @@ public class ownerRegisterAct extends DialogFragment {
             // Set the cursor at the end of the text after toggle
             passwordEditText.post(() -> passwordEditText.setSelection(passwordEditText.getText().length()));
             conpasswordEditText.post(() -> conpasswordEditText.setSelection(conpasswordEditText.getText().length()));
+        });
+
+        btm_login.setOnClickListener(v -> {
+            TechnicianLogin dialogFragment = new TechnicianLogin();
+            dialogFragment.show(getParentFragmentManager(), "LoginDialog");
+            dismiss();
         });
         return view;
     }
@@ -88,7 +97,7 @@ public class ownerRegisterAct extends DialogFragment {
                 if (task.isSuccessful()) {
                     Toast.makeText(getContext(), "Successfully Registered.", Toast.LENGTH_SHORT).show();
                     dismiss();
-                    ownerLoginAct dialogFragment = new ownerLoginAct();
+                    TechnicianLogin dialogFragment = new TechnicianLogin();
                     dialogFragment.show(getParentFragmentManager(), "LogInDialog");
                 }
             });
@@ -97,9 +106,9 @@ public class ownerRegisterAct extends DialogFragment {
             TempStorage.getInstance().addUser(newUser);
             Toast.makeText(getContext(), "Successfully Registered.", Toast.LENGTH_SHORT).show();
             return true;
-    }
-        return true;
         }
+        return true;
+    }
 //    private void addUser(String username, String role) {
 //        SharedPreferences sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
 //        SharedPreferences.Editor editor = sharedPreferences.edit();

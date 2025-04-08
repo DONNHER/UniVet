@@ -43,7 +43,7 @@ public class appAct extends DialogFragment {
         calendarView = view.findViewById(R.id.calendarView);
         scheduleButton = view.findViewById(R.id.scheduleButton);
         EditText time = view.findViewById(R.id.time);
-        TextView cost = view.findViewById(R.id.cost);
+        TextView cost = view.findViewById(R.id.cost2);
         scheduleButton.setOnClickListener(v -> {
             // Handle button click to schedule appointment
             if (time == null || time.getText().toString().isEmpty()) {

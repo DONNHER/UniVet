@@ -1,63 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#F6D4B8"
-    android:padding="16dp">
-
+    android:layout_height="match_parent">
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+    <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <!-- Top Greeting Section -->
+
         <ImageView
             android:id="@+id/back_button"
             android:layout_width="32dp"
             android:layout_height="27dp"
-            android:layout_gravity="start"
+            android:layout_gravity="end"
             android:contentDescription="@string/back_button"
             android:onClick="back"
-            android:src="@drawable/logo" />
+            android:src="@drawable/undo" />
 
-        <!-- Top Greeting Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
             android:gravity="center_vertical"
-            android:layout_marginBottom="16dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="96dp"
                 android:layout_height="96dp"
-                android:src="@drawable/logo"
+                android:layout_marginEnd="12dp"
                 android:contentDescription="@string/dog_image"
-                android:layout_marginEnd="12dp" />
+                android:src="@drawable/lo" />
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
+
                 <GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <TextView
                         android:id="@+id/name2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/hi"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
                         android:textColor="#222222"
-                        />
-                    <Button
-                        android:layout_width="47dp"
-                        android:layout_height="25dp"
-                        android:layout_row="0"
-                        android:layout_column="3"
-                        android:background="@drawable/edit_background"
-                        android:onClick="onBtnClick"
+                        android:textSize="24sp"
                         android:textStyle="bold" />
 
                 </GridLayout>
@@ -66,8 +63,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/how_can_we_assist_you"
-                    android:textSize="16sp"
-                    android:textColor="#444444" />
+                    android:textColor="#444444"
+                    android:textSize="16sp" />
 
 
             </LinearLayout>
@@ -77,104 +74,47 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:layout_marginBottom="24dp"
             android:autofillHints=""
-            android:hint="@string/search"
             android:background="@drawable/edit_background"
-            android:paddingStart="40dp"
             android:drawableStart="@android:drawable/ic_menu_search"
             android:drawablePadding="8dp"
+            android:hint="@string/search"
+            android:paddingStart="40dp"
+            android:singleLine="true"
             android:textColorHint="#888888"
-            android:layout_marginBottom="24dp"
-            tools:ignore="RtlSymmetry"
-            android:singleLine="true"/>
+            tools:ignore="RtlSymmetry" />
 
         <!-- Services Grid -->
-        <GridLayout
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/service_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:columnCount="2"
-            android:useDefaultMargins="true"
-            android:layout_marginBottom="24dp">
+            android:layout_height="wrap_content">
 
-            <!-- Grooming -->
-            <LinearLayout
-                android:layout_width="9dp"
-                android:layout_height="120dp"
-                android:layout_columnWeight="1"
-                android:background="@drawable/edit_background"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="12dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="onTrimClick">
+        </androidx.recyclerview.widget.RecyclerView>
 
-                <TextView
-                    android:id="@+id/cost"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_margin="0dp"
-                    android:textSize="13dp"
-                    android:padding="0dp"
-                    android:paddingTop="8dp"
-                    android:text="₱"
-                    android:textStyle="bold"
-                    tools:ignore="RtlHardcoded"/>
 
-                <ImageView
-                    android:layout_width="102dp"
-                    android:layout_height="49dp"
-                    android:src="@drawable/logo" />
+        <Button
+            android:layout_width="47dp"
+            android:layout_height="25dp"
+            android:layout_row="0"
+            android:layout_gravity="start"
+            android:background="@drawable/sidemenu"
+            android:onClick="onBtnClick"
+            android:textStyle="bold" />
+    </GridLayout>
 
-                <TextView
-                    android:id="@+id/Trim"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:text="Trimming"
-                    android:textStyle="bold" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="9dp"
-                android:layout_height="120dp"
-                android:layout_columnWeight="1"
-                android:background="@drawable/edit_background"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="12dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="onCleanClick">
+</LinearLayout>
 
-                <TextView
-                    android:id="@+id/cost1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_margin="0dp"
-                    android:textSize="13dp"
-                    android:padding="0dp"
-                    android:paddingTop="8dp"
-                    android:text="₱"
-                    android:textStyle="bold"
-                    tools:ignore="RtlHardcoded"
-                    />
-
-                <ImageView
-                    android:layout_width="102dp"
-                    android:layout_height="49dp"
-                    android:src="@drawable/logo" />
-
-                <TextView
-                    android:id="@+id/Clean"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:text="Cleaning"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </GridLayout>
-    </LinearLayout>
-
-</ScrollView>
+    <ImageView
+        android:id="@+id/add"
+        android:layout_width="51dp"
+        android:layout_height="46dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="31dp"
+        android:layout_marginBottom="58dp"
+        android:src="@drawable/add" />
+</RelativeLayout>

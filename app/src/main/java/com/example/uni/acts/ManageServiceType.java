@@ -12,14 +12,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.uni.R;
 import com.example.uni.entities.owner;
 import com.example.uni.fragments.Menu;
+import com.example.uni.fragments.ownerRegisterAct;
 import com.example.uni.helper.TempStorage;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class TechnicianDashB extends AppCompatActivity {
+public class ManageServiceType extends AppCompatActivity {
 
     private static owner logged = null;
-
     private FirebaseAuth myAuth= FirebaseAuth.getInstance();
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class TechnicianDashB extends AppCompatActivity {
 //        }
 
         // Load Main UI for the logged-in user
-        setContentView(R.layout.technician_dash);
+        setContentView(R.layout.manage_servicetype);
         TextView name = findViewById(R.id.name);
         if(myAuth.getCurrentUser() != null) {
             name.setText("Hi, " + myAuth.getCurrentUser().getDisplayName());
@@ -74,11 +75,11 @@ public class TechnicianDashB extends AppCompatActivity {
         return sharedPreferences.getBoolean("isLoggedIn", false);
     }
 
-    public void onServiceManageClick(View view) {
-        Intent intent = new Intent(this, ManageServiceType.class); // Replace with actual target
+    public void onMedClick(View view) {
+        Intent intent = new Intent(this, medServiceAct.class); // Replace with actual target
         startActivity(intent);
     }
-    public void onProductManageClick(View view) {
+    public void onGroomClick(View view) {
         Intent intent = new Intent(this, groomServiceAct.class); // Replace with actual target
         startActivity(intent);
     }

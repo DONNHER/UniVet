@@ -7,20 +7,38 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.uni.R;
+import com.example.uni.adapters.appAdapt;
+import com.example.uni.adapters.serviceAdapt;
+import com.example.uni.entities.Admin;
+import com.example.uni.entities.Appointment;
+import com.example.uni.entities.Service;
+import com.example.uni.entities.Technician;
+import com.example.uni.entities.owner;
 import com.example.uni.fragments.appAct;
 import com.example.uni.fragments.ownerLoginAct;
 import com.example.uni.fragments.ownerRegisterAct;
 import com.example.uni.helper.TempStorage;
 import com.example.uni.management.serviceType;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
 //import com.example.uni.management.SessionManager;
 
 public  class groomServiceAct extends AppCompatActivity {
 //    private ownerVModel ownerVModel;
-    private static final TempStorage temp = TempStorage.getInstance();
+
+    private RecyclerView recyclerView;
+    private static serviceAdapt serviceAdapt;
+
+    private ArrayList<Service> services = new ArrayList<>();
+    private ArrayList<Service> nServices = new ArrayList<>();
+    private static  TempStorage temp = TempStorage.getInstance();
     private FirebaseAuth myAuth= FirebaseAuth.getInstance();
     private static com.example.uni.management.serviceType.Services.Grooming serviceType;
     @SuppressLint("SetTextI18n")
@@ -30,10 +48,14 @@ public  class groomServiceAct extends AppCompatActivity {
 
         // Load Main UI for the logged-in user
         setContentView(R.layout.groom_service);
-//        ownerVModel = new ViewModelProvider(this).get(ownerVModel.class);
-//        TextView cost = findViewById(R.id.cost);
-//        TextView cost1 = findViewById(R.id.cost1);
-//        ownerVModel.getuserdata().observe(this, owner -> {
+
+        recyclerView =  findViewById(R.id.service_recycler_view);
+        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        ImageView add = findViewById(R.id.add);
+        if (temp.getIsLoggedIn().getClass().getSimpleName().equals("owner")){
+            add.setVisibility(View.INVISIBLE);
+        }
+
         if (myAuth.getCurrentUser() != null) {
             TextView name = findViewById(R.id.name2);//
             name.setText( "Hi, " + myAuth.getCurrentUser().getDisplayName());
@@ -43,7 +65,7 @@ public  class groomServiceAct extends AppCompatActivity {
 //        });
         TextView name = findViewById(R.id.name2);//
         name.setText( "Hi, ");
-        Toast.makeText(this,"Invalid Credentials" +TempStorage.getInstance().getAppointments().size(),Toast.LENGTH_SHORT).show();
+        services();
     }
 
     private void initializeServices() {
@@ -90,7 +112,7 @@ public  class groomServiceAct extends AppCompatActivity {
         }
     }
     public void onTrimClick(View view) {
-        if(myAuth.getCurrentUser()  == null){
+        if(myAuth.getCurrentUser()  == null && TempStorage.getInstance().getIsLoggedIn()== null){
             setServiceType(com.example.uni.management.serviceType.Services.Grooming.Trimming);
             ownerLoginAct dialogFragment = new ownerLoginAct();
             dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
@@ -100,7 +122,7 @@ public  class groomServiceAct extends AppCompatActivity {
         dialogFragment.show(getSupportFragmentManager(), "appointmentDialog");
     }
     public void onCleanClick(View view) {
-        if(myAuth.getCurrentUser()  == null){
+        if(myAuth.getCurrentUser()  == null && TempStorage.getInstance().getIsLoggedIn() == null){
             setServiceType(com.example.uni.management.serviceType.Services.Grooming.Cleaning);
             ownerLoginAct dialogFragment = new ownerLoginAct();
             dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
@@ -123,8 +145,26 @@ public  class groomServiceAct extends AppCompatActivity {
         Intent intent = new Intent(this, settingAct.class); // Replace with actual target
         startActivity(intent);
     }
+    private void services(){
+        temp.addService(new Service(200, R.drawable.add,"Trimming"));
+        temp.addService(new Service(200, R.drawable.add,"Trimming"));
+        temp.addService(new Service(200, R.drawable.add,"Trimming"));
+        if ( temp.getServices().isEmpty()){
+            return;
+        }
+        serviceAdapt = new serviceAdapt(temp.getServices());
+        recyclerView.setAdapter(serviceAdapt);
+    }
     @Override
     protected void onResume(){
         super.onResume();
+        newServices();
+    }
+    public void newServices(){
+        if ( temp.getNServices().isEmpty()) {
+            return;
+        }
+        serviceAdapt = new serviceAdapt(temp.getNServices());
+        recyclerView.setAdapter(serviceAdapt);
     }
 }

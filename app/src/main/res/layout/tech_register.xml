@@ -6,21 +6,21 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="24dp">
 
         <ImageView
-            android:layout_width="120dp"
+            android:layout_width="280dp"
             android:layout_height="120dp"
-            android:src="@drawable/lo"
             android:layout_gravity="center"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/lo" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome Back"
+            android:text="Create as Manager"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_gravity="center"
@@ -29,7 +29,7 @@
         <EditText
             android:id="@+id/username"
             android:autofillHints=""
-            android:hint="@string/username"
+            android:hint="Username or Email Address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="12dp"
@@ -52,6 +52,19 @@
         <!--            android:drawableStart="@drawable/ic_lock" -->
         <!--            android:drawableStart="@drawable/edittext_background" -->
 
+
+        <EditText
+            android:id="@+id/conPass"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/edit_background"
+            android:singleLine="true"
+            />
+
         <CheckBox
             android:id="@+id/showPasswordCheckBox"
             android:layout_width="wrap_content"
@@ -69,10 +82,10 @@
             android:text="I accept Privacy Policy &amp; Term of Use" />
 
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="Sign Up"
             android:backgroundTint="#5A2F17"
             android:textColor="@android:color/white"
             android:layout_marginTop="16dp" />
@@ -114,12 +127,15 @@
                 android:text="         Already have an account?"/>
 
             <TextView
+                android:id="@+id/btm_login"
                 android:layout_width="84dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
-                android:text=" Sign up"
-                android:onClick="onResClick" />
+                android:textColor="@android:color/holo_blue_dark"
+                android:text=" Login"
+                android:clickable="true"
+                android:focusable="true"/>
 
         </GridLayout>
     </LinearLayout>

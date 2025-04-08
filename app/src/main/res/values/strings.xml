@@ -38,4 +38,8 @@
     <string name="Tr">Trimming \nCost: 500 php</string>
     <string name="upcoming_appointments">Upcoming Appointments</string>
     <string name="UniVet">UniVet</string>
+    <string name="Admin">I\'m a Admin.</string>
+    <string name="manager">I\'m a Manager.</string>
+    <string name="costumer">I\'m a costumer.</string>
+    <string name="guest">Guest</string>
 </resources>

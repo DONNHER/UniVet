@@ -11,21 +11,22 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 
 import com.example.uni.R;
 import com.example.uni.acts.OwnerDashboardAct;
+import com.example.uni.acts.TechnicianDashB;
 import com.example.uni.entities.owner;
 import com.example.uni.helper.TempStorage;
-import com.example.uni.viewModel.*;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ownerLoginAct extends DialogFragment {
+public class TechnicianLogin extends DialogFragment {
     private OwnerDashboardAct ownerDashboardAct;
     private EditText passwordEditText;
-    private ownerVModel ownerVModel;
+    private com.example.uni.viewModel.ownerVModel ownerVModel;
     private TempStorage temp = TempStorage.getInstance();
 
     private FirebaseAuth myAuth= FirebaseAuth.getInstance();;
@@ -33,8 +34,8 @@ public class ownerLoginAct extends DialogFragment {
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceStat) {
-        View view = inflater.inflate(R.layout.owner_login_act, container, false);
-
+        View view = inflater.inflate(R.layout.tech_login, container, false);
+        TextView btm_signup = view.findViewById(R.id.bot_signUp);
         Button btn= view.findViewById(R.id.btnLogin);
         EditText passwordEditText = view.findViewById(R.id.pass);
         CheckBox showPasswordCheckBox = view.findViewById(R.id.showPasswordCheckBox);
@@ -49,6 +50,12 @@ public class ownerLoginAct extends DialogFragment {
                 passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
             }
             passwordEditText.post(() -> passwordEditText.setSelection(passwordEditText.getText().length()));
+        });
+
+        btm_signup.setOnClickListener(v -> {
+            TechRegister dialogFragment = new TechRegister();
+            dialogFragment.show(getParentFragmentManager(), "RegisterDialog");
+            dismiss();
         });
         return view;
     }
@@ -72,14 +79,14 @@ public class ownerLoginAct extends DialogFragment {
         owner logUser = temp.getUser(newUser, temp.getUsers());
         if (logUser != null) {
             temp.setIsLoggedIn(logUser);
-            Intent intent = new Intent(getContext(), OwnerDashboardAct.class); // Replace with actual target
+            Intent intent = new Intent(getContext(), TechnicianDashB.class); // Replace with actual target
             startActivity(intent);
             return;
         }
         myAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener(requireActivity(), task -> {
             if(task.isSuccessful()){
                 Toast.makeText(getContext(),"Login Successful",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getContext(), OwnerDashboardAct.class); // Replace with actual target
+                Intent intent = new Intent(getContext(), TechnicianDashB.class); // Replace with actual target
                 startActivity(intent);
                 dismiss();
                 return;

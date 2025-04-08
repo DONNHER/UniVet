@@ -9,23 +9,26 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.uni.helper.TempStorage;
 import com.google.firebase.auth.FirebaseAuth;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.uni.R;
+import com.google.firebase.firestore.FirebaseFirestore;
 //import com.example.uni.management.SessionManager;
 
 public class main_act extends AppCompatActivity {
 
     private FirebaseAuth myAuth= FirebaseAuth.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(myAuth.getCurrentUser() != null){
+        if(myAuth.getCurrentUser() != null || TempStorage.getInstance().getIsLoggedIn()!= null){
             Intent intent = new Intent(this, OwnerDashboardAct.class); // Replace with actual target
             startActivity(intent);
             finish();

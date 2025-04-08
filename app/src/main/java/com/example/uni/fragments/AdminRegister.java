@@ -20,13 +20,13 @@ import com.example.uni.entities.owner;
 import com.example.uni.helper.TempStorage;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ownerRegisterAct extends DialogFragment {
+public class AdminRegister extends DialogFragment {
     private FirebaseAuth myAuth= FirebaseAuth.getInstance();;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceStat) {
-        View view = inflater.inflate(R.layout.owner_register_act, container, false);
+        View view = inflater.inflate(R.layout.admin_register, container, false);
 
         EditText passwordEditText = view.findViewById(R.id.pass);
         EditText conpasswordEditText = view.findViewById(R.id.conPass);
@@ -39,7 +39,7 @@ public class ownerRegisterAct extends DialogFragment {
             if (res) {
                 Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
                 dismiss();
-                ownerLoginAct dialogFragment = new ownerLoginAct();
+                AdminLogin dialogFragment = new AdminLogin();
                 dialogFragment.show(getParentFragmentManager(), "LogInDialog");
 
             } else {
@@ -88,7 +88,7 @@ public class ownerRegisterAct extends DialogFragment {
                 if (task.isSuccessful()) {
                     Toast.makeText(getContext(), "Successfully Registered.", Toast.LENGTH_SHORT).show();
                     dismiss();
-                    ownerLoginAct dialogFragment = new ownerLoginAct();
+                    AdminLogin dialogFragment = new AdminLogin();
                     dialogFragment.show(getParentFragmentManager(), "LogInDialog");
                 }
             });
@@ -97,9 +97,9 @@ public class ownerRegisterAct extends DialogFragment {
             TempStorage.getInstance().addUser(newUser);
             Toast.makeText(getContext(), "Successfully Registered.", Toast.LENGTH_SHORT).show();
             return true;
-    }
-        return true;
         }
+        return true;
+    }
 //    private void addUser(String username, String role) {
 //        SharedPreferences sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
 //        SharedPreferences.Editor editor = sharedPreferences.edit();

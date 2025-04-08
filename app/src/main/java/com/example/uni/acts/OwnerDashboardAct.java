@@ -29,7 +29,7 @@ public class OwnerDashboardAct extends AppCompatActivity {
     private  RecyclerView appointmentsView;
     private  RecyclerView appointmentsView2;
     private appAdapt appAdapt;
-    private static appAdapt appAdaptP;
+    private appAdapt appAdaptP;
     private ArrayList<Appointment> appointments = new ArrayList<>();
     private ArrayList<Appointment> appointmentsP = new ArrayList<>();
     private static  TempStorage temp = TempStorage.getInstance();
@@ -57,7 +57,11 @@ public class OwnerDashboardAct extends AppCompatActivity {
         appointmentsView2.setVisibility(View.INVISIBLE);
 //        ownerVModel = new ViewModelProvider(this).get(ownerVModel.class);
           TextView name = findViewById(R.id.name1);
-          name.setText( "Hi, " + myAuth.getCurrentUser().getDisplayName());
+          if(myAuth.getCurrentUser() != null) {
+              name.setText("Hi, " + myAuth.getCurrentUser().getDisplayName());
+          }else {
+              name.setText("Hi, " +TempStorage.getInstance().getIsLoggedIn().getName());
+          }
           appointments();
     }
     private void initializeServices() {
@@ -108,7 +112,7 @@ public class OwnerDashboardAct extends AppCompatActivity {
         appointmentsView2.setVisibility(View.INVISIBLE);
     }
     public void onBtnClick(View view) {
-        Intent intent = new Intent(this, settingAct.class); // Replace with actual target
+        Intent intent = new Intent(this, ownerDashB_setting.class); // Replace with actual target
         startActivity(intent);
     }
 

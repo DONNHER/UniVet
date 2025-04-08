@@ -2,12 +2,34 @@ package com.example.uni.entities;
 
 public class Service {
     private int id;
-    private double price;
+    private static int Image;
+    private static double price;
     private String  serviceType;
+    private static String name;
+
+    private static String isNew = "new";
+
     // Constructor
-    public Service(double price, String serviceType) {
-        this.price = price;
-        this.serviceType = serviceType;
+    public Service(double Price,int image,String Name) {
+        Image = image;
+        price = Price;
+        name = Name;
+    }
+
+    public static String getName() {
+        return name;
+    }
+
+    public static void setName(String name) {
+        Service.name = name;
+    }
+
+    public static String getIsNew() {
+        return isNew;
+    }
+
+    public static void setIsNew(String New) {
+        isNew = New;
     }
 
     // Getters and Setters
@@ -18,12 +40,12 @@ public class Service {
     public void setId(int id) {
         this.id = id;
     }
-    public double getPrice() {
+    public static double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public static void setPrice(double Price) {
+        price = Price;
     }
 
 
@@ -41,5 +63,13 @@ public class Service {
                 ", price=" + price +
                 ", serviceType='" + serviceType + '\'' +
                 '}';
+    }
+
+    public static int getImage() {
+        return Image;
+    }
+
+    public void setImage(int image) {
+        Image = image;
     }
 }

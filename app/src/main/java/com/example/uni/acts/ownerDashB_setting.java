@@ -9,6 +9,7 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.uni.R;
+import com.example.uni.fragments.ownerLoginAct;
 import com.google.firebase.auth.FirebaseAuth;
 //import com.example.uni.management.SessionManager;
 
@@ -81,8 +82,8 @@ public class ownerDashB_setting extends AppCompatActivity {
     }
     public void logoutClick(View view) {
        myAuth.signOut();
-        Intent intent = new Intent(this, main_act.class); // Replace with actual target
-        startActivity(intent);
-        finish();
+        ownerLoginAct dialogFragment = new ownerLoginAct();
+        dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
+        finish();// Replace with actual target
     }
 }

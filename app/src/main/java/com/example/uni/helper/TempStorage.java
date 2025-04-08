@@ -11,11 +11,23 @@ public class TempStorage {
     private  ArrayList<Appointment> appointments;
     private  ArrayList<Appointment> pAppointments;
     private  ArrayList<Service> services;
+    private  ArrayList<Service> nServices;
+
+    private owner isLoggedIn;
     private TempStorage(){
         users = new ArrayList<>();
         appointments = new ArrayList<>();
         services = new ArrayList<>();
+        nServices = new ArrayList<>();
         pAppointments = new ArrayList<>();
+    }
+
+    public owner getIsLoggedIn() {
+        return isLoggedIn;
+    }
+
+    public void setIsLoggedIn(owner isLoggedIn) {
+        this.isLoggedIn = isLoggedIn;
     }
 
     private static class TempStorageHelper {
@@ -27,6 +39,8 @@ public class TempStorage {
     public ArrayList<owner> getUsers(){return users;}
     public ArrayList<Appointment>getAppointments(){return appointments;}
     public ArrayList<Appointment>getPAppointments(){return appointments;}
+    public ArrayList<Service>getServices(){return services;}
+    public ArrayList<Service>getNServices(){return nServices;}
     public owner getUser(owner user, ArrayList<owner> users){
         int l = 0;
         int r = users.size() -1;
@@ -66,8 +80,11 @@ public class TempStorage {
     public void addAppointment(Appointment appointment){
         appointments.add(appointment);
     }
-    public void addAppointment(Service service){
+    public void addService(Service service){
         services.add(service);
+    }
+    public void addNService(Service service){
+        nServices.add(service);
     }
     public void addPAppointment(Appointment appointment){
         pAppointments.add(appointment);
