@@ -1,8 +1,11 @@
 package com.example.uni.entities;
 
+import java.util.UUID;
+
 public class Service {
-    private int id;
-    private static int Image;
+
+    private final UUID id = UUID.randomUUID();
+    private static String Image;
     private static double price;
     private String  serviceType;
     private static String name;
@@ -10,7 +13,7 @@ public class Service {
     private static String isNew = "new";
 
     // Constructor
-    public Service(double Price,int image,String Name) {
+    public Service(double Price,String image,String Name) {
         Image = image;
         price = Price;
         name = Name;
@@ -33,12 +36,8 @@ public class Service {
     }
 
     // Getters and Setters
-    public int getId() {
+    public UUID getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
     public static double getPrice() {
         return price;
@@ -65,11 +64,11 @@ public class Service {
                 '}';
     }
 
-    public static int getImage() {
+    public static String getImage() {
         return Image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         Image = image;
     }
 }

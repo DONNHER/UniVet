@@ -2,6 +2,7 @@ package com.example.uni.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,25 +10,32 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextClock;
 import android.widget.TextView;
-
+import com.bumptech.glide.Glide;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.uni.R;
-import com.example.uni.entities.Appointment;
-import com.example.uni.entities.Item;
+import com.example.uni.acts.groomServiceAct;
 import com.example.uni.entities.Service;
+import com.example.uni.fragments.Menu;
+import com.example.uni.fragments.appAct;
 import com.example.uni.helper.TempStorage;
 import com.google.firebase.auth.FirebaseAuth;
-
+import java.util.UUID;
 import java.util.ArrayList;
 
 public class serviceAdapt extends RecyclerView.Adapter<serviceAdapt.ServiceViewHolder> {
-    private final ArrayList<Service> appointments;
+    private ArrayList<Service> appointments;
+
+    private Context context;
 
     private FirebaseAuth myAuth= FirebaseAuth.getInstance();
     public serviceAdapt(ArrayList<Service> items){
         this.appointments = items;
+        this.context = context;
     }
 
 
@@ -43,8 +51,14 @@ public class serviceAdapt extends RecyclerView.Adapter<serviceAdapt.ServiceViewH
     public void onBindViewHolder(@NonNull ServiceViewHolder holder, int position) {
         Service item = appointments.get(position);
         holder.price.setText(""+ item.getPrice());
-        holder.pic.setImageResource(item.getImage());
         holder.name.setText(item.getName());
+        Glide.with(holder.pic.getContext())
+                .load(item.getImage())
+                .into(holder.pic);
+        holder.itemView.setOnClickListener(view -> {
+            appAct dialogFragment = new appAct();
+            dialogFragment.show(new groomServiceAct().getFragment(), "appointmentDialog");
+    });
     }
 
     @Override

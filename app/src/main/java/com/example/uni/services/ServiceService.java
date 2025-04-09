@@ -18,10 +18,6 @@ public class ServiceService {
 //        return tempStorage.computeIfAbsent(serviceId, dbHelper::getServiceById);
 //    }
 
-    public void updateService(Service service) {
-        tempStorage.put(service.getId(), service);
-    }
-
     public void deleteService(int serviceId) {
         tempStorage.remove(serviceId);
     }

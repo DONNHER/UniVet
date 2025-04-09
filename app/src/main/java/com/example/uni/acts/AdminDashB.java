@@ -84,7 +84,7 @@ public class AdminDashB extends AppCompatActivity {
         Intent intent = new Intent(this, otherServiceAct.class); // Replace with actual target
         startActivity(intent);
     }
-    public void onBtnClick(View view) {
+    public void onMenu(View view) {
         Menu menu = new Menu();
         menu.show(menu.getParentFragmentManager(), "MenuDialog");
     }

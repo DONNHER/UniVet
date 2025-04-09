@@ -3,34 +3,19 @@ package com.example.uni.fragments;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.text.method.*;
+import android.view.*;
+import android.widget.*;
 import androidx.fragment.app.DialogFragment;
-
 import com.example.uni.R;
-import com.example.uni.acts.OwnerDashboardAct;
 import com.example.uni.acts.TechnicianDashB;
 import com.example.uni.entities.owner;
 import com.example.uni.helper.TempStorage;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class TechnicianLogin extends DialogFragment {
-    private OwnerDashboardAct ownerDashboardAct;
-    private EditText passwordEditText;
-    private com.example.uni.viewModel.ownerVModel ownerVModel;
-    private TempStorage temp = TempStorage.getInstance();
-
-    private FirebaseAuth myAuth= FirebaseAuth.getInstance();;
-
+    private final TempStorage temp = TempStorage.getInstance();
+    private final FirebaseAuth myAuth= FirebaseAuth.getInstance();
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceStat) {
@@ -39,10 +24,7 @@ public class TechnicianLogin extends DialogFragment {
         Button btn= view.findViewById(R.id.btnLogin);
         EditText passwordEditText = view.findViewById(R.id.pass);
         CheckBox showPasswordCheckBox = view.findViewById(R.id.showPasswordCheckBox);
-        btn.setOnClickListener(v -> {
-            loginUser(view);
-        });
-
+        btn.setOnClickListener(v -> loginUser(view));
         showPasswordCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
@@ -59,17 +41,6 @@ public class TechnicianLogin extends DialogFragment {
         });
         return view;
     }
-//
-//
-//    private void saveSession(String username, String role) {
-//        SharedPreferences sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putBoolean("isLoggedIn", true);
-//        editor.putString("username", username);
-//        editor.putString("role", role); // Store user role
-//        editor.apply();
-//    }
-
     protected void loginUser(View btn) {
         EditText name =  btn.findViewById(R.id.username);
         String username = name.getText().toString().trim();
@@ -79,25 +50,20 @@ public class TechnicianLogin extends DialogFragment {
         owner logUser = temp.getUser(newUser, temp.getUsers());
         if (logUser != null) {
             temp.setIsLoggedIn(logUser);
-            Intent intent = new Intent(getContext(), TechnicianDashB.class); // Replace with actual target
+            Intent intent = new Intent(getContext(), TechnicianDashB.class);
             startActivity(intent);
             return;
         }
         myAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener(requireActivity(), task -> {
             if(task.isSuccessful()){
                 Toast.makeText(getContext(),"Login Successful",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getContext(), TechnicianDashB.class); // Replace with actual target
+                Intent intent = new Intent(getContext(), TechnicianDashB.class);
                 startActivity(intent);
                 dismiss();
-                return;
+            }  else {
+            Toast.makeText(getContext(), "Registration Failed: " + task.getException().toString(), Toast.LENGTH_SHORT).show();
             }
-            Toast.makeText( getContext(),"Invalid Credentials",Toast.LENGTH_SHORT).show();
         });
-    }
 
-    private String getUserRole(String username) {
-        // Replace this with real logic to fetch user role
-        return "owner";
     }
-
 }

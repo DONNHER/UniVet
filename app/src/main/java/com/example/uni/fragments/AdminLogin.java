@@ -83,8 +83,9 @@ public class AdminLogin  extends DialogFragment {
                 startActivity(intent);
                 dismiss();
                 return;
-            }
-            Toast.makeText( getContext(),"Invalid Credentials",Toast.LENGTH_SHORT).show();
+            } else {
+            Toast.makeText(getContext(), "Registration Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+        }
         });
     }
 
