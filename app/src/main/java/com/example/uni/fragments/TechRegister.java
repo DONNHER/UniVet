@@ -10,9 +10,16 @@ import androidx.fragment.app.DialogFragment;
 import com.example.uni.R;
 import com.example.uni.entities.owner;
 import com.example.uni.helper.TempStorage;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.FirebaseNetworkException;
+import com.google.firebase.auth.*;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class TechRegister extends DialogFragment {
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth myAuth= FirebaseAuth.getInstance();
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
@@ -42,19 +49,24 @@ public class TechRegister extends DialogFragment {
                 myAuth.createUserWithEmailAndPassword(username, password)
                         .addOnCompleteListener(requireActivity(), task -> {
                             if (task.isSuccessful()) {
+                                FirebaseUser user = myAuth.getCurrentUser();
+                                Map<String,Object> data = new HashMap<>();
+                                data.put("uid",user.getUid());
+                                data.put("username",user.getEmail());
+                                data.put("role","manager");
+                                db.collection("users").document(user.getUid()).set(data);
                                 Toast.makeText(getContext(), "Successfully Registered.", Toast.LENGTH_SHORT).show();
                                 dismiss();
                                 new ownerLoginAct().show(getParentFragmentManager(), "LogInDialog");
                             } else {
-                                Toast.makeText(getContext(), "Registration Failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                Exception e = task.getException();
+                                if (e instanceof FirebaseNetworkException) {
+                                    Toast.makeText(getContext(), "No internet connection", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                                }
                             }
                         });
-            } else {
-                owner newUser = new owner(username, password);
-                TempStorage.getInstance().addUser(newUser);
-                Toast.makeText(getContext(), "Successfully Registered.", Toast.LENGTH_SHORT).show();
-                dismiss();
-                new ownerLoginAct().show(getParentFragmentManager(), "LogInDialog");
             }
         });
 

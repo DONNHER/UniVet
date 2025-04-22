@@ -46,29 +46,26 @@ public class start_act extends DialogFragment {
         admin.setOnClickListener(v -> select(admin));
         guest.setOnClickListener(v -> select(guest));
 
-        btnGetStarted.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(),role, Toast.LENGTH_SHORT).show();
+        btnGetStarted.setOnClickListener(v -> {
+            Toast.makeText(getContext(),role, Toast.LENGTH_SHORT).show();
 
-                if(role == null){
-                    Toast.makeText(getContext(),"Please select a role", Toast.LENGTH_SHORT).show();
-                } else if (role.equals("I'm a Costumer.")) {
-                    ownerLoginAct dialogFragment = new ownerLoginAct();
-                    dialogFragment.show(getParentFragmentManager(), "LogInDialog");
-                    dismiss();
-                }else if (role.equals("I'm a Manager.")) {
-                    TechnicianLogin dialogFragment = new TechnicianLogin();
-                    dialogFragment.show(getParentFragmentManager(), "LogInDialog");
-                    dismiss();
-                }
-                else if (role.equals("I'm a Admin.")) {
-                    AdminLogin dialogFragment = new AdminLogin();
-                    dialogFragment.show(getParentFragmentManager(), "LogInDialog");
-                    dismiss();
-                }
+            if(role == null){
+                Toast.makeText(getContext(),"Please select a role", Toast.LENGTH_SHORT).show();
+            } else if (role.equals("I'm a Costumer.")) {
+                ownerLoginAct dialogFragment = new ownerLoginAct();
+                dialogFragment.show(getParentFragmentManager(), "LogInDialog");
+                dismiss();
+            }else if (role.equals("I'm a Manager.")) {
+                TechnicianLogin dialogFragment = new TechnicianLogin();
+                dialogFragment.show(getParentFragmentManager(), "Dialog");
                 dismiss();
             }
+            else if (role.equals("I'm a Admin.")) {
+                AdminLogin dialogFragment = new AdminLogin();
+                dialogFragment.show(getParentFragmentManager(), "LogIn");
+                dismiss();
+            }
+            dismiss();
         });
         return view;
     }

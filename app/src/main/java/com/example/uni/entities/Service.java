@@ -1,37 +1,41 @@
 package com.example.uni.entities;
 
+import com.google.firebase.firestore.PropertyName;
+
 import java.util.UUID;
 
 public class Service {
 
     private final UUID id = UUID.randomUUID();
-    private static String Image;
-    private static double price;
+    private  String Image;
+    private  double price;
     private String  serviceType;
-    private static String name;
-
-    private static String isNew = "new";
+    private  String name;
+    private  String isNew = "new";
+    private String description;
 
     // Constructor
-    public Service(double Price,String image,String Name) {
+    public Service(){}
+    public Service(double Price,String image,String Name,String description) {
         Image = image;
         price = Price;
         name = Name;
+        this.description = description;
     }
 
-    public static String getName() {
+    public  String getName() {
         return name;
     }
 
-    public static void setName(String name) {
-        Service.name = name;
+    public  void setName(String name) {
+        this.name = name;
     }
 
-    public static String getIsNew() {
+    public  String getIsNew() {
         return isNew;
     }
 
-    public static void setIsNew(String New) {
+    public  void setIsNew(String New) {
         isNew = New;
     }
 
@@ -39,11 +43,11 @@ public class Service {
     public UUID getId() {
         return id;
     }
-    public static double getPrice() {
+    public  double getPrice() {
         return price;
     }
 
-    public static void setPrice(double Price) {
+    public  void setPrice(double Price) {
         price = Price;
     }
 
@@ -64,11 +68,19 @@ public class Service {
                 '}';
     }
 
-    public static String getImage() {
+    public  String getImage() {
         return Image;
     }
 
     public void setImage(String image) {
         Image = image;
+    }
+    @PropertyName("Description")
+    public String getDescription() {
+        return description;
+    }
+    @PropertyName("Description")
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

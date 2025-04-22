@@ -17,16 +17,14 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.uni.R;
 import com.example.uni.acts.OwnerDashboardAct;
+import com.example.uni.acts.TechnicianDashB;
 import com.example.uni.entities.owner;
 import com.example.uni.helper.TempStorage;
 import com.example.uni.viewModel.*;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ownerLoginAct extends DialogFragment {
-    private OwnerDashboardAct ownerDashboardAct;
-    private EditText passwordEditText;
-    private ownerVModel ownerVModel;
-    private TempStorage temp = TempStorage.getInstance();
 
     private FirebaseAuth myAuth= FirebaseAuth.getInstance();;
 
@@ -52,45 +50,26 @@ public class ownerLoginAct extends DialogFragment {
         });
         return view;
     }
-//
-//
-//    private void saveSession(String username, String role) {
-//        SharedPreferences sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putBoolean("isLoggedIn", true);
-//        editor.putString("username", username);
-//        editor.putString("role", role); // Store user role
-//        editor.apply();
-//    }
 
     protected void loginUser(View btn) {
         EditText name =  btn.findViewById(R.id.username);
         String username = name.getText().toString().trim();
         EditText pass =  btn.findViewById(R.id.pass);
         String password = pass.getText().toString().trim();
-        owner newUser =   new owner(username, password);
-        owner logUser = temp.getUser(newUser, temp.getUsers());
-        if (logUser != null) {
-            temp.setIsLoggedIn(logUser);
-            Intent intent = new Intent(getContext(), OwnerDashboardAct.class); // Replace with actual target
-            startActivity(intent);
-            return;
-        }
         myAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener(requireActivity(), task -> {
             if(task.isSuccessful()){
                 Toast.makeText(getContext(),"Login Successful",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getContext(), OwnerDashboardAct.class); // Replace with actual target
                 startActivity(intent);
                 dismiss();
-                return;
+            }else{
+                Exception e = task.getException();
+                if (e instanceof FirebaseNetworkException) {
+                    Toast.makeText(getContext(), "No internet connection", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
             }
-            Toast.makeText( getContext(),"Invalid Credentials",Toast.LENGTH_SHORT).show();
         });
     }
-
-    private String getUserRole(String username) {
-        // Replace this with real logic to fetch user role
-        return "owner";
-    }
-
 }

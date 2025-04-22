@@ -82,8 +82,8 @@ public class ownerDashB_setting extends AppCompatActivity {
     }
     public void logoutClick(View view) {
        myAuth.signOut();
-        ownerLoginAct dialogFragment = new ownerLoginAct();
-        dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
-        finish();// Replace with actual target
+        Intent intent = new Intent(this, main_act.class); // Replace with actual target
+        startActivity(intent);
+        finish();
     }
 }

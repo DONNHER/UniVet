@@ -9,101 +9,91 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import com.example.uni.R;
+import com.example.uni.adapters.GroomServiceAdaptor;
 import com.example.uni.adapters.appAdapt;
+import com.example.uni.adapters.ownerAdapt;
 import com.example.uni.entities.Appointment;
+import com.example.uni.entities.ServiceType;
+import com.example.uni.fragments.Menu;
 import com.example.uni.helper.TempStorage;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
 import java.util.ArrayList;
 
 public class OwnerDashboardAct extends AppCompatActivity {
-    private  RecyclerView appointmentsView;
-    private  RecyclerView appointmentsView2;
-    private appAdapt appAdaptP;
+    private  RecyclerView appointmentsView ;
+    private appAdapt Adapt;
+    private Button btn1, btn2;
     private final ArrayList<Appointment> appointments = new ArrayList<>();
-    private final ArrayList<Appointment> appointmentsP = new ArrayList<>();
-    private static final TempStorage temp = TempStorage.getInstance();
-
+    private RecyclerView recyclerView;
+    private ArrayList<ServiceType> list;
+    private ownerAdapt owner_adapt;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth myAuth= FirebaseAuth.getInstance();
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_d_board);
-        appointmentsView = findViewById(R.id.appointmentsView);
-        appointmentsView.setVisibility(View.VISIBLE);
-        appointmentsView2 = findViewById(R.id.appointmentsView2);
-        appointmentsView2.setVisibility(View.INVISIBLE);
-          TextView name = findViewById(R.id.name1);
-          if(myAuth.getCurrentUser() != null) {
-              name.setText("Hi, " + myAuth.getCurrentUser().getDisplayName());
-          }else {
-              name.setText("Hi, " +TempStorage.getInstance().getIsLoggedIn().getName());
-          }
-          appointments();
-    }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-    public void onMedClick(View view) {
-        Intent intent = new Intent(this, medServiceAct.class); // Replace with actual target
-        startActivity(intent);
-    }
-    public void onGroomClick(View view) {
-        Intent intent = new Intent(this, groomServiceAct.class); // Replace with actual target
-        startActivity(intent);
-    }
-    public void onProductClick(View view) {
-        Intent intent = new Intent(this, productServiceAct.class); // Replace with actual target
-        startActivity(intent);
-    }
-    public void onOtherClick(View view) {
-        Intent intent = new Intent(this, otherServiceAct.class); // Replace with actual target
-        startActivity(intent);
-    }
-    public void onPendingClick(View view) {
-        appointmentsView.setVisibility(View.INVISIBLE);
-        appointmentsView2.setVisibility(View.VISIBLE);
-    }
-    public void onUpcomingClick(View view) {
-        appointmentsView.setVisibility(View.VISIBLE);
-        appointmentsView2.setVisibility(View.INVISIBLE);
-    }
-    public void onBtnClick(View view) {
-        Intent intent = new Intent(this, ownerDashB_setting.class); // Replace with actual target
-        startActivity(intent);
+        recyclerView = findViewById(R.id.appointmentsView);
+        list = new ArrayList<>();
+        owner_adapt = new ownerAdapt(list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(owner_adapt);
+        loadServices();
+        btn1 = findViewById(R.id.appoint1);
+        btn2 = findViewById(R.id.appoint2);
+        appointmentsView = findViewById(R.id.appointments23);
+        Adapt = new appAdapt();
+        appointmentsView.setLayoutManager(new LinearLayoutManager(this));
+        appointmentsView.setAdapter(Adapt);
+        TextView name = findViewById(R.id.name);
+        name.setText("Hi, " + myAuth.getCurrentUser().getDisplayName());
+        btn2.setOnClickListener(v ->filter("Pending"));
+        btn1.setOnClickListener(v ->filter("Confirmed"));
+        filter("Pending");
+        appointments();
     }
 
     private void appointments(){
-        if ( temp.getAppointments().isEmpty()){
-            return;
-        }
-        for (Appointment appointment : temp.getAppointments()){
-            if (appointment.getStatus().equals("Pending")){
-                appointmentsP.add(appointment);
-            }else {
+        db.collection("Appointments").get().addOnSuccessListener(queryDocumentSnapshots -> {
+            appointments.clear();
+            for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                Appointment appointment = documentSnapshot.toObject(Appointment.class);
                 appointments.add(appointment);
             }
-        }
-        com.example.uni.adapters.appAdapt appAdapt = new appAdapt(appointments);
-        appAdaptP = new appAdapt(appointmentsP);
-        appointmentsView.setAdapter(appAdapt);
-        appointmentsView2.setAdapter(appAdaptP);
-        appointmentsView.setLayoutManager(new LinearLayoutManager(this));
-        appointmentsView2.setLayoutManager(new LinearLayoutManager(this));
+        });
     }
-    @Override
-    protected void onResume(){
-        super.onResume();
-        pAppointment();
-    }
-    public void pAppointment(){
-        if ( temp.getPAppointments().isEmpty()) {
-            return;
+
+    private void filter(String s){
+        ArrayList<Appointment> filtered = new ArrayList<>();
+        for (Appointment appointment : appointments){
+            if (appointment.getStatus().equals(s)){
+                filtered.add(appointment);
+            }
         }
-        appAdaptP = new appAdapt(temp.getPAppointments());
-        appointmentsView2.setAdapter(appAdaptP);
-        appointmentsView.setLayoutManager(new LinearLayoutManager(this));
-        appointmentsView2.setLayoutManager(new LinearLayoutManager(this));
+        Adapt.setAppointments(filtered, getSupportFragmentManager());
+    }
+    public void onMenuClicks(View view) {
+        Menu menu = new Menu();
+        menu.show(getSupportFragmentManager(), "MenuDialog");
+    }
+    @SuppressLint("NotifyDataSetChanged")
+    private void loadServices() {
+        db.collection("serviceType").get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                list.clear();
+                for (QueryDocumentSnapshot d : task.getResult()) {
+                    ServiceType serviceType = d.toObject(ServiceType.class);
+                    list.add(serviceType);
+                    owner_adapt.notifyDataSetChanged();
+                }
+            } else {
+                Toast.makeText(getApplicationContext(), "error:2", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

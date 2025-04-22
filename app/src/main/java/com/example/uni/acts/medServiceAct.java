@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.uni.R;
-import com.example.uni.fragments.appAct;
 import com.example.uni.fragments.ownerLoginAct;
 import com.example.uni.helper.TempStorage;
 import com.example.uni.management.serviceType;
@@ -95,8 +94,6 @@ public class medServiceAct extends AppCompatActivity {
             dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
             finish();
         }
-        appAct dialogFragment = new appAct();
-        dialogFragment.show(getSupportFragmentManager(), "appointmentDialog");
     }
     public void onVaccineClick(View view) {
         if(myAuth.getCurrentUser() == null){
@@ -105,8 +102,6 @@ public class medServiceAct extends AppCompatActivity {
             dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
             finish();
         }
-        appAct dialogFragment = new appAct();
-        dialogFragment.show(getSupportFragmentManager(), "appointmentDialog");
     }
     public void onSurgeryClick(View view) {
         if(myAuth.getCurrentUser() == null){
@@ -115,8 +110,6 @@ public class medServiceAct extends AppCompatActivity {
             dialogFragment.show(getSupportFragmentManager(), "LogInDialog");
             finish();
         }
-        appAct dialogFragment = new appAct();
-        dialogFragment.show(getSupportFragmentManager(), "appointmentDialog");
     }
     public void onBtnClick(View view) {
         Intent intent = new Intent(this, settingAct.class); // Replace with actual target

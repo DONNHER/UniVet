@@ -10,22 +10,30 @@ import android.widget.TextClock;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.uni.R;
+import com.example.uni.acts.TechHome;
+import com.example.uni.acts.groomServiceAct;
 import com.example.uni.entities.Appointment;
 import com.example.uni.entities.Item;
+import com.example.uni.fragments.AppointmentDetails;
 import com.example.uni.helper.TempStorage;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class appAdapt extends RecyclerView.Adapter<appAdapt.AppViewHolder> {
-    private final ArrayList<Appointment> appointments;
+    private List<Appointment> appointments;
+    FragmentManager fragmentManager;
 
-    private FirebaseAuth myAuth= FirebaseAuth.getInstance();
-    public appAdapt(ArrayList<Appointment> items){
-        this.appointments = items;
+    @SuppressLint("NotifyDataSetChanged")
+    public void setAppointments(ArrayList<Appointment> newList,FragmentManager fragmentManager){
+        this.fragmentManager = fragmentManager;
+        appointments = newList;
+        notifyDataSetChanged();
     }
 
 
@@ -41,7 +49,17 @@ public class appAdapt extends RecyclerView.Adapter<appAdapt.AppViewHolder> {
     public void onBindViewHolder(@NonNull AppViewHolder holder, int position) {
         Appointment item = appointments.get(position);
         holder.date.setText(item.getAppointmentDate());
-        holder.time.setText(myAuth.getCurrentUser().getEmail()+ "     " + item.getStatus()+ "      "+item.getAppointmentTime());
+        holder.time.setText(item.getEmail()+ "     " + item.getStatus()+ "      "+item.getAppointmentTime());
+        holder.itemView.setOnClickListener(v -> {
+            AppointmentDetails dialogFragment = AppointmentDetails.newInstance(
+                    item.getAppointmentDate(),
+                    item.getAppointmentTime(),
+                    item.getTotalCost(),
+                    item.getEmail(), // or name
+                    "" // or service string
+            );
+            dialogFragment.show(fragmentManager, "appointmentDialog");
+        });
     }
 
     @Override

@@ -10,8 +10,16 @@ import androidx.fragment.app.DialogFragment;
 import com.example.uni.R;
 import com.example.uni.entities.owner;
 import com.example.uni.helper.TempStorage;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class AdminRegister extends DialogFragment {
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth myAuth= FirebaseAuth.getInstance();;
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
@@ -30,22 +38,30 @@ public class AdminRegister extends DialogFragment {
 
             if (username.isEmpty() || password.isEmpty()) {
                 Toast.makeText(getContext(), "Please fill in all required fields.", Toast.LENGTH_SHORT).show();
-                return;
             } else if (password.length() < 6) {
                 Toast.makeText(getContext(), "Password must be at least 6 characters.", Toast.LENGTH_SHORT).show();
-                return;
             } else if (!password.equals(confirmation)) {
                 Toast.makeText(getContext(), "Passwords do not match.", Toast.LENGTH_SHORT).show();
-                return;
             } else if (Patterns.EMAIL_ADDRESS.matcher(username).matches()) {
                 myAuth.createUserWithEmailAndPassword(username, password)
                         .addOnCompleteListener(requireActivity(), task -> {
                             if (task.isSuccessful()) {
+                                FirebaseUser user = myAuth.getCurrentUser();
+                                Map<String,Object> data = new HashMap<>();
+                                data.put("uid",user.getUid());
+                                data.put("username",user.getEmail());
+                                data.put("role","admin");
+                                db.collection("users").document(user.getUid()).set(data);
                                 Toast.makeText(getContext(), "Successfully Registered.", Toast.LENGTH_SHORT).show();
                                 dismiss();
                                 new ownerLoginAct().show(getParentFragmentManager(), "LogInDialog");
                             } else {
-                                Toast.makeText(getContext(), "Registration Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                Exception e = task.getException();
+                                if (e instanceof FirebaseNetworkException) {
+                                    Toast.makeText(getContext(), "No internet connection", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                                }
                             }
                         });
             } else {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/admin"
     android:layout_width="match_parent"
@@ -27,46 +27,34 @@
 
                 <GridLayout
                     android:layout_width="match_parent"
-                    android:layout_height="86dp">
+                    android:layout_height="match_parent">
 
                     <Button
-                        android:layout_marginTop="15dp"
                         android:layout_width="35dp"
                         android:layout_height="28dp"
                         android:layout_row="0"
                         android:layout_column="0"
+                        android:layout_marginTop="15dp"
                         android:background="@drawable/sidemenu"
-                        android:onClick="onMenuClicks"
+                        android:onClick="sideMenu"
                         android:textStyle="bold" />
 
                     <ImageView
                         android:layout_width="106dp"
                         android:layout_height="60dp"
-                        android:layout_row="0"
-                        android:layout_column="3"
+                        android:layout_row="1"
+                        android:layout_column="1"
                         android:layout_gravity="right"
                         android:layout_marginEnd="12dp"
                         android:contentDescription="@string/dog_image"
                         android:src="@drawable/lo" />
 
                     <TextView
-                        android:id="@+id/name"
-                        android:layout_width="39dp"
-                        android:layout_height="wrap_content"
-                        android:layout_row="1"
-                        android:layout_column="0"
-                        android:text="Hi, "
-                        android:textColor="#444444"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        android:layout_marginLeft="20dp"/>
-
-                    <TextView
                         android:id="@+id/textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_row="1"
-                        android:layout_column="3"
+                        android:layout_row="0"
+                        android:layout_column="2"
                         android:text="December 12, 1923"
                         android:textColor="#444444"
                         android:textSize="14sp" />
@@ -78,34 +66,24 @@
         </LinearLayout>
 
         <!-- Search Bar -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Services"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textColorHint="#888888"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            tools:ignore="RtlSymmetry" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/appointmentsView"
+        <!-- Services Grid -->
+        <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_column="0"
-            android:padding="16dp"
-            android:layout_marginTop="20dp"
-            android:scrollbars="vertical"/>
+            android:columnCount="2"
+            android:useDefaultMargins="true"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Upcoming Appointments Section Title -->
         <GridLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <!-- Upcoming Appointments Section Title -->
-            <Button
-                android:id="@+id/appoint1"
-                android:layout_width="175dp"
+            <TextView
+                android:id="@+id/appointments"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_row="0"
                 android:layout_column="0"
@@ -115,16 +93,13 @@
                 android:textAlignment="center"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:layout_marginLeft="10dp"
-                android:clickable="true"
-                android:onClick="onUpcomingClick"
-                android:focusable="true"/>
+                android:layout_marginLeft="20dp"/>
 
 
             <!-- Upcoming Appointments Section Title -->
-            <Button
-                android:id="@+id/appoint2"
-                android:layout_width="175dp"
+            <TextView
+                android:id="@+id/appointments3"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_row="0"
                 android:layout_column="1"
@@ -134,17 +109,14 @@
                 android:textAlignment="center"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:layout_marginLeft="10dp"
-                android:clickable="true"
-                android:onClick="onPendingClick"
-                android:focusable="true"/>
+                android:layout_marginLeft="20dp"/>
 
         </GridLayout>
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/appointmentsView5"
+                android:id="@+id/appointmentsView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_row="1"
@@ -153,7 +125,7 @@
                 android:scrollbars="vertical"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/appointments23"
+                android:id="@+id/appointmentsView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_row="1"
@@ -163,4 +135,4 @@
         </GridLayout>
     </LinearLayout>
 
-</ScrollView>
+</LinearLayout>

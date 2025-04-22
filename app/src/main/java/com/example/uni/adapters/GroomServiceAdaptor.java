@@ -15,9 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.uni.R;
 import com.example.uni.acts.GroomPackage;
-import com.example.uni.acts.GroomPackageUser;
 import com.example.uni.acts.MedPackage;
-import com.example.uni.acts.MedPackageUser;
 import com.example.uni.acts.TechHome;
 import com.example.uni.acts.groomServiceAct;
 import com.example.uni.acts.medServiceAct;
@@ -26,12 +24,12 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class ownerAdapt  extends RecyclerView.Adapter<ownerAdapt.manageServiceTypeHolder> {
+public class GroomServiceAdaptor  extends RecyclerView.Adapter<GroomServiceAdaptor.manageServiceTypeHolder> {
     private ArrayList<ServiceType> appointments;
 
 
     @SuppressLint("NotifyDataSetChanged")
-    public ownerAdapt(ArrayList<ServiceType> items){
+    public GroomServiceAdaptor(ArrayList<ServiceType> items){
         this.appointments = items;
     }
 
@@ -55,12 +53,12 @@ public class ownerAdapt  extends RecyclerView.Adapter<ownerAdapt.manageServiceTy
                 .into(holder.pic);
         if (item.getName().trim().equalsIgnoreCase("Grooming")) {
             holder.itemView.setOnClickListener(view -> {
-                Intent intent = new Intent(view.getContext(), GroomPackageUser.class);
+                Intent intent = new Intent(view.getContext(), GroomPackage.class);
                 view.getContext().startActivity(intent);
             });
         } else {
             holder.itemView.setOnClickListener(view -> {
-                Intent intent = new Intent(view.getContext(), MedPackageUser.class);
+                Intent intent = new Intent(view.getContext(), MedPackage.class);
                 view.getContext().startActivity(intent);
             });
         }

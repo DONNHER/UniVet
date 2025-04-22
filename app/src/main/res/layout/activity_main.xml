@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F6D4B8"
     android:padding="16dp">
 
 
@@ -12,7 +11,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
         <!-- Search Bar -->
 
 
@@ -20,46 +18,53 @@
 
         <GridLayout
             android:layout_width="match_parent"
-            android:layout_height="26dp"
-            android:layout_gravity="center"
+            android:layout_height="60dp"
             android:layout_marginBottom="24dp"
-            android:columnCount="4"
+            android:columnCount="5"
             android:padding="0dp"
             android:useDefaultMargins="false">
 
+            <ImageView
+                android:layout_width="106dp"
+                android:layout_height="60dp"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:layout_gravity="start"
+                android:contentDescription="@string/dog_image"
+                android:src="@drawable/lo" />
 
             <TextView
                 android:layout_width="51dp"
                 android:layout_height="25dp"
                 android:layout_row="0"
-                android:layout_column="1"
+                android:layout_column="2"
                 android:background="@color/white"
                 android:gravity="center"
+                android:onClick="onLogClick"
                 android:text="@string/login"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:onClick="onLogClick"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="76dp"
                 android:layout_height="25dp"
                 android:layout_row="0"
-                android:layout_column="2"
+                android:layout_column="3"
                 android:background="@color/white"
                 android:gravity="center"
+                android:onClick="onResClick"
                 android:text="@string/register"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:onClick="onResClick"/>
+                android:textStyle="bold" />
 
             <Button
                 android:layout_width="47dp"
                 android:layout_height="25dp"
                 android:layout_row="0"
-                android:layout_column="3"
-                android:background="@drawable/edit_background"
-                android:textStyle="bold"
-                android:onClick="onBtnClick"/>
+                android:layout_column="4"
+                android:background="@drawable/sidemenu"
+                android:onClick="onMenuClick2"
+                android:textStyle="bold" />
 
         </GridLayout>
 
@@ -77,133 +82,88 @@
             tools:ignore="RtlSymmetry"
             android:singleLine="true"/>
 
-        <GridLayout
+        <!-- Search Bar -->
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:columnCount="2"
-            android:useDefaultMargins="true"
-            android:layout_marginBottom="24dp">
+            android:text="Services"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textColorHint="#888888"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            tools:ignore="RtlSymmetry" />
 
-            <!-- Grooming -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/appointmentsView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:padding="16dp"
+            android:layout_marginTop="20dp"
+            android:scrollbars="vertical"/>
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-            <!-- Boarding -->
-
-            <LinearLayout
-                android:id="@+id/grooming"
-                android:layout_width="9dp"
-                android:layout_height="154dp"
+            <!-- Upcoming Appointments Section Title -->
+            <Button
+                android:id="@+id/appoint1"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
                 android:layout_row="0"
                 android:layout_column="0"
-                android:layout_columnWeight="1"
-                android:background="@drawable/edit_background"
+                android:layout_gravity="center"
+                android:scrollbars="vertical"
+                android:text="Upcoming Appointments"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
                 android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:onClick="onGroomClick"
-                android:orientation="vertical"
-                android:padding="12dp">
+                android:focusable="true"/>
 
-                <ImageView
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                android:src="@drawable/logo"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:text="Grooming Services"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="156dp"
-                android:layout_columnWeight="1"
-                android:background="@drawable/edit_background"
+            <!-- Upcoming Appointments Section Title -->
+            <Button
+                android:id="@+id/appoint2"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:layout_gravity="center"
+                android:scrollbars="vertical"
+                android:text="Pending Appointments"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
                 android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:onClick="onMedClick"
-                android:orientation="vertical"
-                android:padding="12dp">
+                android:focusable="true"/>
 
-                <ImageView
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:src="@drawable/logo" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:text="Medical Services"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <!-- Dog Walking -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="152dp"
-                android:layout_columnWeight="1"
-                android:background="@drawable/edit_background"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:onClick="onProductClick"
-                android:orientation="vertical"
-                android:padding="12dp">
-
-                <ImageView
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:src="@drawable/logo" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:text="@string/products"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <!-- Pet Training -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="152dp"
-                android:layout_columnWeight="1"
-                android:background="@drawable/edit_background"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:onClick="onOtherClick"
-                android:orientation="vertical"
-                android:padding="12dp"
-                >
-
-                <ImageView
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:contentDescription="@string/todo"
-                    android:src="@drawable/logo"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:text="@string/Other"
-                    android:textStyle="bold" />
-            </LinearLayout>
         </GridLayout>
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/appointmentsView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:padding="16dp"
+                android:scrollbars="vertical"/>
 
-        <!-- Upcoming Appointments Section Title -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Upcoming Appointments"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="#000000" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/appointments23"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:padding="16dp"
+                android:scrollbars="vertical"/>
+        </GridLayout>
 
     </LinearLayout>
 

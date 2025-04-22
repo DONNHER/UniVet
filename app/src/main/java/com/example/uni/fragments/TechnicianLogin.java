@@ -8,9 +8,11 @@ import android.view.*;
 import android.widget.*;
 import androidx.fragment.app.DialogFragment;
 import com.example.uni.R;
+import com.example.uni.acts.TechHome;
 import com.example.uni.acts.TechnicianDashB;
 import com.example.uni.entities.owner;
 import com.example.uni.helper.TempStorage;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class TechnicianLogin extends DialogFragment {
@@ -46,14 +48,6 @@ public class TechnicianLogin extends DialogFragment {
         String username = name.getText().toString().trim();
         EditText pass =  btn.findViewById(R.id.pass);
         String password = pass.getText().toString().trim();
-        owner newUser =   new owner(username, password);
-        owner logUser = temp.getUser(newUser, temp.getUsers());
-        if (logUser != null) {
-            temp.setIsLoggedIn(logUser);
-            Intent intent = new Intent(getContext(), TechnicianDashB.class);
-            startActivity(intent);
-            return;
-        }
         myAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener(requireActivity(), task -> {
             if(task.isSuccessful()){
                 Toast.makeText(getContext(),"Login Successful",Toast.LENGTH_SHORT).show();
@@ -61,7 +55,12 @@ public class TechnicianLogin extends DialogFragment {
                 startActivity(intent);
                 dismiss();
             }  else {
-            Toast.makeText(getContext(), "Registration Failed: " + task.getException().toString(), Toast.LENGTH_SHORT).show();
+                Exception e = task.getException();
+                if (e instanceof FirebaseNetworkException) {
+                    Toast.makeText(getContext(), "No internet connection", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
             }
         });
 

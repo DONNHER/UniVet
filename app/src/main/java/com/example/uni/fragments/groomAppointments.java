@@ -15,23 +15,32 @@ import android.widget.Toast;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.uni.R;
-import com.example.uni.acts.OwnerDashboardAct;
-import com.example.uni.acts.groomServiceAct;
-import com.example.uni.adapters.appAdapt;
 import com.example.uni.entities.Appointment;
+import com.example.uni.entities.groomAppointment;
 import com.example.uni.helper.TempStorage;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-public class appAct extends DialogFragment {
+public class groomAppointments extends DialogFragment {
     private CalendarView calendarView;
     private Button scheduleButton;
     private static TempStorage temp = TempStorage.getInstance();
     private FirebaseAuth myAuth= FirebaseAuth.getInstance();
+    private String id;
+    private String name;
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    public groomAppointments(String id, String name){
+        this.id = id;
+        this.name = name;
+    }
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,7 +52,7 @@ public class appAct extends DialogFragment {
         calendarView = view.findViewById(R.id.calendarView);
         scheduleButton = view.findViewById(R.id.scheduleButton);
         EditText time = view.findViewById(R.id.time);
-        TextView cost = view.findViewById(R.id.cost2);
+//        TextView cost = view.findViewById(R.id.price);
         scheduleButton.setOnClickListener(v -> {
             // Handle button click to schedule appointment
             if (time == null || time.getText().toString().isEmpty()) {
@@ -51,16 +60,24 @@ public class appAct extends DialogFragment {
                 return;
             }
             long date = calendarView.getDate();
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, MMMM dd ,yyyy");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, MMMM dd ,yyyy");
             String Date = simpleDateFormat.format(date);
             String Time = time.getText().toString();
-            Appointment newAppointment = new Appointment(myAuth.getCurrentUser().getEmail(), groomServiceAct.getServiceType(), Date, Time);
-            temp.addAppointment(newAppointment);
-            temp.addPAppointment(newAppointment);
-            Toast.makeText(getContext(), "Successful Appointment", Toast.LENGTH_SHORT).show();
-            dismiss();
-        });
+
+            Map<String, Object> data = new HashMap<>();
+            data.put("uid", id);
+            data.put("name", name);
+            data.put("Date", Date);
+            data.put("time", Time);
+
+            db.collection("Appointments").add(data).addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful()) {
+                            Toast.makeText(getContext(), "Successful " + name, Toast.LENGTH_SHORT).show();
+                            dismiss();
+                        }
+                    });
+                Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
+            });
         return view;
     }
-
 }

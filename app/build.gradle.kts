@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("com.google.gms.google-services")
-
     id("kotlin-kapt")
 
 }
@@ -11,14 +10,12 @@ plugins {
 android {
     namespace = "com.example.uni"
     compileSdk = 35
-
     defaultConfig {
         applicationId = "com.example.uni"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -70,4 +67,13 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.12.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.github.bumptech.glide:glide:4.16.0")
-    kapt("com.github.bumptech.glide:compiler:4.16.0") }
+    annotationProcessor("com.github.bumptech.glide:glide:4.16.0")
+    kapt("com.github.bumptech.glide:compiler:4.16.0")
+//    implementation ("com.google.firebase:firebase-storage:20.1.0")
+//    implementation ("com.google.firebase:firebase-firestore:24.1.0")
+//
+//// Firestore
+//    implementation("com.google.cloud:google-cloud-firestore:3.17.0")
+    implementation ("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation ("com.google.code.gson:gson:2.10.1")
+}

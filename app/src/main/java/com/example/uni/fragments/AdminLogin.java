@@ -20,6 +20,7 @@ import com.example.uni.acts.AdminDashB;
 import com.example.uni.acts.OwnerDashboardAct;
 import com.example.uni.entities.owner;
 import com.example.uni.helper.TempStorage;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class AdminLogin  extends DialogFragment {
@@ -82,10 +83,14 @@ public class AdminLogin  extends DialogFragment {
                 Intent intent = new Intent(getContext(), AdminDashB.class); // Replace with actual target
                 startActivity(intent);
                 dismiss();
-                return;
             } else {
-            Toast.makeText(getContext(), "Registration Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-        }
+                Exception e = task.getException();
+                if (e instanceof FirebaseNetworkException) {
+                    Toast.makeText(getContext(), "No internet connection", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
         });
     }
 
