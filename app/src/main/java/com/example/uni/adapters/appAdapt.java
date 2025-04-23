@@ -2,78 +2,114 @@ package com.example.uni.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextClock;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.uni.R;
+import com.example.uni.acts.OwnerDashboardAct;
 import com.example.uni.acts.TechHome;
+import com.example.uni.acts.TechnicianDashB;
 import com.example.uni.acts.groomServiceAct;
 import com.example.uni.entities.Appointment;
-import com.example.uni.entities.Item;
+import com.example.uni.entities.SectionItem;
 import com.example.uni.fragments.AppointmentDetails;
+import com.example.uni.fragments.Appointment_manage;
+import com.example.uni.fragments.ownerLoginAct;
 import com.example.uni.helper.TempStorage;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class appAdapt extends RecyclerView.Adapter<appAdapt.AppViewHolder> {
-    private List<Appointment> appointments;
+import java.util.Map;
+public class appAdapt extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private List<SectionItem> sectionItems = new ArrayList<>();
     FragmentManager fragmentManager;
+    private final FirebaseAuth myAuth = FirebaseAuth.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @SuppressLint("NotifyDataSetChanged")
-    public void setAppointments(ArrayList<Appointment> newList,FragmentManager fragmentManager){
+    public void setAppointments(Map<String, List<Appointment>> groupedAppointments, FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
-        appointments = newList;
+        sectionItems.clear();
+
+        for (String date : groupedAppointments.keySet()) {
+            sectionItems.add(new SectionItem(date)); // Add date header
+            for (Appointment appointment : groupedAppointments.get(date)) {
+                sectionItems.add(new SectionItem(appointment)); // Add appointments under that date
+            }
+        }
+
         notifyDataSetChanged();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return sectionItems.get(position).type;
+    }
 
     @NonNull
     @Override
-    public AppViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate((R.layout.appointment),parent,false);
-        return new AppViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if (viewType == SectionItem.TYPE_HEADER) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_header, parent, false);
+            return new HeaderViewHolder(view);
+        } else {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.appointment, parent, false);
+            return new AppointmentViewHolder(view);
+        }
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull AppViewHolder holder, int position) {
-        Appointment item = appointments.get(position);
-        holder.date.setText(item.getAppointmentDate());
-        holder.time.setText(item.getEmail()+ "     " + item.getStatus()+ "      "+item.getAppointmentTime());
-        holder.itemView.setOnClickListener(v -> {
-            AppointmentDetails dialogFragment = AppointmentDetails.newInstance(
-                    item.getAppointmentDate(),
-                    item.getAppointmentTime(),
-                    item.getTotalCost(),
-                    item.getEmail(), // or name
-                    "" // or service string
-            );
-            dialogFragment.show(fragmentManager, "appointmentDialog");
-        });
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        SectionItem sectionItem = sectionItems.get(position);
+
+        if (holder instanceof HeaderViewHolder) {
+            ((HeaderViewHolder) holder).bind(sectionItem.date);
+        } else if (holder instanceof AppointmentViewHolder) {
+            ((AppointmentViewHolder) holder).bind(sectionItem.appointment);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return appointments.size();
+        return sectionItems.size();
     }
 
-    public static class AppViewHolder extends RecyclerView.ViewHolder {
-        public TextView date;
-        public TextView time;
-        public AppViewHolder(@NonNull View itemView){
+    static class HeaderViewHolder extends RecyclerView.ViewHolder {
+        TextView dateText;
+
+        public HeaderViewHolder(View itemView) {
             super(itemView);
-            date = itemView.findViewById(R.id.date);
+            dateText = itemView.findViewById(R.id.dateText);
+        }
+
+        public void bind(String date) {
+            dateText.setText(date); // Set the date for the header
+        }
+    }
+
+    static class AppointmentViewHolder extends RecyclerView.ViewHolder {
+        TextView time;
+
+        public AppointmentViewHolder(View itemView) {
+            super(itemView);
             time = itemView.findViewById(R.id.time);
+        }
+
+        public void bind(Appointment appointment) {
+            time.setText(appointment.getEmail() + "     " + appointment.getStatus() + "      " + appointment.getAppointmentTime());
         }
     }
 }

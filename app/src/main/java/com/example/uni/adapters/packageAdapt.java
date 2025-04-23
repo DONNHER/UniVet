@@ -66,7 +66,6 @@ public class packageAdapt  extends RecyclerView.Adapter<packageAdapt.manageServi
             });
         }else {
             holder.itemView.setOnClickListener(view -> {
-//            Toast.makeText(fragmentActivity, item.getId().toString(), Toast.LENGTH_SHORT).show();
                 groomAppointments dialogFragment = new groomAppointments(item.getId().toString(), item.getName());
                 dialogFragment.show(fragmentActivity.getSupportFragmentManager(), "AppointmentDialog");
             });

@@ -22,7 +22,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TechnicianDashB extends AppCompatActivity {
     private RecyclerView recyclerView ;
@@ -45,10 +47,9 @@ public class TechnicianDashB extends AppCompatActivity {
         recyclerView.setAdapter(Adapt);
         TextView name = findViewById(R.id.name);
         name.setText("Hi, " + myAuth.getCurrentUser().getDisplayName());
-
+        filter("Confirmed");
         btn2.setOnClickListener(v ->filter("Pending"));
         btn1.setOnClickListener(v ->filter("Confirmed"));
-        filter("Pending");
         services();
     }
     @Override
@@ -60,26 +61,51 @@ public class TechnicianDashB extends AppCompatActivity {
         menu.show(getSupportFragmentManager(), "MenuDialog");
     }
     private void services(){
-        db.collection("appointments").whereEqualTo("type","grooming").get().addOnSuccessListener(queryDocumentSnapshots -> {
+        db.collection("Appointments").get().addOnSuccessListener(queryDocumentSnapshots -> {
             appointments.clear();
-            for (DocumentSnapshot documentSnapshot: queryDocumentSnapshots){
-                groomAppointment appointment = documentSnapshot.toObject(groomAppointment.class);
-               appointments.add(appointment);
-        }
+            for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                Appointment appt = documentSnapshot.toObject(Appointment.class);
+                    appt.setId(documentSnapshot.getId());  // ✅ Fix: Set the document ID manually
+                    appointments.add(appt);
+            }
+            filter("Confirmed");
         });
     }
 
-    private void filter(String s){
+
+
+    private void filter(String status) {
         ArrayList<Appointment> filtered = new ArrayList<>();
-        for (Appointment appointment : appointments){
-            if (appointment.getStatus().equals(s)){
+        for (Appointment appointment : appointments) {
+            if (appointment.getStatus().equals(status)) {
                 filtered.add(appointment);
             }
         }
-        Adapt.setAppointments(filtered,getSupportFragmentManager());
+
+        // Group appointments by date
+        Map<String, List<Appointment>> grouped = groupByDate(filtered);
+        Adapt.setAppointments(grouped,getSupportFragmentManager());
     }
+
+    private Map<String, List<Appointment>> groupByDate(List<Appointment> appointments) {
+        Map<String, List<Appointment>> grouped = new LinkedHashMap<>();
+        for (Appointment appointment : appointments) {
+            String date = appointment.getAppointmentDate(); // Assuming getDate() returns the date as a string
+            if (!grouped.containsKey(date)) {
+                grouped.put(date, new ArrayList<>());
+            }
+            grouped.get(date).add(appointment);
+        }
+        return grouped;
+    }
+
     public void onManageClick(View view) {
         Intent intent = new Intent(this, ManageServiceType.class); // Replace with actual target
         startActivity(intent);
+    }
+    @Override
+    public void onResume(){
+       super.onResume();
+       services();
     }
 }

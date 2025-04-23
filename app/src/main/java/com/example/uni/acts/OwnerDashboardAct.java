@@ -22,6 +22,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class OwnerDashboardAct extends AppCompatActivity {
     private  RecyclerView appointmentsView ;
@@ -68,15 +71,31 @@ public class OwnerDashboardAct extends AppCompatActivity {
         });
     }
 
-    private void filter(String s){
+    private void filter(String status) {
         ArrayList<Appointment> filtered = new ArrayList<>();
-        for (Appointment appointment : appointments){
-            if (appointment.getStatus().equals(s)){
+        for (Appointment appointment : appointments) {
+            if (appointment.getStatus().equals(status)) {
                 filtered.add(appointment);
             }
         }
-        Adapt.setAppointments(filtered, getSupportFragmentManager());
+
+        // Group appointments by date and pass the grouped data to the adapter
+        Map<String, List<Appointment>> groupedAppointments = groupByDate(filtered);
+        Adapt.setAppointments(groupedAppointments, getSupportFragmentManager());
     }
+
+    private Map<String, List<Appointment>> groupByDate(List<Appointment> appointments) {
+        Map<String, List<Appointment>> grouped = new LinkedHashMap<>();
+        for (Appointment appointment : appointments) {
+            String date = appointment.getAppointmentDate(); // Assuming this method returns the date
+            if (!grouped.containsKey(date)) {
+                grouped.put(date, new ArrayList<>());
+            }
+            grouped.get(date).add(appointment);
+        }
+        return grouped;
+    }
+
     public void onMenuClicks(View view) {
         Menu menu = new Menu();
         menu.show(getSupportFragmentManager(), "MenuDialog");
@@ -95,5 +114,10 @@ public class OwnerDashboardAct extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "error:2", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        loadServices();
     }
 }

@@ -17,6 +17,7 @@ import androidx.fragment.app.DialogFragment;
 import com.example.uni.R;
 import com.example.uni.entities.Appointment;
 import com.example.uni.entities.groomAppointment;
+import com.example.uni.entities.medAppointment;
 import com.example.uni.helper.TempStorage;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -26,16 +27,17 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class groomAppointments extends DialogFragment {
     private CalendarView calendarView;
     private Button scheduleButton;
     private static TempStorage temp = TempStorage.getInstance();
     private FirebaseAuth myAuth= FirebaseAuth.getInstance();
-    private String id;
     private String name;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private  String id;
 
     public groomAppointments(String id, String name){
         this.id = id;
@@ -54,30 +56,37 @@ public class groomAppointments extends DialogFragment {
         EditText time = view.findViewById(R.id.time);
 //        TextView cost = view.findViewById(R.id.price);
         scheduleButton.setOnClickListener(v -> {
-            // Handle button click to schedule appointment
             if (time == null || time.getText().toString().isEmpty()) {
                 Toast.makeText(getContext(), "Please enter a valid time.", Toast.LENGTH_SHORT).show();
                 return;
             }
+
             long date = calendarView.getDate();
             @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, MMMM dd ,yyyy");
             String Date = simpleDateFormat.format(date);
             String Time = time.getText().toString();
 
-            Map<String, Object> data = new HashMap<>();
-            data.put("uid", id);
-            data.put("name", name);
-            data.put("Date", Date);
-            data.put("time", Time);
+            String docId = UUID.randomUUID().toString();
 
-            db.collection("Appointments").add(data).addOnCompleteListener(task1 -> {
-                        if (task1.isSuccessful()) {
-                            Toast.makeText(getContext(), "Successful " + name, Toast.LENGTH_SHORT).show();
-                            dismiss();
-                        }
+            Appointment appointment = new Appointment(
+                    myAuth.getCurrentUser().getDisplayName(), // name
+                    Date,
+                    Time
+            );
+            appointment.setId(docId);
+            appointment.setStatus("Pending");
+            appointment.setUserID(myAuth.getCurrentUser().getUid());
+            appointment.setServiceID(id); // assuming you add this field to Appointment
+
+            db.collection("Appointments").document(docId).set(appointment)
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(getContext(), "Appointment scheduled successfully!", Toast.LENGTH_SHORT).show();
+                        dismiss();
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
-                Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
-            });
+        });
         return view;
     }
 }
