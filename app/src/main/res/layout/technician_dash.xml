@@ -194,7 +194,7 @@
                 android:padding="12dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:onClick="onOtherClick">
+                android:onClick="onInventoryClick">
 
                 <ImageView
                     android:layout_width="40dp"

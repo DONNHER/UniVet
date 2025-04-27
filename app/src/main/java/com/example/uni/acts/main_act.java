@@ -47,9 +47,8 @@ public class main_act extends AppCompatActivity {
     private final FirebaseAuth myAuth= FirebaseAuth.getInstance();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+    public void onStart(){
+        super.onStart();
         FirebaseUser user = myAuth.getCurrentUser();
         if(user!= null){
             String uid = user.getUid();
@@ -71,6 +70,11 @@ public class main_act extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         start_act dialogFragment = new start_act();
         dialogFragment.show(getSupportFragmentManager(), "StartDialog");
@@ -82,34 +86,7 @@ public class main_act extends AppCompatActivity {
         loadServices();
         btn1 = findViewById(R.id.appoint1);
         btn2 = findViewById(R.id.appoint2);
-//        appointmentsView = findViewById(R.id.appointments23);
-//        Adapt = new appAdapt();
-//        appointmentsView.setLayoutManager(new LinearLayoutManager(this));
-//        appointmentsView.setAdapter(Adapt);
-//        btn2.setOnClickListener(v ->filter("Pending"));
-//        btn1.setOnClickListener(v ->filter("Confirmed"));
-//        filter("Pending");
-//        appointments();
     }
-    private void appointments(){
-        db.collection("Appointments").get().addOnSuccessListener(queryDocumentSnapshots -> {
-            appointments.clear();
-            for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                Appointment appointment = documentSnapshot.toObject(Appointment.class);
-                appointments.add(appointment);
-            }
-        });
-    }
-
-//    private void filter(String s){
-//        ArrayList<Appointment> filtered = new ArrayList<>();
-//        for (Appointment appointment : appointments){
-//            if (appointment.getStatus().equals(s)){
-//                filtered.add(appointment);
-//            }
-//        }
-//        Adapt.setAppointments(filtered, getSupportFragmentManager());
-//    }
     public void onMenuClick2(View view) {
         Intent intent = new Intent(view.getContext(), settingAct.class);
         view.getContext().startActivity(intent);

@@ -15,6 +15,7 @@ import com.example.uni.adapters.ownerAdapt;
 import com.example.uni.entities.Appointment;
 import com.example.uni.entities.ServiceType;
 import com.example.uni.fragments.Menu;
+import com.example.uni.fragments.userMenu;
 import com.example.uni.helper.TempStorage;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -68,6 +69,7 @@ public class OwnerDashboardAct extends AppCompatActivity {
                 Appointment appointment = documentSnapshot.toObject(Appointment.class);
                 appointments.add(appointment);
             }
+            filter("Confirmed");
         });
     }
 
@@ -97,7 +99,7 @@ public class OwnerDashboardAct extends AppCompatActivity {
     }
 
     public void onMenuClicks(View view) {
-        Menu menu = new Menu();
+        userMenu menu = new userMenu();
         menu.show(getSupportFragmentManager(), "MenuDialog");
     }
     @SuppressLint("NotifyDataSetChanged")
