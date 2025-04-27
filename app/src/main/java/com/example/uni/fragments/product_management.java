@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontVariation;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.uni.R;
+import com.example.uni.entities.Item;
 import com.example.uni.entities.Service;
 import com.example.uni.entities.ServiceType;
 import com.example.uni.helper.Firebase;
@@ -29,8 +30,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
 
-public class AddServiceType extends DialogFragment {
+public class product_management extends DialogFragment {
 
     private ActivityResultLauncher<Intent> galleryLauncher;
 
@@ -41,12 +44,14 @@ public class AddServiceType extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.addservice_type, container, false);
+        View view = inflater.inflate(R.layout.product_management, container, false);
 
-        EditText nameEditText = view.findViewById(R.id.TextName);
-        EditText priceEdit = view.findViewById(R.id.editText3);
-        imageView = view.findViewById(R.id.imageView);
-        Button submitButton = view.findViewById(R.id.confirm);
+        EditText nameEditText = view.findViewById(R.id.TextName3);
+        EditText priceEdit = view.findViewById(R.id.editTextPrice3);
+        EditText slots = view.findViewById(R.id.slot_number);
+        imageView = view.findViewById(R.id.imageViewSelected_pm);
+        Button cancelButton = view.findViewById(R.id.cancel_pm);
+        Button submitButton = view.findViewById(R.id.confirm_pm);
 
         // Register for result from gallery selection
         galleryLauncher = registerForActivityResult(
@@ -64,6 +69,7 @@ public class AddServiceType extends DialogFragment {
         submitButton.setOnClickListener(v -> {
             String price = priceEdit.getText().toString().trim();
             String name = nameEditText.getText().toString().trim();
+            String units = slots.getText().toString().trim();
 
             if (name.isEmpty() || price.isEmpty() || selectedImageUri == null) {
                 Toast.makeText(getContext(), "Please fill all fields and select an image.", Toast.LENGTH_SHORT).show();
@@ -76,21 +82,24 @@ public class AddServiceType extends DialogFragment {
                     @Override
                     public void onSuccess(String imageUrl) {
                         // Create a ServiceType object
-                        ServiceType service = new ServiceType(price, imageUrl, name);
-
+                        String docId = UUID.randomUUID().toString();
+                        Item item = new Item(Double.parseDouble(price), imageUrl, name,Integer.parseInt(units));
+                        item.setId(docId);
                         // Prepare data to be stored in Firestore
                         Map<String, Object> data = new HashMap<>();
-                        data.put("uid", service.getId());
-                        data.put("name", service.getName());
-                        data.put("Description", service.getDescription());
-                        data.put("image", service.getImage());
+                        data.put("uid", item.getId());
+                        data.put("name", item.getName());
+                        data.put("price", item.getPrice());
+                        data.put("Slots", item.getSlot());
+                        data.put("image", item.getImage());
 
                         // Upload data to Firestore
-                        db.collection("serviceType").document(service.getName()).set(data)
+                        db.collection("products").document(docId).set(data)
                                 .addOnSuccessListener(aVoid -> {
-                                    Toast.makeText(getContext(), "Service added: " + service.getName(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "Service added: " + item.getName(), Toast.LENGTH_SHORT).show();
+                                    dismiss();
                                     requireActivity().recreate();
-                                    dismiss();  // Close the dialog
+                                      // Close the dialog
                                 })
                                 .addOnFailureListener(e -> {
                                     Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -104,9 +113,10 @@ public class AddServiceType extends DialogFragment {
                 });
             }
         });
-
+        cancelButton.setOnClickListener(v -> dismiss());
         return view;
     }
+
 
     // Method to open the gallery and select an image
     private void openGallery() {

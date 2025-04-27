@@ -7,6 +7,7 @@ import java.util.UUID;
 public class Service {
 
     private final UUID id = UUID.randomUUID();
+    public int getSlots;
     private  String Image;
     private  double price;
     private String  serviceType;

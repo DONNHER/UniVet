@@ -1,18 +1,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="350dp"
-    android:layout_height="500dp"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <EditText
         android:id="@+id/TextName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Service Name: " />
 
     <EditText
         android:id="@+id/editText3"
         android:hint="Description:"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <ImageView
@@ -24,11 +24,32 @@
         android:src="@drawable/add"
         android:contentDescription="Selected image"
         android:layout_marginTop="12dp" />
-
-    <Button
-        android:id="@+id/btn"
-        android:text="Add Item"
+    <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"/>
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/red"
+            android:text="Cancel"
+            android:textSize="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="40dp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/green"
+            android:text="Confirm"
+            android:textSize="10dp"
+            android:layout_marginLeft="35dp">
+            
+        </Button>
+
+    </GridLayout>
 </LinearLayout>

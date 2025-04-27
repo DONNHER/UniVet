@@ -53,4 +53,8 @@
     <string name="sign_up_with_facebook">Sign Up with Facebook</string>
     <string name="to">TODO</string>
     <string name="manager_login">Manager Login</string>
+    <string name="pending_appointments">Pending \nAppointments</string>
+    <string name="upcoming_appointments2">Upcoming \nAppointments</string>
+    <string name="upcoming_appointment">Upcoming \nAppointments</string>
+    <string name="pending_appointment">Pending \nAppointments</string>
 </resources>

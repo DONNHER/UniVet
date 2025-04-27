@@ -13,10 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.uni.R;
 import com.example.uni.adapters.appAdapt;
 import com.example.uni.entities.Appointment;
-import com.example.uni.entities.groomAppointment;
 import com.example.uni.fragments.Menu;
-import com.example.uni.fragments.ownerLoginAct;
-import com.example.uni.helper.TempStorage;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -107,5 +104,9 @@ public class TechnicianDashB extends AppCompatActivity {
     public void onResume(){
        super.onResume();
        services();
+    }
+    public void onInventoryClick(View view){
+        Intent intent = new Intent(this, manager_inventory.class); // Replace with actual target
+        startActivity(intent);
     }
 }

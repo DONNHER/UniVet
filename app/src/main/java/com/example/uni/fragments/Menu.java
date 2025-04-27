@@ -18,6 +18,7 @@ import com.example.uni.R;
 import com.example.uni.acts.TechHome;
 import com.example.uni.acts.TechnicianDashB;
 import com.example.uni.acts.groomServiceAct;
+import com.example.uni.acts.manager_inventory;
 import com.example.uni.acts.ownerDashB_setting;
 import com.example.uni.acts.settingAct;
 import com.example.uni.entities.Appointment;
@@ -37,7 +38,8 @@ public class Menu  extends DialogFragment {
 
         TextView home = view.findViewById(R.id.username14);
 
-        TextView profile = view.findViewById(R.id.username2);
+        TextView profile = view.findViewById(R.id.username6);
+        TextView inventory = view.findViewById(R.id.username5);
 
 //        TextView reports = view.findViewById(R.id.username15);
         dashB.setOnClickListener(v -> {
@@ -52,6 +54,11 @@ public class Menu  extends DialogFragment {
         });
         profile.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), ownerDashB_setting.class);
+            startActivity(intent);
+            dismiss();
+        });
+        inventory.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), manager_inventory.class);
             startActivity(intent);
             dismiss();
         });

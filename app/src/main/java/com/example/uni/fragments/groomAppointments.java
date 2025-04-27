@@ -9,24 +9,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 
 import com.example.uni.R;
 import com.example.uni.entities.Appointment;
-import com.example.uni.entities.groomAppointment;
-import com.example.uni.entities.medAppointment;
 import com.example.uni.helper.TempStorage;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 public class groomAppointments extends DialogFragment {
@@ -81,6 +74,7 @@ public class groomAppointments extends DialogFragment {
             db.collection("Appointments").document(docId).set(appointment)
                     .addOnSuccessListener(aVoid -> {
                         Toast.makeText(getContext(), "Appointment scheduled successfully!", Toast.LENGTH_SHORT).show();
+                        requireActivity().recreate();
                         dismiss();
                     })
                     .addOnFailureListener(e -> {

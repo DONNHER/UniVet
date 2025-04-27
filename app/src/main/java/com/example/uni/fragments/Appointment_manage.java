@@ -21,19 +21,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
         private double totalCost;
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        public static Appointment_manage newInstance(String appointmentId, String date, String time, double totalCost, String name, String services,String status) {
-            Appointment_manage fragment = new Appointment_manage();
-            Bundle args = new Bundle();
-            args.putString("appointmentId", appointmentId);
-            args.putString("date", date);
-            args.putString("time", time);
-            args.putDouble("totalCost", totalCost);
-            args.putString("name", name);
-            args.putString("services", services);
-            args.putString("status",status);
-            fragment.setArguments(args);
-            return fragment;
-        }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
