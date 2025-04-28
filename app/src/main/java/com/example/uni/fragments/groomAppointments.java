@@ -15,7 +15,6 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.uni.R;
 import com.example.uni.entities.Appointment;
-import com.example.uni.helper.TempStorage;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -25,7 +24,6 @@ import java.util.UUID;
 public class groomAppointments extends DialogFragment {
     private CalendarView calendarView;
     private Button scheduleButton;
-    private static TempStorage temp = TempStorage.getInstance();
     private FirebaseAuth myAuth= FirebaseAuth.getInstance();
     private String name;
 

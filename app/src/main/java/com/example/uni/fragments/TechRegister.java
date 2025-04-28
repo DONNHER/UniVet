@@ -8,8 +8,6 @@ import android.view.*;
 import android.widget.*;
 import androidx.fragment.app.DialogFragment;
 import com.example.uni.R;
-import com.example.uni.entities.owner;
-import com.example.uni.helper.TempStorage;
 import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.*;
 import com.google.firebase.firestore.FirebaseFirestore;

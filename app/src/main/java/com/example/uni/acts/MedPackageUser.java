@@ -12,20 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.uni.R;
-import com.example.uni.adapters.GroomServiceAdaptor;
-import com.example.uni.adapters.appAdapt;
-import com.example.uni.adapters.ownerAdapt;
 import com.example.uni.adapters.packageAdapt;
 import com.example.uni.entities.Service;
-import com.example.uni.entities.ServiceType;
 import com.example.uni.fragments.addService;
 import com.example.uni.fragments.ownerRegisterAct;
-import com.example.uni.helper.TempStorage;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 

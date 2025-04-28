@@ -1,12 +1,9 @@
 package com.example.uni.fragments;
 
-import static android.content.ContentValues.TAG;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +16,6 @@ import android.widget.Toast;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.uni.R;
-import com.example.uni.entities.owner;
-import com.example.uni.helper.TempStorage;
 import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

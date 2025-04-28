@@ -17,18 +17,11 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.uni.R;
 import com.example.uni.acts.AdminDashB;
-import com.example.uni.acts.OwnerDashboardAct;
 import com.example.uni.entities.owner;
-import com.example.uni.helper.TempStorage;
 import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class AdminLogin  extends DialogFragment {
-    private OwnerDashboardAct ownerDashboardAct;
-    private EditText passwordEditText;
-    private com.example.uni.viewModel.ownerVModel ownerVModel;
-    private TempStorage temp = TempStorage.getInstance();
-
     private FirebaseAuth myAuth= FirebaseAuth.getInstance();;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
@@ -53,16 +46,6 @@ public class AdminLogin  extends DialogFragment {
         });
         return view;
     }
-//
-//
-//    private void saveSession(String username, String role) {
-//        SharedPreferences sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putBoolean("isLoggedIn", true);
-//        editor.putString("username", username);
-//        editor.putString("role", role); // Store user role
-//        editor.apply();
-//    }
 
     protected void loginUser(View btn) {
         EditText name =  btn.findViewById(R.id.username);
@@ -70,13 +53,6 @@ public class AdminLogin  extends DialogFragment {
         EditText pass =  btn.findViewById(R.id.pass);
         String password = pass.getText().toString().trim();
         owner newUser =   new owner(username, password);
-        owner logUser = temp.getUser(newUser, temp.getUsers());
-        if (logUser != null) {
-            temp.setIsLoggedIn(logUser);
-            Intent intent = new Intent(getContext(), AdminDashB.class); // Replace with actual target
-            startActivity(intent);
-            return;
-        }
         myAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener(requireActivity(), task -> {
             if(task.isSuccessful()){
                 Toast.makeText(getContext(),"Login Successful",Toast.LENGTH_SHORT).show();

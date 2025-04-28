@@ -9,7 +9,6 @@ import android.widget.*;
 import androidx.fragment.app.DialogFragment;
 import com.example.uni.R;
 import com.example.uni.entities.owner;
-import com.example.uni.helper.TempStorage;
 import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -66,8 +65,7 @@ public class AdminRegister extends DialogFragment {
                         });
             } else {
                 owner newUser = new owner(username, password);
-                TempStorage.getInstance().addUser(newUser);
-                Toast.makeText(getContext(), "Successfully Registered.", Toast.LENGTH_SHORT).show();
+               Toast.makeText(getContext(), "Successfully Registered.", Toast.LENGTH_SHORT).show();
                 dismiss();
                 new ownerLoginAct().show(getParentFragmentManager(), "LogInDialog");
             }

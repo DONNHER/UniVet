@@ -1,33 +1,19 @@
 package com.example.uni.adapters;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextClock;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.uni.R;
-import com.example.uni.acts.OwnerDashboardAct;
-import com.example.uni.acts.TechHome;
-import com.example.uni.acts.TechnicianDashB;
-import com.example.uni.acts.groomServiceAct;
 import com.example.uni.entities.Appointment;
 import com.example.uni.entities.SectionItem;
-import com.example.uni.fragments.AppointmentDetails;
-import com.example.uni.fragments.Appointment_manage;
-import com.example.uni.fragments.ownerLoginAct;
-import com.example.uni.helper.TempStorage;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;

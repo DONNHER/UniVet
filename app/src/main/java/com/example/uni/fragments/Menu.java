@@ -8,30 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.CalendarView;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 
 import com.example.uni.R;
 import com.example.uni.acts.TechHome;
 import com.example.uni.acts.TechnicianDashB;
-import com.example.uni.acts.groomServiceAct;
 import com.example.uni.acts.manager_inventory;
 import com.example.uni.acts.ownerDashB_setting;
-import com.example.uni.acts.settingAct;
-import com.example.uni.entities.Appointment;
-import com.example.uni.helper.TempStorage;
-
-import java.text.SimpleDateFormat;
 
 public class Menu  extends DialogFragment {
-    private static TempStorage temp = TempStorage.getInstance();
-
-    @Override
+   @Override
     public void onStart(){
         super.onStart();
         if(getDialog() == null&& getDialog().getWindow() == null){

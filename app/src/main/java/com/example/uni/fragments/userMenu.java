@@ -16,13 +16,10 @@ import com.example.uni.R;
 import com.example.uni.acts.ManageServiceType;
 import com.example.uni.acts.TechHome;
 import com.example.uni.acts.TechnicianDashB;
-import com.example.uni.acts.manager_inventory;
 import com.example.uni.acts.ownerDashB_setting;
-import com.example.uni.helper.TempStorage;
 
 public class userMenu extends DialogFragment {
-    private static TempStorage temp = TempStorage.getInstance();
-    @Override
+     @Override
     public void onStart(){
         super.onStart();
         if(getDialog() == null&& getDialog().getWindow() == null){

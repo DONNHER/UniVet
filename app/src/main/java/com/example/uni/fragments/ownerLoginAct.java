@@ -17,10 +17,6 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.uni.R;
 import com.example.uni.acts.OwnerDashboardAct;
-import com.example.uni.acts.TechnicianDashB;
-import com.example.uni.entities.owner;
-import com.example.uni.helper.TempStorage;
-import com.example.uni.viewModel.*;
 import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.FirebaseAuth;
 

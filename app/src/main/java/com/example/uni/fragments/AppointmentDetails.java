@@ -1,6 +1,5 @@
 package com.example.uni.fragments;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +9,6 @@ import android.widget.TextView;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.uni.R;
-import com.example.uni.entities.Service;
-import com.example.uni.helper.TempStorage;
 import com.example.uni.management.serviceType;
 
 public class AppointmentDetails extends DialogFragment {

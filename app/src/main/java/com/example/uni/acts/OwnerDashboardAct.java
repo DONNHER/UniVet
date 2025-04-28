@@ -1,22 +1,17 @@
 package com.example.uni.acts;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.recyclerview.widget.*;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import com.example.uni.R;
-import com.example.uni.adapters.GroomServiceAdaptor;
 import com.example.uni.adapters.appAdapt;
 import com.example.uni.adapters.ownerAdapt;
 import com.example.uni.entities.Appointment;
 import com.example.uni.entities.ServiceType;
-import com.example.uni.fragments.Menu;
 import com.example.uni.fragments.userMenu;
-import com.example.uni.helper.TempStorage;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;

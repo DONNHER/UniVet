@@ -4,12 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,11 +15,7 @@ import com.example.uni.R;
 import com.example.uni.adapters.packageAdapt;
 import com.example.uni.entities.Service;
 import com.example.uni.fragments.addService;
-import com.example.uni.fragments.groomAppointments;
-import com.example.uni.fragments.ownerLoginAct;
 import com.example.uni.fragments.ownerRegisterAct;
-import com.example.uni.helper.TempStorage;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -29,13 +23,10 @@ import java.util.ArrayList;
 
 public class MedPackage  extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private static TempStorage temp = TempStorage.getInstance();
     private ArrayList<Service> list;
     private packageAdapt Adaptor;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-
-    private static com.example.uni.management.serviceType.Services.Grooming serviceType;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,29 +47,16 @@ public class MedPackage  extends AppCompatActivity {
         ownerRegisterAct dialogFragment = new ownerRegisterAct();
         dialogFragment.show(dialogFragment.getParentFragmentManager(), "RegisterDialog");
     }
-    public static com.example.uni.management.serviceType.Services.Grooming getServiceType() {
-        return serviceType;
-    }
-    public static void setServiceType(com.example.uni.management.serviceType.Services.Grooming service){
-        serviceType = service;
-    }
     public void onBtnClick(View view) {
         Intent intent = new Intent(this, settingAct.class); // Replace with actual target
         startActivity(intent);
     }
-    private void services(){
-        if ( temp.getServices().isEmpty()){
-            return;
-        }
-    }
+
     @Override
     protected void onResume(){
         super.onResume();
     }
-    public void newServices(){
-        if ( temp.getNServices().isEmpty()) {
-        }
-    }
+
     public void onAddMedService(View view) {
         addService dialog = new addService();
         dialog.show(getSupportFragmentManager(), "AddItemDialog");

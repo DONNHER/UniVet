@@ -8,15 +8,11 @@ import android.view.*;
 import android.widget.*;
 import androidx.fragment.app.DialogFragment;
 import com.example.uni.R;
-import com.example.uni.acts.TechHome;
 import com.example.uni.acts.TechnicianDashB;
-import com.example.uni.entities.owner;
-import com.example.uni.helper.TempStorage;
 import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class TechnicianLogin extends DialogFragment {
-    private final TempStorage temp = TempStorage.getInstance();
     private final FirebaseAuth myAuth= FirebaseAuth.getInstance();
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
