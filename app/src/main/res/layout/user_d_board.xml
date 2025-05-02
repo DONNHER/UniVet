@@ -59,7 +59,8 @@
                         android:textColor="#444444"
                         android:textSize="20dp"
                         android:textStyle="bold"
-                        android:layout_marginLeft="20dp"/>
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/poppins_semibold"/>
 
                     <TextView
                         android:id="@+id/textView"
@@ -69,7 +70,9 @@
                         android:layout_column="3"
                         android:text="December 12, 1923"
                         android:textColor="#444444"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_light"
+                        />
 
                 </GridLayout>
 
@@ -87,7 +90,8 @@
             android:textColorHint="#888888"
             android:textSize="20dp"
             android:textStyle="bold"
-            tools:ignore="RtlSymmetry" />
+            tools:ignore="RtlSymmetry"
+            android:fontFamily="@font/poppins_semibold"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/appointmentsView"
@@ -118,7 +122,9 @@
                 android:layout_marginLeft="10dp"
                 android:clickable="true"
                 android:onClick="onUpcomingClick"
-                android:focusable="true"/>
+                android:focusable="true"
+                android:fontFamily="@font/poppins_semibold"
+                />
 
 
             <!-- Upcoming Appointments Section Title -->
@@ -137,7 +143,8 @@
                 android:layout_marginLeft="10dp"
                 android:clickable="true"
                 android:onClick="onPendingClick"
-                android:focusable="true"/>
+                android:focusable="true"
+                android:fontFamily="@font/poppins_semibold"/>
 
         </GridLayout>
         <GridLayout
