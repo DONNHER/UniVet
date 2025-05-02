@@ -64,6 +64,7 @@
                         android:src="@drawable/lo" />
 
                     <TextView
+                        android:fontFamily="@font/poppins_semibold"
                         android:id="@+id/name"
                         android:layout_width="39dp"
                         android:layout_height="wrap_content"
@@ -83,7 +84,8 @@
                         android:layout_column="3"
                         android:text="December 12, 1923"
                         android:textColor="#444444"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_light"/>
 
                 </GridLayout>
 
@@ -126,7 +128,8 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="8dp"
                     android:text="Total Visitors"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_light"/>
             </LinearLayout>
 
             <!-- Boarding -->
@@ -153,7 +156,8 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="8dp"
                     android:text="Total Pets"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_light"/>
             </LinearLayout>
 
             <!-- Dog Walking -->
@@ -172,7 +176,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/user"
+                    android:src="@drawable/mdi_dog_service"
                     android:layout_gravity="left"/>
 
                 <TextView
@@ -180,7 +184,8 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="8dp"
                     android:text="Total Services"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_light"/>
             </LinearLayout>
 
             <!-- Pet Training -->
@@ -200,14 +205,15 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/calendar"/>
+                    android:src="@drawable/products"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="8dp"
                     android:text="Total Products"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_light"/>
             </LinearLayout>
         </GridLayout>
 
@@ -228,7 +234,9 @@
                 android:text="Upcoming Appointments"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="14dp"/>
 
 
             <!-- Upcoming Appointments Section Title -->
@@ -244,7 +252,9 @@
                 android:textAlignment="center"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="14dp"/>
 
         </GridLayout>
         <GridLayout
