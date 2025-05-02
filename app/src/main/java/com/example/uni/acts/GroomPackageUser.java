@@ -25,7 +25,6 @@ public class GroomPackageUser  extends AppCompatActivity {
     private ArrayList<Service> list;
     private packageAdapt Adaptor;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private static com.example.uni.management.serviceType.Services.Grooming serviceType;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -47,12 +46,7 @@ public class GroomPackageUser  extends AppCompatActivity {
         ownerRegisterAct dialogFragment = new ownerRegisterAct();
         dialogFragment.show(dialogFragment.getParentFragmentManager(), "RegisterDialog");
     }
-    public static com.example.uni.management.serviceType.Services.Grooming getServiceType() {
-        return serviceType;
-    }
-    public static void setServiceType(com.example.uni.management.serviceType.Services.Grooming service){
-        serviceType = service;
-    }
+
     public void onBtnClick(View view) {
         Intent intent = new Intent(this, settingAct.class); // Replace with actual target
         startActivity(intent);

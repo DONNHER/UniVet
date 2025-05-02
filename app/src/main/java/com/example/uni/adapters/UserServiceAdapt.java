@@ -48,7 +48,7 @@ public class UserServiceAdapt extends   RecyclerView.Adapter<UserServiceAdapt.Vi
                 .load(item.getImage())
                 .into(holder.pic);
         holder.itemView.setOnClickListener(view -> {
-            groomAppointments dialogFragment = new groomAppointments(item.getId().toString(),item.getName());
+            groomAppointments dialogFragment = new groomAppointments(item.getId().toString(),item.getName(),item.getDescription(),item.getPrice());
             dialogFragment.show(new TechHome().getFragment(), "appointmentDialog");
         });
     }

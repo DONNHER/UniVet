@@ -37,7 +37,7 @@ public class MedPackage  extends AppCompatActivity {
         Adaptor = new packageAdapt(list,this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(Adaptor);
-        services();
+        loadServices();
     }
     public void back(View view) {
         finish();

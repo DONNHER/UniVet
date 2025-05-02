@@ -1,7 +1,5 @@
 package com.example.uni.entities;
 
-import com.example.uni.management.serviceType;
-
 import java.util.UUID;
 
 public class Appointment {
@@ -16,14 +14,16 @@ public class Appointment {
     private String id ;
     private String userID;
     private String serviceID;
+    private String patientName;
 
 
     // Constructor
     public Appointment(){}
-    public Appointment(String Email, String appointmentDate,String appointmentTime) {
+    public Appointment(String Email, String appointmentDate,String appointmentTime,String name) {
         email = Email;
         this.appointmentDate = appointmentDate;
         this.appointmentTime = appointmentTime;
+        this.patientName =name;
     }
 
     public String getAppointmentDate() { return appointmentDate; }
@@ -77,5 +77,13 @@ public class Appointment {
 
     public void setServiceID(String serviceID) {
         this.serviceID = serviceID;
+    }
+
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
     }
 }

@@ -1,12 +1,10 @@
 package com.example.uni.fragments;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,9 +28,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class addService extends DialogFragment {
+public class UpdateService  extends DialogFragment {
 
-    private  ActivityResultLauncher<Intent> galleryLauncher;
+    private ActivityResultLauncher<Intent> galleryLauncher;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Uri selectedImageUri;
     private ImageView imageView;
@@ -40,7 +38,7 @@ public class addService extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.addservice_dialog, container, false);
+        View view = inflater.inflate(R.layout.updateservice_dailog, container, false);
 
         EditText nameEditText = view.findViewById(R.id.editTextName);
         EditText priceEditText = view.findViewById(R.id.editTextPrice);
@@ -113,7 +111,6 @@ public class addService extends DialogFragment {
 
         return view;
     }
-
 
     private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

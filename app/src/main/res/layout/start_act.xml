@@ -3,7 +3,6 @@
     android:layout_width="335dp"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     android:padding="24dp">
 
     <ImageView
@@ -30,8 +29,8 @@
 
     <TextView
         android:id="@+id/manager"
-        android:layout_width="285dp"
-        android:layout_height="45dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:background="@drawable/blue"
         android:gravity="center"
@@ -43,7 +42,7 @@
     <TextView
         android:id="@+id/admin"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:background="@drawable/blue"
         android:gravity="center"
@@ -54,7 +53,7 @@
     <TextView
         android:id="@+id/guest"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:background="@drawable/edit_background"
         android:gravity="center"
@@ -68,5 +67,6 @@
         android:layout_height="wrap_content"
         android:text="Get Started"
         android:backgroundTint="#5A2F17"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:layout_gravity="center"/>
 </LinearLayout>

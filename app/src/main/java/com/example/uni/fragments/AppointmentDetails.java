@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.uni.R;
-import com.example.uni.management.serviceType;
 
 public class AppointmentDetails extends DialogFragment {
     private String date, time, name, services;

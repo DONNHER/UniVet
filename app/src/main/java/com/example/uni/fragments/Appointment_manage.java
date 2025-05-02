@@ -10,7 +10,6 @@ import android.widget.Toast;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.uni.R;
-import com.example.uni.management.serviceType;
 import com.google.firebase.firestore.FirebaseFirestore;
 
     public class Appointment_manage extends DialogFragment {

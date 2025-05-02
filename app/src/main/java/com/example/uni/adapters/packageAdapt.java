@@ -66,7 +66,7 @@ public class packageAdapt  extends RecyclerView.Adapter<packageAdapt.manageServi
             });
         }else {
             holder.itemView.setOnClickListener(view -> {
-                groomAppointments dialogFragment = new groomAppointments(item.getId().toString(), item.getName());
+                groomAppointments dialogFragment = new groomAppointments(item.getId().toString(), item.getName(),item.getDescription(),item.getPrice());
                 dialogFragment.show(fragmentActivity.getSupportFragmentManager(), "AppointmentDialog");
             });
         }

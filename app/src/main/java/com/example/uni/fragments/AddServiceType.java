@@ -1,10 +1,12 @@
 package com.example.uni.fragments;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +36,7 @@ public class AddServiceType extends DialogFragment {
     private Uri selectedImageUri;
     private ImageView imageView;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class AddServiceType extends DialogFragment {
         EditText priceEdit = view.findViewById(R.id.editText3);
         imageView = view.findViewById(R.id.imageView);
         Button submitButton = view.findViewById(R.id.confirm);
+        Button cancelButton = view.findViewById(R.id.cancel);
 
         // Register for result from gallery selection
         galleryLauncher = registerForActivityResult(
@@ -56,6 +60,11 @@ public class AddServiceType extends DialogFragment {
         );
 
         imageView.setOnClickListener(v -> openGallery());
+
+        cancelButton.setOnClickListener(v -> {
+                    requireActivity().recreate();
+                    dismiss();
+                });
 
         submitButton.setOnClickListener(v -> {
             String price = priceEdit.getText().toString().trim();
@@ -110,4 +119,5 @@ public class AddServiceType extends DialogFragment {
         intent.setType("image/*");
         galleryLauncher.launch(intent);  // Open gallery for image selection
     }
+
 }
