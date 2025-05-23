@@ -74,7 +74,6 @@ public class main_act extends AppCompatActivity {
         dialogFragment.show(getSupportFragmentManager(), "StartDialog");
         recyclerView = findViewById(R.id.appointmentsView);
         list = new ArrayList<>();
-        owner_adapt = new ownerAdapt(list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(owner_adapt);
         loadServices();
@@ -96,6 +95,7 @@ public class main_act extends AppCompatActivity {
                     list.add(serviceType);
                     owner_adapt.notifyDataSetChanged();
                 }
+                owner_adapt = new ownerAdapt(list);
             } else {
                 Toast.makeText(getApplicationContext(), "error:2", Toast.LENGTH_SHORT).show();
             }
