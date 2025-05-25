@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
@@ -34,6 +35,10 @@ public class ownerRegisterAct extends DialogFragment {
         View view = inflater.inflate(R.layout.owner_register_act, container, false);
         EditText passwordEditText = view.findViewById(R.id.pass);
         EditText conpasswordEditText = view.findViewById(R.id.conPass);
+        TextView login = view.findViewById(R.id.num_sign);
+        login.setOnClickListener( v -> {
+            new ownerLoginAct().show(getParentFragmentManager(), "LoginDialog");
+        });
         CheckBox showPasswordCheckBox = view.findViewById(R.id.showPasswordCheckBox);
         Button btnGetStarted = view.findViewById(R.id.btnSignUp);
         btnGetStarted.setOnClickListener(v -> {
