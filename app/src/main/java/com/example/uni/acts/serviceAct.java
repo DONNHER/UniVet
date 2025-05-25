@@ -15,6 +15,7 @@ import com.example.uni.adapters.GroomServiceAdaptor;
 import com.example.uni.entities.ServiceType;
 import com.example.uni.fragments.AddServiceType;
 import com.example.uni.fragments.Menu;
+import com.example.uni.fragments.userMenu;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -52,7 +53,7 @@ public class serviceAct extends AppCompatActivity {
     }
 
     public void onside(View view) {
-        Menu menu = new Menu();
+        userMenu menu = new userMenu();
         menu.show(getSupportFragmentManager(), "MenuDialog");
     }
 

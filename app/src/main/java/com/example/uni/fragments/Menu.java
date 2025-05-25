@@ -17,6 +17,7 @@ import com.example.uni.acts.TechHome;
 import com.example.uni.acts.TechnicianDashB;
 import com.example.uni.acts.manager_inventory;
 import com.example.uni.acts.ownerDashB_setting;
+import com.example.uni.acts.techProfile;
 
 public class Menu  extends DialogFragment {
    @Override
@@ -55,7 +56,7 @@ public class Menu  extends DialogFragment {
             dismiss();
         });
         profile.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), ownerDashB_setting.class);
+            Intent intent = new Intent(getContext(), techProfile.class);
             startActivity(intent);
             dismiss();
         });
