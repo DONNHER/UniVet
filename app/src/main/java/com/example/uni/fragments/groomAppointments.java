@@ -21,6 +21,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class groomAppointments extends AppCompatActivity {
@@ -164,8 +166,13 @@ public class groomAppointments extends AppCompatActivity {
             appointment.setStatus("Pending");
             appointment.setUserID(myAuth.getCurrentUser().getUid());
             appointment.setServiceID(id);
+            Map<String, Object> data = new HashMap<>();
+            data.put("id", appointment.getId());
+            data.put("status", appointment.getStatus());
+            data.put("userID", appointment.getUserID());
+            data.put("serviceID", appointment.getServiceID());
 
-            db.collection("Appointments").document(docId).set(appointment)
+            db.collection("users").document("user").collection("account").document(docId).collection("appointments").add(data)
                     .addOnSuccessListener(aVoid -> {
                         Toast.makeText(this, "Appointment scheduled successfully!", Toast.LENGTH_SHORT).show();
                         finish(); // Close activity after scheduling

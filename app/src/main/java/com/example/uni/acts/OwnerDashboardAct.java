@@ -49,7 +49,8 @@ public class OwnerDashboardAct extends AppCompatActivity {
     }
 
     private void appointments(){
-        db.collection("Appointments").get().addOnSuccessListener(queryDocumentSnapshots -> {
+        db.collection("users").document("user").collection("accounts").document(myAuth.getCurrentUser().getUid()).collection("appointments").
+                get().addOnSuccessListener(queryDocumentSnapshots  -> {
             appointments.clear();
             for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                 Appointment appointment = documentSnapshot.toObject(Appointment.class);
