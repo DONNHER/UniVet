@@ -1,7 +1,10 @@
 package com.example.uni.fragments;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.*;
 import android.view.*;
@@ -47,6 +50,8 @@ public class TechnicianLogin extends DialogFragment {
         myAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener(requireActivity(), task -> {
             if(task.isSuccessful()){
                 Toast.makeText(getContext(),"Login Successful",Toast.LENGTH_SHORT).show();
+                SharedPreferences preferences = requireActivity().getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                preferences.edit().putBoolean("isLoggedIn", true).apply();
                 Intent intent = new Intent(getContext(), TechnicianDashB.class);
                 startActivity(intent);
                 dismiss();

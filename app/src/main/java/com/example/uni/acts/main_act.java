@@ -9,6 +9,7 @@ import com.example.uni.fragments.start_act;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,12 +40,13 @@ public class main_act extends AppCompatActivity {
     private ownerAdapt owner_adapt;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth myAuth= FirebaseAuth.getInstance();
+    private SharedPreferences preferences;
 
     @Override
     public void onStart(){
         super.onStart();
         FirebaseUser user = myAuth.getCurrentUser();
-        if(user!= null){
+        if(preferences.getBoolean("isLoggedIn",false)){
             String uid = user.getUid();
             db.collection("users").document(uid).get().addOnSuccessListener(documentSnapshot -> {
                 if(documentSnapshot.exists()) {
@@ -103,11 +105,11 @@ public class main_act extends AppCompatActivity {
         });
     }
     public void onLogClick(View view) {
-        Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
+        Intent intent = new Intent(this, start_act.class); // Replace with actual target
         startActivity(intent);
     }
     public void onResClick(View view) {
-        Intent intent = new Intent(this, ownerRegisterAct.class); // Replace with actual target
+        Intent intent = new Intent(this, start_act.class); // Replace with actual target
         startActivity(intent);
     }
 
