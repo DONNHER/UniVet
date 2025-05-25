@@ -27,9 +27,6 @@ public class OwnerDashboardAct extends AppCompatActivity {
     private appAdapt Adapt;
     private Button btn1, btn2;
     private final ArrayList<Appointment> appointments = new ArrayList<>();
-    private RecyclerView recyclerView;
-    private ArrayList<ServiceType> list;
-    private ownerAdapt owner_adapt;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth myAuth= FirebaseAuth.getInstance();
     @SuppressLint("MissingInflatedId")
@@ -37,8 +34,6 @@ public class OwnerDashboardAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_d_board);
-        owner_adapt = new ownerAdapt(list);
-        loadServices();
         btn1 = findViewById(R.id.appoint1);
         btn2 = findViewById(R.id.appoint2);
         appointmentsView = findViewById(R.id.appointments23);
@@ -93,24 +88,9 @@ public class OwnerDashboardAct extends AppCompatActivity {
         userMenu menu = new userMenu();
         menu.show(getSupportFragmentManager(), "MenuDialog");
     }
-    @SuppressLint("NotifyDataSetChanged")
-    private void loadServices() {
-        db.collection("serviceType").get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                list.clear();
-                for (QueryDocumentSnapshot d : task.getResult()) {
-                    ServiceType serviceType = d.toObject(ServiceType.class);
-                    list.add(serviceType);
-                    owner_adapt.notifyDataSetChanged();
-                }
-            } else {
-                Toast.makeText(getApplicationContext(), "error:2", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+
     @Override
     public void onResume(){
         super.onResume();
-        loadServices();
     }
 }
