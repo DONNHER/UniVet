@@ -1,6 +1,7 @@
 package com.example.uni.fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -54,6 +55,8 @@ public class ownerLoginAct extends AppCompatActivity {
                     .addOnCompleteListener(this, task -> {
                         if (task.isSuccessful()) {
                             Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+                            SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                            preferences.edit().putBoolean("isLoggedIn", true).apply();
                             Intent intent = new Intent(this, OwnerDashboardAct.class);
                             startActivity(intent);
                             finish(); // Close login screen

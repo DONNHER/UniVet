@@ -40,12 +40,17 @@ public class main_act extends AppCompatActivity {
     private ownerAdapt owner_adapt;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth myAuth= FirebaseAuth.getInstance();
-    private SharedPreferences preferences;
+    private SharedPreferences preferences ;
 
     @Override
     public void onStart(){
         super.onStart();
         FirebaseUser user = myAuth.getCurrentUser();
+        if(getSharedPreferences("MyPrefs",MODE_PRIVATE) == null){
+            return;
+        }
+        preferences = getSharedPreferences("MyPrefs",MODE_PRIVATE);
+
         if(preferences.getBoolean("isLoggedIn",false)){
             String uid = user.getUid();
             db.collection("users").document(uid).get().addOnSuccessListener(documentSnapshot -> {
