@@ -18,6 +18,7 @@ import com.example.uni.acts.OwnerDashboardAct;
 import com.example.uni.acts.TechHome;
 import com.example.uni.acts.TechnicianDashB;
 import com.example.uni.acts.ownerDashB_setting;
+import com.example.uni.acts.serviceAct;
 import com.example.uni.acts.settingAct;
 import com.example.uni.acts.shop;
 import com.example.uni.entities.Service;
@@ -64,7 +65,7 @@ public class userMenu extends DialogFragment {
             dismiss();
         });
         booking.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), Service.class);
+            Intent intent = new Intent(getContext(), serviceAct.class);
             startActivity(intent);
             dismiss();
         });

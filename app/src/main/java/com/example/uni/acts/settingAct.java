@@ -10,12 +10,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.uni.R;
 import com.example.uni.fragments.ownerLoginAct;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 //import com.example.uni.management.SessionManager;
 
 public class settingAct extends AppCompatActivity {
     private ownerLoginAct ownerLogin;
-
-
+    private final FirebaseAuth myAuth= FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +29,12 @@ public class settingAct extends AppCompatActivity {
 //            finish();
 //            return; // Prevent further execution
 //        }
+        FirebaseUser user = myAuth.getCurrentUser();
+        if(user != null) {
+            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
+            startActivity(intent);
+            finish();
+        }
 
         // Load Main UI for the logged-in user
         setContentView(R.layout.setting_act);
