@@ -11,7 +11,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Profile Section (Top) -->
+        <!-- Profile Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,11 +26,8 @@
                 android:layout_gravity="start"
                 android:contentDescription="@string/back_button"
                 android:onClick="back"
-                android:src="@drawable/sidemenu">
+                android:src="@drawable/sidemenu"/>
 
-            </ImageView>
-
-            <!-- Profile Image -->
             <TextView
                 android:id="@+id/profile_name"
                 android:layout_width="wrap_content"
@@ -38,7 +35,7 @@
                 android:layout_marginTop="8dp"
                 android:text="User"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <ImageView
                 android:id="@+id/profile_image"
@@ -46,11 +43,8 @@
                 android:layout_height="80dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/logo"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="16dp"/>
 
-            <!-- Name -->
-
-            <!-- Email -->
             <TextView
                 android:id="@+id/profile_email"
                 android:layout_width="wrap_content"
@@ -59,19 +53,17 @@
                 android:textSize="14sp"
                 android:textColor="@android:color/darker_gray"
                 android:layout_marginBottom="12dp"/>
-
         </LinearLayout>
 
-        <!-- Settings Section -->
+        <!-- Settings Header -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Settings"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            style=""/>
+            android:paddingBottom="12dp"/>
 
         <!-- Account Section -->
         <TextView
@@ -86,36 +78,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="12dp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/security"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:text="@string/security"
                 android:textSize="14sp"
-                android:padding="10dp"/>
-
+                android:gravity="center_vertical"
+                android:padding="12dp"/>
 
             <TextView
                 android:id="@+id/privacy"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:text="Privacy"
                 android:textSize="14sp"
-                android:padding="10dp"/>
+                android:gravity="center_vertical"
+                android:padding="12dp"/>
         </LinearLayout>
 
-        <!-- Support & About -->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="12dp"/>
-
-        <!-- Actions -->
+        <!-- Actions Section -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -123,32 +107,34 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@android:color/darker_gray"
-            android:paddingTop="12dp"
+            android:paddingTop="24dp"
             android:paddingBottom="4dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="12dp">
+            android:gravity="center"
+            android:paddingTop="16dp">
 
-            <!-- Edit Profile Button -->
             <Button
                 android:id="@+id/btn_edit_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
                 android:text="Edit Profile"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/border"
-                android:layout_marginLeft="50dp"/>
+                android:background="@drawable/border"/>
+
             <Button
                 android:id="@+id/logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
                 android:text="@string/log_out"
                 android:onClick="logoutClick"
-                android:background="@drawable/border"
-                android:layout_marginLeft="50dp"/>
+                android:background="@drawable/border"/>
         </LinearLayout>
 
     </LinearLayout>
