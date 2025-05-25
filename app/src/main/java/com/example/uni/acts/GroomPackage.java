@@ -44,8 +44,7 @@ public class GroomPackage  extends AppCompatActivity {
     }
 
     public void onResClick(View view) {
-        ownerRegisterAct dialogFragment = new ownerRegisterAct();
-        dialogFragment.show(dialogFragment.getParentFragmentManager(), "RegisterDialog");
+      Intent intent = new Intent(this, ownerRegisterAct.class); // Replace with actual target
     }
 
     public void onBtnClick(View view) {

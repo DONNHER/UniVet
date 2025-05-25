@@ -15,6 +15,7 @@ import com.example.uni.R;
 import com.example.uni.adapters.packageAdapt;
 import com.example.uni.entities.Service;
 import com.example.uni.fragments.addService;
+import com.example.uni.fragments.ownerLoginAct;
 import com.example.uni.fragments.ownerRegisterAct;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -44,8 +45,8 @@ public class MedPackage  extends AppCompatActivity {
     }
 
     public void onResClick(View view) {
-        ownerRegisterAct dialogFragment = new ownerRegisterAct();
-        dialogFragment.show(dialogFragment.getParentFragmentManager(), "RegisterDialog");
+        Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
+        startActivity(intent);
     }
     public void onBtnClick(View view) {
         Intent intent = new Intent(this, settingAct.class); // Replace with actual target

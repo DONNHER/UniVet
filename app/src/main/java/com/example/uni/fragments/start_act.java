@@ -2,6 +2,7 @@ package com.example.uni.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -52,8 +53,8 @@ public class start_act extends DialogFragment {
             if(role == null){
                 Toast.makeText(getContext(),"Please select a role", Toast.LENGTH_SHORT).show();
             } else if (role.equals("I'm a Costumer.")) {
-                ownerLoginAct dialogFragment = new ownerLoginAct();
-                dialogFragment.show(getParentFragmentManager(), "LogInDialog");
+                Intent intent = new Intent(getContext(), ownerLoginAct.class);
+                startActivity(intent);
                 dismiss();
             }else if (role.equals("I'm a Manager.")) {
                 TechnicianLogin dialogFragment = new TechnicianLogin();

@@ -42,6 +42,15 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         </activity>
         <activity
+            android:name=".fragments.ownerLoginAct"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        </activity><activity
+        android:name=".fragments.ownerRegisterAct"
+        android:exported="true"
+        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+    </activity>
+        <activity
             android:name=".acts.MedPackageUser"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">

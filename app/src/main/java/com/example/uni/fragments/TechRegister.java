@@ -1,6 +1,7 @@
 package com.example.uni.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.*;
 import android.util.Patterns;
@@ -54,8 +55,8 @@ public class TechRegister extends DialogFragment {
                                 data.put("role","manager");
                                 db.collection("users").document(user.getUid()).set(data);
                                 Toast.makeText(getContext(), "Successfully Registered.", Toast.LENGTH_SHORT).show();
-                                dismiss();
-                                new ownerLoginAct().show(getParentFragmentManager(), "LogInDialog");
+                                Intent intent = new Intent(getContext(), ownerLoginAct.class);
+                                startActivity(intent);
                             } else {
                                 Exception e = task.getException();
                                 if (e instanceof FirebaseNetworkException) {
