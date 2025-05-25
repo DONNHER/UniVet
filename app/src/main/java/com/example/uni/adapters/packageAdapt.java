@@ -61,9 +61,9 @@ public class packageAdapt  extends RecyclerView.Adapter<packageAdapt.manageServi
                 .into(holder.pic);
         if(myAuth.getCurrentUser() == null){
             holder.itemView.setOnClickListener(view -> {
-            ownerLoginAct dialogFragment = new ownerLoginAct();
-            dialogFragment.show(fragmentActivity.getSupportFragmentManager(), "AppointmentDialog");
-            });
+                Intent intent = new Intent(fragmentActivity, ownerLoginAct.class);
+                fragmentActivity.startActivity(intent);
+             });
         }else {
             holder.itemView.setOnClickListener(view -> {
                 groomAppointments dialogFragment = new groomAppointments(item.getId().toString(), item.getName(),item.getDescription(),item.getPrice());

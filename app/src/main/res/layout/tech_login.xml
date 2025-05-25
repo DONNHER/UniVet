@@ -62,13 +62,6 @@
         <!--            android:drawableStart="@drawable/ic_lock" -->
         <!--            android:drawableStart="@drawable/edittext_background" -->
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
-            android:layout_marginBottom="0dp"
-            android:text="@string/i_accept_privacy_policy_amp_term_of_use" />
-
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"

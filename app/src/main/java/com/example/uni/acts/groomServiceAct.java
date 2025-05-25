@@ -40,8 +40,8 @@ public  class groomServiceAct extends AppCompatActivity {
         finish();
     }
     public void onResClick(View view) {
-        ownerRegisterAct dialogFragment = new ownerRegisterAct();
-        dialogFragment.show(dialogFragment.getParentFragmentManager(), "RegisterDialog");
+        Intent intent = new Intent(this, ownerRegisterAct.class); // Replace with actual target
+        startActivity(intent);
     }
 
     public void onBtnClick(View view) {
