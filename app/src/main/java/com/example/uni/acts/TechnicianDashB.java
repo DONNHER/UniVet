@@ -81,7 +81,7 @@ public class TechnicianDashB extends AppCompatActivity {
 
         // Group appointments by date
         Map<String, List<Appointment>> grouped = groupByDate(filtered);
-        Adapt.setAppointments(grouped,getSupportFragmentManager());
+        Adapt.setAppointments(grouped,this,getSupportFragmentManager());
     }
 
     private Map<String, List<Appointment>> groupByDate(List<Appointment> appointments) {

@@ -47,6 +47,21 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         </activity>
         <activity
+            android:name=".fragments.Appointment_manage"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        </activity>
+        <activity
+            android:name=".fragments.AppointmentDetails"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        </activity>
+        <activity
+            android:name=".acts.techProfile"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        </activity>
+        <activity
             android:name=".acts.serviceAct"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">

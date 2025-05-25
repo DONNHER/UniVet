@@ -30,7 +30,7 @@ public class settingAct extends AppCompatActivity {
 //            return; // Prevent further execution
 //        }
         FirebaseUser user = myAuth.getCurrentUser();
-        if(user != null) {
+        if(user == null) {
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
             finish();

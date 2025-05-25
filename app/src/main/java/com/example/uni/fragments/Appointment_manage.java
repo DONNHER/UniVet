@@ -1,68 +1,60 @@
 package com.example.uni.fragments;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.DialogFragment;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.uni.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-    public class Appointment_manage extends DialogFragment {
-        private String date, time, name, services, appointmentId,status;
-        private double totalCost;
+public class Appointment_manage extends AppCompatActivity {
+    private String date, time, name, services, appointmentId, status;
+    private double totalCost;
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.appointment_manage, container, false);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.appointment_manage);
+
+        if (getIntent() != null) {
+            appointmentId = getIntent().getStringExtra("appointmentId");
+            date = getIntent().getStringExtra("date");
+            time = getIntent().getStringExtra("time");
+            totalCost = getIntent().getDoubleExtra("totalCost", 0.0);
+            name = getIntent().getStringExtra("name");
+            services = getIntent().getStringExtra("services");
+            status = getIntent().getStringExtra("status");
         }
 
-        @Override
-        public void onViewCreated(View view, Bundle savedInstanceState) {
-            super.onViewCreated(view, savedInstanceState);
+        TextView Date = findViewById(R.id.Date);
+        TextView Time = findViewById(R.id.Time);
+        TextView tCost = findViewById(R.id.cost);
+        TextView service = findViewById(R.id.service);
 
-            if (getArguments() != null) {
-                appointmentId = getArguments().getString("appointmentId");
-                date = getArguments().getString("date");
-                time = getArguments().getString("time");
-                totalCost = getArguments().getDouble("totalCost");
-                name = getArguments().getString("name");
-                services = getArguments().getString("services");
-                status = getArguments().getString("status");
-            }
+        Date.setText(date);
+        Time.setText(time);
+        tCost.setText(String.format("%.2f", totalCost));
+        service.setText(services);
 
-            TextView Date = view.findViewById(R.id.Date);
-            TextView Time = view.findViewById(R.id.Time);
-            TextView tCost = view.findViewById(R.id.cost);
-            TextView service = view.findViewById(R.id.service);
-
-            Date.setText(date);
-            Time.setText(time);
-            tCost.setText(String.format("%.2f", totalCost));
-            service.setText(services);
-
-            view.findViewById(R.id.confirm).setOnClickListener(v -> updateStatus("Confirmed"));
-            view.findViewById(R.id.cancel).setOnClickListener(v -> updateStatus("Cancelled"));
-        }
-
-        private void updateStatus(String status) {
-            Toast.makeText(getContext(), "Appointment " + status, Toast.LENGTH_SHORT).show();
-
-            db.collection("Appointments").document(appointmentId)
-                    .update("status", status)
-                    .addOnSuccessListener(unused -> {
-                        Toast.makeText(getContext(), "Appointment " + status, Toast.LENGTH_SHORT).show();
-                        dismiss();
-                        getActivity().finish();
-                    })
-                    .addOnFailureListener(e ->
-                            Toast.makeText(getContext(), "Failed to update: " + e.getMessage(), Toast.LENGTH_SHORT).show()
-                    );
-        }
+        findViewById(R.id.confirm).setOnClickListener(v -> updateStatus("Confirmed"));
+        findViewById(R.id.cancel).setOnClickListener(v -> updateStatus("Cancelled"));
     }
+
+    private void updateStatus(String status) {
+        Toast.makeText(this, "Appointment " + appointmentId, Toast.LENGTH_SHORT).show();
+
+        db.collection("Appointments").document(appointmentId)
+                .update("status", status)
+                .addOnSuccessListener(unused -> {
+                    Toast.makeText(this, "Appointment " + status, Toast.LENGTH_SHORT).show();
+                    finish();
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Failed to update: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                );
+    }
+}

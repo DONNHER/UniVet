@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.uni.fragments.userMenu;
 import com.google.firebase.auth.FirebaseAuth;
 
 
@@ -79,8 +80,8 @@ public class main_act extends AppCompatActivity {
         }
     }
     public void onMenuClick2(View view) {
-        Intent intent = new Intent(view.getContext(), settingAct.class);
-        view.getContext().startActivity(intent);
+        userMenu menu = new userMenu();
+        menu.show(getSupportFragmentManager(), "MenuDialog");
 
     }
     private void loadServices() {

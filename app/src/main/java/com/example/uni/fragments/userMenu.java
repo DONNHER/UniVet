@@ -60,7 +60,7 @@ public class userMenu extends DialogFragment {
             dismiss();
         });
         user_profile.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), settingAct.class);
+            Intent intent = new Intent(getContext(), ownerDashB_setting.class);
             startActivity(intent);
             dismiss();
         });

@@ -49,7 +49,8 @@ public class OwnerDashboardAct extends AppCompatActivity {
     }
 
     private void appointments(){
-        db.collection("users").document("user").collection("accounts").document(myAuth.getCurrentUser().getUid()).collection("appointments").
+        Toast.makeText(this,myAuth.getCurrentUser().getUid(),Toast.LENGTH_SHORT).show();
+        db.collection("users").document("user").collection("account").document(myAuth.getCurrentUser().getUid()).collection("appointments").
                 get().addOnSuccessListener(queryDocumentSnapshots  -> {
             appointments.clear();
             for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
@@ -70,7 +71,7 @@ public class OwnerDashboardAct extends AppCompatActivity {
 
         // Group appointments by date and pass the grouped data to the adapter
         Map<String, List<Appointment>> groupedAppointments = groupByDate(filtered);
-        Adapt.setAppointments(groupedAppointments, getSupportFragmentManager());
+        Adapt.setAppointments(groupedAppointments,this, getSupportFragmentManager());
     }
 
     private Map<String, List<Appointment>> groupByDate(List<Appointment> appointments) {

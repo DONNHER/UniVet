@@ -1,12 +1,14 @@
 package com.example.uni.adapters;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +16,7 @@ import com.example.uni.R;
 import com.example.uni.entities.Appointment;
 import com.example.uni.entities.SectionItem;
 import com.example.uni.fragments.AppointmentDetails;
+import com.example.uni.fragments.Appointment_manage;
 import com.example.uni.fragments.ownerLoginAct;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -23,14 +26,14 @@ import java.util.List;
 import java.util.Map;
 public class appAdapt extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<SectionItem> sectionItems = new ArrayList<>();
-    FragmentManager fragmentManager;
+    FragmentActivity fragmentManager;
+    FragmentManager Manager;
     private final FirebaseAuth myAuth= FirebaseAuth.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     @SuppressLint("NotifyDataSetChanged")
-    public void setAppointments(Map<String, List<Appointment>> groupedAppointments, FragmentManager fragmentManager) {
+    public void setAppointments(Map<String, List<Appointment>> groupedAppointments, FragmentActivity fragmentManager,FragmentManager Manager) {
         this.fragmentManager = fragmentManager;
         sectionItems.clear();
-
         for (String date : groupedAppointments.keySet()) {
             sectionItems.add(new SectionItem(date)); // Add date header
             for (Appointment appointment : groupedAppointments.get(date)) {
@@ -60,11 +63,17 @@ public class appAdapt extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         SectionItem sectionItem = sectionItems.get(position);
-
-        holder.itemView.setOnClickListener(v -> {
-            AppointmentDetails dialogFragment = new AppointmentDetails();
-            dialogFragment.show(fragmentManager, "AppointmentDialog");
-        });
+        if(fragmentManager.getClass().getSimpleName().equals("TechnicianDashB")){
+            holder.itemView.setOnClickListener(v -> {
+                Intent i = new Intent(fragmentManager, Appointment_manage.class);
+                fragmentManager.startActivity(i);
+            });
+        }else {
+            holder.itemView.setOnClickListener(v -> {
+                Intent i = new Intent(fragmentManager, AppointmentDetails.class);
+                fragmentManager.startActivity(i);
+            });
+        }
         if (holder instanceof HeaderViewHolder) {
             ((HeaderViewHolder) holder).bind(sectionItem.date);
         } else if (holder instanceof AppointmentViewHolder) {

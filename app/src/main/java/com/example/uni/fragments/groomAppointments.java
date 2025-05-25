@@ -171,8 +171,22 @@ public class groomAppointments extends AppCompatActivity {
             data.put("status", appointment.getStatus());
             data.put("userID", appointment.getUserID());
             data.put("serviceID", appointment.getServiceID());
+            data.put("email", appointment.getServiceID());
+            data.put("appointmentDate", appointment.getAppointmentDate());
+            data.put("appointmentTime", appointment.getAppointmentTime());
+            data.put("patientName", appointment.getPatientName());
+            data.put("paymentMethod", appointment.getPaymentMethod());
 
-            db.collection("users").document("user").collection("account").document(docId).collection("appointments").add(data)
+            db.collection("Appointments").document(docId).set(appointment)
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(this, "Appointment scheduled successfully!", Toast.LENGTH_SHORT).show();
+                        finish(); // Close activity after scheduling
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+
+            db.collection("users").document("user").collection("account").document(myAuth.getCurrentUser().getUid()).collection("appointments").add(data)
                     .addOnSuccessListener(aVoid -> {
                         Toast.makeText(this, "Appointment scheduled successfully!", Toast.LENGTH_SHORT).show();
                         finish(); // Close activity after scheduling

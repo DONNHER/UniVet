@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.uni.R;
 import com.example.uni.fragments.ownerLoginAct;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 //import com.example.uni.management.SessionManager;
 
 public class ownerDashB_setting extends AppCompatActivity {
@@ -31,7 +32,12 @@ public class ownerDashB_setting extends AppCompatActivity {
         // Load Main UI for the logged-in user
         setContentView(R.layout.setting_act);
         Button btnGetStarted = findViewById(R.id.btn_edit_profile);
-
+        FirebaseUser user = myAuth.getCurrentUser();
+        if(user == null) {
+            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
+            startActivity(intent);
+            finish();
+        }
         // Set the action for the "Get Started" button
         btnGetStarted.setOnClickListener(v -> {
             // Action to perform when "Get Started" is clicked

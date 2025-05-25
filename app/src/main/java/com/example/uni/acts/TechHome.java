@@ -61,7 +61,8 @@ public class TechHome  extends AppCompatActivity {
     }
 
     private void services(){
-        db.collection("Appointments").get().addOnSuccessListener(queryDocumentSnapshots -> {
+        db.collection("users").document("user").collection("account").document(myAuth.getCurrentUser().getUid()).collection("appointments").
+                get().addOnSuccessListener(queryDocumentSnapshots -> {
             appointments.clear();
             for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                 Appointment appt = documentSnapshot.toObject(Appointment.class);
@@ -81,7 +82,7 @@ public class TechHome  extends AppCompatActivity {
 
         // Group appointments by date
         Map<String, List<Appointment>> grouped = groupByDate(filtered);
-        Adapt.setAppointments(grouped,getSupportFragmentManager());
+        Adapt.setAppointments(grouped,this,getSupportFragmentManager());
     }
     private Map<String, List<Appointment>> groupByDate(List<Appointment> appointments) {
         Map<String, List<Appointment>> grouped = new LinkedHashMap<>();

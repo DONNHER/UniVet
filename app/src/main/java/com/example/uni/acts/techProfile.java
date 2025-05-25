@@ -9,6 +9,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.uni.R;
+import com.example.uni.fragments.TechnicianLogin;
 import com.example.uni.fragments.ownerLoginAct;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,8 +30,8 @@ public class techProfile  extends AppCompatActivity {
 //            return; // Prevent further execution
 //        }
         FirebaseUser user = myAuth.getCurrentUser();
-        if(user != null) {
-            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
+        if(user == null) {
+            Intent intent = new Intent(this, TechnicianLogin.class); // Replace with actual target
             startActivity(intent);
             finish();
         }
@@ -94,6 +95,12 @@ public class techProfile  extends AppCompatActivity {
 //    }
     public void editProfileClick(View view) {
         Intent intent = new Intent(this, ownerAct.class); // Replace with actual target
+        startActivity(intent);
+        finish();
+    }
+    public void logoutClick(View view) {
+        myAuth.signOut();
+        Intent intent = new Intent(this, main_act.class); // Replace with actual target
         startActivity(intent);
         finish();
     }
