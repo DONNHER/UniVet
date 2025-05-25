@@ -24,7 +24,8 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_gravity="center"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/poppins_semibold"/>
 
         <EditText
             android:id="@+id/username"
@@ -34,7 +35,8 @@
             android:layout_height="wrap_content"
             android:padding="12dp"
             android:background="@drawable/edit_background"
-            android:singleLine="true"/>
+            android:singleLine="true"
+            android:fontFamily="@font/poppins_regular"/>
 
         <!--            android:drawableStart="@drawable/ic_user" -->
 
@@ -47,7 +49,8 @@
             android:padding="12dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/edit_background"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:fontFamily="@font/poppins_regular"/>
 
         <!--            android:drawableStart="@drawable/ic_lock" -->
         <!--            android:drawableStart="@drawable/edittext_background" -->
@@ -63,16 +66,18 @@
             android:layout_marginTop="12dp"
             android:background="@drawable/edit_background"
             android:singleLine="true"
+            android:fontFamily="@font/poppins_regular"
             />
+
+        <!--            android:drawableStart="@drawable/ic_lock" -->
+        <!--            android:drawableStart="@drawable/edittext_background" -->
 
         <CheckBox
             android:id="@+id/showPasswordCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Show Password"
-            android:padding="5dp"/>
-        <!--            android:drawableStart="@drawable/ic_lock" -->
-        <!--            android:drawableStart="@drawable/edittext_background" -->
+            android:padding="5dp"
+            android:text="Show Password" />
 
         <CheckBox
             android:layout_width="wrap_content"
