@@ -43,15 +43,25 @@ public class main_act extends AppCompatActivity {
     private SharedPreferences preferences ;
 
     @Override
-    public void onStart(){
-        super.onStart();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        start_act dialogFragment = new start_act();
+        dialogFragment.show(getSupportFragmentManager(), "StartDialog");
+        recyclerView = findViewById(R.id.appointmentsView);
+        list = new ArrayList<>();
+        owner_adapt = new ownerAdapt(list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(owner_adapt);
+        loadServices();
+        btn1 = findViewById(R.id.appoint1);
+        btn2 = findViewById(R.id.appoint2);
         FirebaseUser user = myAuth.getCurrentUser();
-        if(getSharedPreferences("MyPrefs",MODE_PRIVATE) == null){
-            return;
-        }
-        preferences = getSharedPreferences("MyPrefs",MODE_PRIVATE);
-
-        if(preferences.getBoolean("isLoggedIn",false)){
+        if(user != null) {
+            Intent intent = new Intent(this, OwnerDashboardAct.class); // Replace with actual target
+            startActivity(intent);
+            finish();
+        }else {
             String uid = user.getUid();
             db.collection("users").document(uid).get().addOnSuccessListener(documentSnapshot -> {
                 if(documentSnapshot.exists()) {
@@ -71,22 +81,6 @@ public class main_act extends AppCompatActivity {
                 }
             });
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        start_act dialogFragment = new start_act();
-        dialogFragment.show(getSupportFragmentManager(), "StartDialog");
-        recyclerView = findViewById(R.id.appointmentsView);
-        list = new ArrayList<>();
-        owner_adapt = new ownerAdapt(list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(owner_adapt);
-        loadServices();
-        btn1 = findViewById(R.id.appoint1);
-        btn2 = findViewById(R.id.appoint2);
     }
     public void onMenuClick2(View view) {
         Intent intent = new Intent(view.getContext(), settingAct.class);
