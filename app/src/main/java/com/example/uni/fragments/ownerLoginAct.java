@@ -31,6 +31,12 @@ public class ownerLoginAct extends DialogFragment {
 
         Button btn= view.findViewById(R.id.btnLogin);
         EditText passwordEditText = view.findViewById(R.id.pass);
+        Button signup = view.findViewById(R.id.num_sign);
+
+        signup.setOnClickListener( v -> {
+            new ownerRegisterAct().show(getParentFragmentManager(), "RegisterDialog");
+        });
+
         CheckBox showPasswordCheckBox = view.findViewById(R.id.showPasswordCheckBox);
         btn.setOnClickListener(v -> {
             loginUser(view);
