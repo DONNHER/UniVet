@@ -67,6 +67,7 @@ public class packageAdapt  extends RecyclerView.Adapter<packageAdapt.manageServi
         }else {
             holder.itemView.setOnClickListener(view -> {
                 Intent intent = new Intent( fragmentActivity, groomAppointments.class);
+                intent.putExtra("price",item.getPrice());
                 fragmentActivity.startActivity(intent);
                 fragmentActivity.finish();
             });

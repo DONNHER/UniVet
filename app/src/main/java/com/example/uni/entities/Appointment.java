@@ -6,7 +6,7 @@ public class Appointment {
     private  String email;
     private String appointmentDate;
     private String appointmentTime;
-    private String status;
+    private String status = "Pending";;
     private  String paymentMethod = "COD";
     private double totalCost = 0;
     private String createdAt;
@@ -24,6 +24,7 @@ public class Appointment {
         this.appointmentDate = appointmentDate;
         this.appointmentTime = appointmentTime;
         this.patientName =name;
+
     }
 
     public String getAppointmentDate() { return appointmentDate; }
