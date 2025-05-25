@@ -167,7 +167,7 @@ public class groomAppointments extends AppCompatActivity {
             appointment.setUserID(myAuth.getCurrentUser().getUid());
             appointment.setServiceID(id);
             Map<String, Object> data = new HashMap<>();
-            data.put("id", appointment.getId());
+            data.put("id", docId);
             data.put("status", appointment.getStatus());
             data.put("userID", appointment.getUserID());
             data.put("serviceID", appointment.getServiceID());
@@ -186,7 +186,11 @@ public class groomAppointments extends AppCompatActivity {
                         Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
 
-            db.collection("users").document("user").collection("account").document(myAuth.getCurrentUser().getUid()).collection("appointments").add(data)
+
+            db.collection("users").document("user")
+                    .collection("account").document(appointment.getUserID())
+                    .collection("appointments").document(docId)
+                    .set(data)
                     .addOnSuccessListener(aVoid -> {
                         Toast.makeText(this, "Appointment scheduled successfully!", Toast.LENGTH_SHORT).show();
                         finish(); // Close activity after scheduling
@@ -194,6 +198,7 @@ public class groomAppointments extends AppCompatActivity {
                     .addOnFailureListener(e -> {
                         Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
+
         });
     }
 }
