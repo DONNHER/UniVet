@@ -74,6 +74,7 @@ public class main_act extends AppCompatActivity {
         dialogFragment.show(getSupportFragmentManager(), "StartDialog");
         recyclerView = findViewById(R.id.appointmentsView);
         list = new ArrayList<>();
+        owner_adapt = new ownerAdapt(list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(owner_adapt);
         loadServices();
