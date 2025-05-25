@@ -66,6 +66,14 @@ public class appAdapt extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if(fragmentManager.getClass().getSimpleName().equals("TechnicianDashB")){
             holder.itemView.setOnClickListener(v -> {
                 Intent i = new Intent(fragmentManager, Appointment_manage.class);
+                i.putExtra("appointmentId", sectionItem.getAppointment().getId());
+                i.putExtra("date", sectionItem.getAppointment().getAppointmentDate());
+                i.putExtra("time", sectionItem.getAppointment().getAppointmentTime());
+                i.putExtra("totalCost", sectionItem.getAppointment().getTotalCost());
+                i.putExtra("name", sectionItem.getAppointment().getPatientName());
+                i.putExtra("services", sectionItem.getAppointment().getServiceID());
+                i.putExtra("status", sectionItem.getAppointment().getStatus());
+                i.putExtra("userID", sectionItem.getAppointment().getUserID());
                 fragmentManager.startActivity(i);
             });
         }else {

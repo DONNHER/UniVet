@@ -17,4 +17,11 @@ public class SectionItem {
         this.type = TYPE_ITEM;
         this.appointment = appointment;
     }
+    public Appointment getAppointment() {
+        return this.appointment;
+    }
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
+    }
+
 }

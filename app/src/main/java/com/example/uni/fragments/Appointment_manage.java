@@ -56,5 +56,14 @@ public class Appointment_manage extends AppCompatActivity {
                 .addOnFailureListener(e ->
                         Toast.makeText(this, "Failed to update: " + e.getMessage(), Toast.LENGTH_SHORT).show()
                 );
+        db.collection("users").document("user").collection("account").document(myAuth.getCurrentUser().getUid()).collection("appointments")
+                .update("status", status)
+                .addOnSuccessListener(unused -> {
+                    Toast.makeText(this, "Appointment " + status, Toast.LENGTH_SHORT).show();
+                    finish();
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Failed to update: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                );
     }
 }
