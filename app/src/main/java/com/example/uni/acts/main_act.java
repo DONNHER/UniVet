@@ -58,10 +58,6 @@ public class main_act extends AppCompatActivity {
         btn2 = findViewById(R.id.appoint2);
         FirebaseUser user = myAuth.getCurrentUser();
         if(user != null) {
-            Intent intent = new Intent(this, OwnerDashboardAct.class); // Replace with actual target
-            startActivity(intent);
-            finish();
-        }else {
             String uid = user.getUid();
             db.collection("users").document(uid).get().addOnSuccessListener(documentSnapshot -> {
                 if(documentSnapshot.exists()) {
@@ -80,6 +76,10 @@ public class main_act extends AppCompatActivity {
                     }
                 }
             });
+        }else {
+            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
+            startActivity(intent);
+            finish();
         }
     }
     public void onMenuClick2(View view) {
@@ -87,7 +87,6 @@ public class main_act extends AppCompatActivity {
         view.getContext().startActivity(intent);
 
     }
-    @SuppressLint("NotifyDataSetChanged")
     private void loadServices() {
         db.collection("serviceType").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -95,14 +94,20 @@ public class main_act extends AppCompatActivity {
                 for (QueryDocumentSnapshot d : task.getResult()) {
                     ServiceType serviceType = d.toObject(ServiceType.class);
                     list.add(serviceType);
-                    owner_adapt.notifyDataSetChanged();
                 }
-                owner_adapt = new ownerAdapt(list);
+                owner_adapt.notifyDataSetChanged();
             } else {
-                Toast.makeText(getApplicationContext(), "error:2", Toast.LENGTH_SHORT).show();
+                Exception e = task.getException();
+                if (e != null) {
+                    e.printStackTrace(); // Logs the full error to Logcat
+                    Toast.makeText(getApplicationContext(), "Firestore Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Unknown Firestore error", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
+
     public void onLogClick(View view) {
         Intent intent = new Intent(this, start_act.class); // Replace with actual target
         startActivity(intent);
