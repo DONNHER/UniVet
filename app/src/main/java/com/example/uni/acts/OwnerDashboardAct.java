@@ -37,11 +37,7 @@ public class OwnerDashboardAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_d_board);
-        recyclerView = findViewById(R.id.appointmentsView);
-        list = new ArrayList<>();
         owner_adapt = new ownerAdapt(list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(owner_adapt);
         loadServices();
         btn1 = findViewById(R.id.appoint1);
         btn2 = findViewById(R.id.appoint2);

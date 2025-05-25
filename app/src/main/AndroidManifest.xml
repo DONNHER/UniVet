@@ -37,6 +37,11 @@
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
     </activity>
         <activity
+            android:name=".fragments.groomAppointments"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        </activity>
+        <activity
             android:name=".acts.manager_inventory"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">

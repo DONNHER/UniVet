@@ -2,6 +2,7 @@ package com.example.uni.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -22,12 +24,13 @@ import java.util.ArrayList;
 
 public class UserServiceAdapt extends   RecyclerView.Adapter<UserServiceAdapt.ViewHolder> {
     private ArrayList<Service> appointments;
-
+    private FragmentActivity fragmentActivity;
     private Context context;
 
     private FirebaseAuth myAuth= FirebaseAuth.getInstance();
-    public UserServiceAdapt(ArrayList<Service> items){
+    public UserServiceAdapt(ArrayList<Service> items,FragmentActivity fragmentActivity){
         this.appointments = items;
+        this.fragmentActivity = fragmentActivity;
     }
 
 
@@ -48,8 +51,8 @@ public class UserServiceAdapt extends   RecyclerView.Adapter<UserServiceAdapt.Vi
                 .load(item.getImage())
                 .into(holder.pic);
         holder.itemView.setOnClickListener(view -> {
-            groomAppointments dialogFragment = new groomAppointments(item.getId().toString(),item.getName(),item.getDescription(),item.getPrice());
-            dialogFragment.show(new TechHome().getFragment(), "appointmentDialog");
+            Intent intent = new Intent(fragmentActivity, groomAppointments.class);
+            fragmentActivity.startActivity(intent);
         });
     }
 

@@ -13,7 +13,7 @@
         android:layout_marginTop="8dp"
 
         android:layout_marginBottom="16dp"
-        android:src="@drawable/lo" />
+        android:src="@drawable/logo" />
 
 
     <!--            android:drawableStart="@drawable/ic_user" -->
