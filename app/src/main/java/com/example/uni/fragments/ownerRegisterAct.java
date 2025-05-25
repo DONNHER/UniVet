@@ -1,5 +1,6 @@
 package com.example.uni.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -44,6 +45,8 @@ public class ownerRegisterAct extends AppCompatActivity {
 
         login.setOnClickListener(v -> {
             // Launch Login Activity (you should implement this)
+            Intent intent = new Intent(this , ownerLoginAct.class);
+            startActivity(intent);
             finish(); // closes current activity
         });
 

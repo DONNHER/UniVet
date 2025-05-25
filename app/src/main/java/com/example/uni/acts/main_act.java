@@ -76,10 +76,6 @@ public class main_act extends AppCompatActivity {
                     }
                 }
             });
-        }else {
-            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-            startActivity(intent);
-            finish();
         }
     }
     public void onMenuClick2(View view) {
@@ -109,11 +105,11 @@ public class main_act extends AppCompatActivity {
     }
 
     public void onLogClick(View view) {
-        Intent intent = new Intent(this, start_act.class); // Replace with actual target
+        Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
         startActivity(intent);
     }
     public void onResClick(View view) {
-        Intent intent = new Intent(this, start_act.class); // Replace with actual target
+        Intent intent = new Intent(this, ownerRegisterAct.class); // Replace with actual target
         startActivity(intent);
     }
 
