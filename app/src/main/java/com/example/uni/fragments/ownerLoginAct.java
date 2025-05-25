@@ -11,12 +11,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 
 import com.example.uni.R;
 import com.example.uni.acts.OwnerDashboardAct;
+import com.example.uni.acts.TechServicePackages;
 import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -31,7 +33,7 @@ public class ownerLoginAct extends DialogFragment {
 
         Button btn= view.findViewById(R.id.btnLogin);
         EditText passwordEditText = view.findViewById(R.id.pass);
-        Button signup = view.findViewById(R.id.num_sign);
+        TextView signup = view.findViewById(R.id.num_sign);
 
         signup.setOnClickListener( v -> {
             new ownerRegisterAct().show(getParentFragmentManager(), "RegisterDialog");
