@@ -10,7 +10,7 @@ import com.example.uni.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Appointment_manage extends AppCompatActivity {
-    private String date, time, name, services, appointmentId, status;
+    private String date, time, name, services, appointmentId, status , userID;
     private double totalCost;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -28,6 +28,8 @@ public class Appointment_manage extends AppCompatActivity {
             name = getIntent().getStringExtra("name");
             services = getIntent().getStringExtra("services");
             status = getIntent().getStringExtra("status");
+            userID = getIntent().getStringExtra("userID");
+
         }
 
         TextView Date = findViewById(R.id.Date);
@@ -45,7 +47,7 @@ public class Appointment_manage extends AppCompatActivity {
     }
 
     private void updateStatus(String status) {
-        Toast.makeText(this, "Appointment " + appointmentId, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Appointment " + userID, Toast.LENGTH_SHORT).show();
 
         db.collection("Appointments").document(appointmentId)
                 .update("status", status)
@@ -56,8 +58,8 @@ public class Appointment_manage extends AppCompatActivity {
                 .addOnFailureListener(e ->
                         Toast.makeText(this, "Failed to update: " + e.getMessage(), Toast.LENGTH_SHORT).show()
                 );
-        db.collection("users").document("user").collection("account").document(myAuth.getCurrentUser().getUid()).collection("appointments")
-                .update("status", status)
+        db.collection("users").document("user").collection("account").document(userID).collection("appointments")
+                .document(appointmentId).update("status", status)
                 .addOnSuccessListener(unused -> {
                     Toast.makeText(this, "Appointment " + status, Toast.LENGTH_SHORT).show();
                     finish();

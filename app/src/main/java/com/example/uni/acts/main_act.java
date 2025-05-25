@@ -119,10 +119,12 @@ public class main_act extends AppCompatActivity {
     }
 
     public void onLogClick(View view) {
-        startActivity(new Intent(this, ownerLoginAct.class));
+        start_act menu = new start_act();
+        menu.show(getSupportFragmentManager(), "MenuDialog");
     }
 
     public void onResClick(View view) {
-        startActivity(new Intent(this, ownerRegisterAct.class));
+        start_act menu = new start_act();
+        menu.show(getSupportFragmentManager(), "MenuDialog");
     }
 }
