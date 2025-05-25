@@ -63,31 +63,60 @@ public class appAdapt extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         SectionItem sectionItem = sectionItems.get(position);
-        if(fragmentManager.getClass().getSimpleName().equals("TechnicianDashB")){
-            holder.itemView.setOnClickListener(v -> {
-                Intent i = new Intent(fragmentManager, Appointment_manage.class);
-                i.putExtra("appointmentId", sectionItem.getAppointment().getId());
-                i.putExtra("date", sectionItem.getAppointment().getAppointmentDate());
-                i.putExtra("time", sectionItem.getAppointment().getAppointmentTime());
-                i.putExtra("totalCost", sectionItem.getAppointment().getTotalCost());
-                i.putExtra("name", sectionItem.getAppointment().getPatientName());
-                i.putExtra("services", sectionItem.getAppointment().getServiceID());
-                i.putExtra("status", sectionItem.getAppointment().getStatus());
-                i.putExtra("userID", sectionItem.getAppointment().getUserID());
-                fragmentManager.startActivity(i);
-            });
-        }else {
-            holder.itemView.setOnClickListener(v -> {
-                Intent i = new Intent(fragmentManager, AppointmentDetails.class);
-                fragmentManager.startActivity(i);
-            });
+
+        // Handle clickability based on appointment status
+        if (holder instanceof AppointmentViewHolder) {
+            Appointment appointment = sectionItem.getAppointment();
+            if (appointment != null) {
+                boolean isConfirmed = "confirmed".equalsIgnoreCase(appointment.getStatus());
+
+                // Set clickable state
+                holder.itemView.setClickable(!isConfirmed);
+                holder.itemView.setFocusable(!isConfirmed);
+
+                // Visual feedback for non-clickable items
+                if (isConfirmed) {
+                    holder.itemView.setAlpha(0.7f);  // Make slightly transparent
+                } else {
+                    holder.itemView.setAlpha(1.0f);  // Full opacity for clickable items
+                }
+            }
         }
+
+        // Set click listeners only for clickable items
+        if (!(holder instanceof AppointmentViewHolder) ||
+                (sectionItem.getAppointment() != null &&
+                        !"confirmed".equalsIgnoreCase(sectionItem.getAppointment().getStatus()))) {
+
+            if(fragmentManager.getClass().getSimpleName().equals("TechnicianDashB")) {
+                holder.itemView.setOnClickListener(v -> {
+                    if (sectionItem.getAppointment() != null) {
+                        Intent i = new Intent(fragmentManager, Appointment_manage.class);
+                        i.putExtra("appointmentId", sectionItem.getAppointment().getId());
+                        i.putExtra("date", sectionItem.getAppointment().getAppointmentDate());
+                        i.putExtra("time", sectionItem.getAppointment().getAppointmentTime());
+                        i.putExtra("totalCost", sectionItem.getAppointment().getTotalCost());
+                        i.putExtra("name", sectionItem.getAppointment().getPatientName());
+                        i.putExtra("services", sectionItem.getAppointment().getServiceID());
+                        i.putExtra("status", sectionItem.getAppointment().getStatus());
+                        i.putExtra("userID", sectionItem.getAppointment().getUserID());
+                        fragmentManager.startActivity(i);
+                    }
+                });
+            } else {
+                holder.itemView.setOnClickListener(v -> {
+                    Intent i = new Intent(fragmentManager, AppointmentDetails.class);
+                    fragmentManager.startActivity(i);
+                });
+            }
+        }
+
+        // Bind the data
         if (holder instanceof HeaderViewHolder) {
             ((HeaderViewHolder) holder).bind(sectionItem.date);
         } else if (holder instanceof AppointmentViewHolder) {
             ((AppointmentViewHolder) holder).bind(sectionItem.appointment);
         }
-
     }
 
     @Override
