@@ -40,8 +40,6 @@ public class OwnerDashboardAct extends AppCompatActivity {
         Adapt = new appAdapt();
         appointmentsView.setLayoutManager(new LinearLayoutManager(this));
         appointmentsView.setAdapter(Adapt);
-        TextView name = findViewById(R.id.name);
-        name.setText("Hi, " + myAuth.getCurrentUser().getDisplayName());
         btn2.setOnClickListener(v ->filter("Pending"));
         btn1.setOnClickListener(v ->filter("Confirmed"));
         filter("Pending");
@@ -49,7 +47,6 @@ public class OwnerDashboardAct extends AppCompatActivity {
     }
 
     private void appointments(){
-        Toast.makeText(this,myAuth.getCurrentUser().getUid(),Toast.LENGTH_SHORT).show();
         db.collection("users").document("user").collection("account").document(myAuth.getCurrentUser().getUid()).collection("appointments").
                 get().addOnSuccessListener(queryDocumentSnapshots  -> {
             appointments.clear();

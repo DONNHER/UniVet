@@ -42,8 +42,6 @@ public class TechnicianDashB extends AppCompatActivity {
         Adapt = new appAdapt();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(Adapt);
-        TextView name = findViewById(R.id.name);
-        name.setText("Hi, " + myAuth.getCurrentUser().getDisplayName());
         filter("Confirmed");
         btn2.setOnClickListener(v ->filter("Pending"));
         btn1.setOnClickListener(v ->filter("Confirmed"));

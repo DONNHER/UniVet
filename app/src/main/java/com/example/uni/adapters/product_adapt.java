@@ -42,9 +42,7 @@ public class product_adapt  extends   RecyclerView.Adapter<product_adapt.ViewHol
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Item item = items.get(position);
-        holder.price.setText(""+ item.getPrice());
         holder.name.setText(item.getName());
-        holder.slots.setText(item.getSlot()+" units");
         Glide.with(holder.pic.getContext())
                 .load(item.getImage())
                 .into(holder.pic);
@@ -60,16 +58,12 @@ public class product_adapt  extends   RecyclerView.Adapter<product_adapt.ViewHol
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView price;
         public ImageView pic;
         public TextView name;
-        public TextView slots;
         public ViewHolder(@NonNull View itemView){
             super(itemView);
-            price = itemView.findViewById(R.id.price2);
             pic = itemView.findViewById(R.id.image2);
             name = itemView.findViewById(R.id.service_name1);
-            slots = itemView.findViewById(R.id.slots);
         }
     }
 }

@@ -9,7 +9,7 @@ import com.example.uni.R;
 
 public class AppointmentDetails extends AppCompatActivity {
     private String date, time, name, services;
-    private double totalCost;
+    private String totalCost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,7 @@ public class AppointmentDetails extends AppCompatActivity {
         if (getIntent() != null) {
             date = getIntent().getStringExtra("date");
             time = getIntent().getStringExtra("time");
-            totalCost = getIntent().getDoubleExtra("totalCost", 0.0);
+            totalCost = getIntent().getStringExtra("price");
             name = getIntent().getStringExtra("name");
             services = getIntent().getStringExtra("services");
         }
@@ -34,7 +34,7 @@ public class AppointmentDetails extends AppCompatActivity {
 
         Date.setText(date);
         Time.setText(time);
-        tCost.setText(String.format("%.2f", totalCost));
+        tCost.setText(totalCost);
         Name.setText(name);
         service.setText(services);
     }

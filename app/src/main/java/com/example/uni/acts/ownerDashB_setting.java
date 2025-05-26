@@ -31,21 +31,13 @@ public class ownerDashB_setting extends AppCompatActivity {
 
         // Load Main UI for the logged-in user
         setContentView(R.layout.setting_act);
-        Button btnGetStarted = findViewById(R.id.btn_edit_profile);
         FirebaseUser user = myAuth.getCurrentUser();
         if(user == null) {
             Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
             startActivity(intent);
             finish();
         }
-        // Set the action for the "Get Started" button
-        btnGetStarted.setOnClickListener(v -> {
-            // Action to perform when "Get Started" is clicked
-            // Redirect to Login or next activity, for example
-            Intent intent = new Intent(ownerDashB_setting.this, ownerAct.class);
-            startActivity(intent);
-            finish();
-        });
+        // Set the action for the "Get Started" butto
     }
 
     private void initializeServices() {

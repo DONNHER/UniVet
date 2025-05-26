@@ -61,13 +61,6 @@
         <!--            android:drawableStart="@drawable/ic_lock" -->
         <!--            android:drawableStart="@drawable/edittext_background" -->
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
-            android:layout_marginBottom="0dp"
-            android:text="I accept Privacy Policy &amp; Term of Use" />
-
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
@@ -77,26 +70,9 @@
             android:textColor="@android:color/white"
             android:layout_marginTop="16dp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="- OR -"
-            android:gravity="center"
-            android:layout_marginTop="12dp" />
-
-        <Button
-            android:text="Sign Up with Google"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
         <!--            android:drawableStart="@drawable/ic_google" -->
 
 
-        <Button
-            android:text="Sign Up with Facebook"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
         <!--            android:drawableStart="@drawable/ic_apple" -->
 
         <GridLayout
@@ -120,7 +96,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:text=" Sign up"
-                android:onClick="onResClick" />
+                android:onClick="onResClick"
+                android:textColor="@android:color/holo_blue_light"/>
 
         </GridLayout>
     </LinearLayout>

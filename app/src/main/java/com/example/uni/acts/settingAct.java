@@ -1,131 +1,130 @@
 package com.example.uni.acts;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.*;
+import android.provider.MediaStore;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.uni.R;
 import com.example.uni.fragments.ownerLoginAct;
+import com.example.uni.helper.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-//import com.example.uni.management.SessionManager;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class settingAct extends AppCompatActivity {
-    private ownerLoginAct ownerLogin;
-    private final FirebaseAuth myAuth= FirebaseAuth.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseAuth myAuth = FirebaseAuth.getInstance();
+    private ActivityResultLauncher<Intent> galleryLauncher;
+    private Uri selectedImageUri;
+    private ImageView imageView, edit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//
-//        if (!isSessionActive()) {
-//            // Redirect to Login if session is not found
-//            Intent intent = new Intent(this, ownerLoginAct.class);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            startActivity(intent);
-//            finish();
-//            return; // Prevent further execution
-//        }
-        FirebaseUser user = myAuth.getCurrentUser();
-        if(user == null) {
-            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-            startActivity(intent);
+        setContentView(R.layout.setting_act);
+
+        imageView = findViewById(R.id.profile_image);
+        edit = findViewById(R.id.edit);
+        Button logout= findViewById(R.id.logout);
+        logout.setOnClickListener(v->{
+            myAuth.signOut();
+            startActivity(new Intent(this, main_act.class));
             finish();
+        });
+
+        FirebaseUser user = myAuth.getCurrentUser();
+        if (user == null) {
+            startActivity(new Intent(this, ownerLoginAct.class));
+            finish();
+            return;
         }
 
-        // Load Main UI for the logged-in user
-        setContentView(R.layout.setting_act);
-        Button btnGetStarted = findViewById(R.id.btn_edit_profile);
+        // Load existing image from Firestore
+        loadUserProfileImage();
+        // Register gallery launcher
+        galleryLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                        selectedImageUri = result.getData().getData();
+                        imageView.setImageURI(selectedImageUri);  // Show the image
+                        Toast.makeText(this, "Image selected, please wait for saving.", Toast.LENGTH_SHORT).show();
+                        uploadImageToFirebase(selectedImageUri);  // Upload and save to Firestore
+                    }
+                }
+        );
 
-//         Set the action for the "Get Started" button
-        btnGetStarted.setOnClickListener(v -> {
-            // Action to perform when "Get Started" is clicked
-            // Redirect to Login or next activity, for example
-            Intent intent = new Intent(settingAct.this, ownerAct.class);
-            startActivity(intent);
+        // When user clicks edit icon
+        edit.setOnClickListener(v -> openGallery());
+    }
+
+    private void loadUserProfileImage() {
+        String uid = myAuth.getCurrentUser().getUid();
+        DocumentReference docRef = db.collection("users").document("user").collection("account").document(uid);
+
+        docRef.get().addOnSuccessListener(snapshot -> {
+            if (snapshot.exists()) {
+                String imageUrl = snapshot.getString("image");
+                if (imageUrl != null && !imageUrl.isEmpty()) {
+                    Glide.with(this).load(imageUrl).into(imageView);
+                }
+            }
+        }).addOnFailureListener(e -> {
+            Toast.makeText(this, "Failed to load image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         });
     }
 
-    private void initializeServices() {
-
-//        com.univet.service.PetService petService = new com.univet.service.PetService(dbHelper);
-//        com.univet.service.OwnerService ownerService = new com.univet.service.OwnerService(dbHelper);
-//        com.univet.service.ServiceService serviceService = new com.univet.service.ServiceService(dbHelper);
-//        com.univet.service.AppointmentService appointmentService = new com.univet.service.AppointmentService(dbHelper);
-//
-//        // Initialize SessionManager
-//        SessionManager.initialize(petService, ownerService, serviceService, appointmentService);
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");
+        galleryLauncher.launch(intent);
     }
 
+    private void uploadImageToFirebase(Uri imageUri) {
+        String fileName = "profile_" + System.currentTimeMillis() + ".jpg";
 
-    // Check if a session exists
-    private boolean isSessionActive() {
-        SharedPreferences sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
-        return sharedPreferences.getBoolean("isLoggedIn", false);
+        Firebase.upload(this, imageUri, fileName, new Firebase.UploadCallback() {
+            @Override
+            public void onSuccess(String imageUrl) {
+                String uid = myAuth.getCurrentUser().getUid();
+                DocumentReference docRef = db.collection("users").document("user").collection("account").document(uid);
+
+                Map<String, Object> update = new HashMap<>();
+                update.put("image", imageUrl);
+
+                docRef.set(update, SetOptions.merge())
+                        .addOnSuccessListener(aVoid -> {
+                            Toast.makeText(settingAct.this, "Image saved to Firestore.", Toast.LENGTH_SHORT).show();
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(settingAct.this, "Failed to save image: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        });
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                Toast.makeText(settingAct.this, "Upload failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    private void loadUserRoleUI() {
-        SharedPreferences sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
-        String role = sharedPreferences.getString("role", "");
-
-        Intent intent;
-        if ("admin".equals(role)) {
-            intent = new Intent(this, OwnerDashboardAct.class);
-//        else if ("technician".equals(role)) {
-//            intent = new Intent(this, TechnicianDashboardActivity.class);
-//        } else {
-//            intent = new Intent(this, OwnerDashboardActivity.class);
-//        }
-            startActivity(intent);
-            finish(); // Close MainActivity after redirection
-
-        }
-    }
-    public void back(View view) {
+    public void back(android.view.View view) {
         finish();
     }
-//    public void logoutClick(View view) {
-//        ownerLogin.setLoggedIn(null);
-//        Intent intent = new Intent(this, main_act.class); // Replace with actual target
-//        startActivity(intent);
-//        finish();
-//    }
-    public void editProfileClick(View view) {
-        Intent intent = new Intent(this, ownerAct.class); // Replace with actual target
-        startActivity(intent);
-        finish();
-    }
-//    public void onProductClick(View view) {
-//        if(ownerLogin.isLoggedIn()==null){
-//            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-//            startActivity(intent);
-//            finish();
-//        }
-//        Intent intent = new Intent(this, productServiceAct.class); // Replace with actual target
-//        startActivity(intent);
-//        finish();
-    }
-//    public void onOtherClick(View view) {
-//        if(ownerLogin.isLoggedIn()==null){
-//            Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-//            startActivity(intent);
-//            finish();
-//        }
-//        Intent intent = new Intent(this, otherServiceAct.class); // Replace with actual target
-//        startActivity(intent);
-//        finish();
-//    }
-//    public void onLogClick(View view) {
-//        Intent intent = new Intent(this, ownerLoginAct.class); // Replace with actual target
-//        startActivity(intent);
-//        finish();
-//    }
-//    public void onResClick(View view) {
-//        Intent intent = new Intent(this, ownerRegisterAct.class); // Replace with actual target
-//        startActivity(intent);
-//        finish();
-//    }
-//}
+
+}

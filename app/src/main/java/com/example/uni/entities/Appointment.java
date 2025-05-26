@@ -15,15 +15,19 @@ public class Appointment {
     private String userID;
     private String serviceID;
     private String patientName;
+    private String price;
+    private String services;
 
 
     // Constructor
     public Appointment(){}
-    public Appointment(String Email, String appointmentDate,String appointmentTime,String name) {
+    public Appointment(String Email, String appointmentDate,String appointmentTime,String name,String price,String services) {
         email = Email;
         this.appointmentDate = appointmentDate;
         this.appointmentTime = appointmentTime;
         this.patientName =name;
+        this.price = price;
+        this.services = services;
 
     }
 
@@ -86,5 +90,21 @@ public class Appointment {
 
     public void setPatientName(String patientName) {
         this.patientName = patientName;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getServices() {
+        return services;
+    }
+
+    public void setServices(String services) {
+        this.services = services;
     }
 }

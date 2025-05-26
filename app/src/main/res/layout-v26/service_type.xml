@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/edit_background"
+    android:background="@drawable/border"
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical"
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:text="Description: "
                 android:justificationMode="inter_word"
-
+                
                 android:textSize="10sp" />
         </LinearLayout>
     </LinearLayout>

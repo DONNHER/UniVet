@@ -15,7 +15,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="16dp"
             android:contentDescription="@string/to"
-            android:src="@drawable/lo" />
+            android:src="@drawable/logo" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:background="@drawable/border"
+            android:background="@drawable/edit_background"
             android:singleLine="true" />
 
         <!--            android:drawableStart="@drawable/ic_user" -->
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:padding="12dp"
             android:layout_marginTop="12dp"
-            android:background="@drawable/border"
+            android:background="@drawable/edit_background"
             android:singleLine="true" />
 
         <!--            android:drawableStart="@drawable/ic_lock" -->
@@ -71,26 +71,9 @@
             android:textColor="@android:color/white"
             android:layout_marginTop="16dp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/or"
-            android:gravity="center"
-            android:layout_marginTop="12dp" />
-
-        <Button
-            android:text="@string/sign_up_with_google"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
         <!--            android:drawableStart="@drawable/ic_google" -->
 
 
-        <Button
-            android:text="@string/sign_up_with_facebook"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
         <!--            android:drawableStart="@drawable/ic_apple" -->
 
         <GridLayout

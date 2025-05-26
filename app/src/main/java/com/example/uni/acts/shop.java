@@ -39,7 +39,7 @@ public class shop extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.products);
+        setContentView(R.layout.shop);
         recyclerView = findViewById(R.id.Products_Recycler);
         list = new ArrayList<>();
         Adaptor = new product_adapt(list,this);

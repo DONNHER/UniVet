@@ -9,9 +9,10 @@ public class owner {
     private String email;
     private String phone;
     private String address;
-
+    private String image;
     private String password;
     // Constructor
+    public owner(){}
     public owner( String email, String password) {
         this.email = email;
         this.password = password;
@@ -89,5 +90,13 @@ public class owner {
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
                 '}';
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

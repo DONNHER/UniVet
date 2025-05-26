@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/admin"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
@@ -46,7 +47,7 @@
                         android:layout_gravity="right"
                         android:layout_marginEnd="12dp"
                         android:contentDescription="@string/dog_image"
-                        android:src="@drawable/lo" />
+                        android:src="@drawable/logo" />
 
                 </GridLayout>
 

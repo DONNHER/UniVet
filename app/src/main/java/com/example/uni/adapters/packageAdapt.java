@@ -34,7 +34,7 @@ import java.util.ArrayList;
 public class packageAdapt  extends RecyclerView.Adapter<packageAdapt.manageServiceTypeHolder> {
     private ArrayList<Service> appointments;
     private FragmentActivity fragmentActivity;
-    private final FirebaseAuth myAuth= FirebaseAuth.getInstance();
+    private  FirebaseAuth myAuth= FirebaseAuth.getInstance();
     @SuppressLint("NotifyDataSetChanged")
     public packageAdapt(ArrayList<Service> items,FragmentActivity activity){
         this.appointments = items;
@@ -63,10 +63,12 @@ public class packageAdapt  extends RecyclerView.Adapter<packageAdapt.manageServi
             holder.itemView.setOnClickListener(view -> {
                 Intent intent = new Intent(fragmentActivity, ownerLoginAct.class);
                 fragmentActivity.startActivity(intent);
+                fragmentActivity.finish();
              });
         }else {
             holder.itemView.setOnClickListener(view -> {
                 Intent intent = new Intent( fragmentActivity, groomAppointments.class);
+                intent.putExtra("services",item.getName());
                 intent.putExtra("price",item.getPrice());
                 fragmentActivity.startActivity(intent);
                 fragmentActivity.finish();

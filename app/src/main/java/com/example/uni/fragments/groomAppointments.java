@@ -32,6 +32,7 @@ public class groomAppointments extends AppCompatActivity {
 
     private String id;
     private String Service_name;
+    private String name;
     private String description;
     private double price;
 
@@ -46,6 +47,7 @@ public class groomAppointments extends AppCompatActivity {
         // Get service data from intent
         id = getIntent().getStringExtra("id");
         Service_name = getIntent().getStringExtra("name");
+        name = getIntent().getStringExtra("services");
         description = getIntent().getStringExtra("description");
         price = getIntent().getDoubleExtra("price", 0.0);
 
@@ -160,7 +162,7 @@ public class groomAppointments extends AppCompatActivity {
                     fullDate,
                     time,
                     patient
-            );
+                    ,String.valueOf(price),this.name);
 
             appointment.setId(docId);
             appointment.setStatus("Pending");
@@ -172,10 +174,12 @@ public class groomAppointments extends AppCompatActivity {
             data.put("userID", appointment.getUserID());
             data.put("serviceID", appointment.getServiceID());
             data.put("email", appointment.getServiceID());
+            data.put("price", String.valueOf(price));
             data.put("appointmentDate", appointment.getAppointmentDate());
             data.put("appointmentTime", appointment.getAppointmentTime());
             data.put("patientName", appointment.getPatientName());
             data.put("paymentMethod", appointment.getPaymentMethod());
+            data.put("services",name);
 
             db.collection("Appointments").document(docId).set(appointment)
                     .addOnSuccessListener(aVoid -> {

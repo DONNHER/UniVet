@@ -52,8 +52,8 @@ public class TechRegister extends DialogFragment {
                                 Map<String,Object> data = new HashMap<>();
                                 data.put("uid",user.getUid());
                                 data.put("username",user.getEmail());
-                                data.put("role","manager");
-                                db.collection("users").document(user.getUid()).set(data);
+                                data.put("role","technician");
+                                db.collection("users").document("technician").collection("technician").document(user.getUid()).set(data);
                                 Toast.makeText(getContext(), "Successfully Registered.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getContext(), ownerLoginAct.class);
                                 startActivity(intent);

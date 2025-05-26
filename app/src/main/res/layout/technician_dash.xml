@@ -105,68 +105,15 @@
             android:layout_marginBottom="24dp">
 
             <!-- Grooming -->
-            <LinearLayout
-
-                android:layout_width="9dp"
-                android:layout_height="120dp"
-                android:layout_columnWeight="1"
-                android:background="@drawable/border"
-                android:orientation="vertical"
-                android:padding="12dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="onServiceManageClick">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/user"
-                    android:layout_gravity="left"
-                    android:layout_marginTop="10dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:text="Total Visitors"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/poppins_light"/>
-            </LinearLayout>
 
             <!-- Boarding -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="120dp"
-                android:layout_columnWeight="1"
-                android:background="@drawable/border"
-                android:orientation="vertical"
-                android:padding="12dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="onProductManageClick">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/pawprint"
-                    android:layout_gravity="left"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:text="Total Pets"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/poppins_light"/>
-            </LinearLayout>
 
             <!-- Dog Walking -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="113dp"
                 android:layout_columnWeight="1"
-                android:background="@drawable/border"
+                android:background="@drawable/edit_background"
                 android:orientation="vertical"
                 android:padding="12dp"
                 android:clickable="true"
@@ -194,7 +141,7 @@
                 android:layout_width="0dp"
                 android:layout_height="113dp"
                 android:layout_columnWeight="1"
-                android:background="@drawable/border"
+                android:background="@drawable/edit_background"
 
                 android:orientation="vertical"
                 android:padding="12dp"

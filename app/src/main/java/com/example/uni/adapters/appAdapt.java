@@ -17,29 +17,33 @@ import com.example.uni.entities.Appointment;
 import com.example.uni.entities.SectionItem;
 import com.example.uni.fragments.AppointmentDetails;
 import com.example.uni.fragments.Appointment_manage;
-import com.example.uni.fragments.ownerLoginAct;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 public class appAdapt extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<SectionItem> sectionItems = new ArrayList<>();
     FragmentActivity fragmentManager;
     FragmentManager Manager;
-    private final FirebaseAuth myAuth= FirebaseAuth.getInstance();
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseAuth myAuth = FirebaseAuth.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     @SuppressLint("NotifyDataSetChanged")
-    public void setAppointments(Map<String, List<Appointment>> groupedAppointments, FragmentActivity fragmentManager,FragmentManager Manager) {
+    public void setAppointments(Map<String, List<Appointment>> groupedAppointments, FragmentActivity fragmentManager, FragmentManager Manager) {
         this.fragmentManager = fragmentManager;
+        this.Manager = Manager;
         sectionItems.clear();
+
         for (String date : groupedAppointments.keySet()) {
-            sectionItems.add(new SectionItem(date)); // Add date header
+            sectionItems.add(new SectionItem(date)); // Header
             for (Appointment appointment : groupedAppointments.get(date)) {
-                sectionItems.add(new SectionItem(appointment)); // Add appointments under that date
+                sectionItems.add(new SectionItem(appointment)); // Item
             }
         }
+
         notifyDataSetChanged();
     }
 
@@ -64,58 +68,59 @@ public class appAdapt extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         SectionItem sectionItem = sectionItems.get(position);
 
-        // Handle clickability based on appointment status
-        if (holder instanceof AppointmentViewHolder) {
-            Appointment appointment = sectionItem.getAppointment();
-            if (appointment != null) {
-                boolean isConfirmed = "confirmed".equalsIgnoreCase(appointment.getStatus());
-
-                // Set clickable state
-                holder.itemView.setClickable(!isConfirmed);
-                holder.itemView.setFocusable(!isConfirmed);
-
-                // Visual feedback for non-clickable items
-                if (isConfirmed) {
-                    holder.itemView.setAlpha(0.7f);  // Make slightly transparent
-                } else {
-                    holder.itemView.setAlpha(1.0f);  // Full opacity for clickable items
-                }
-            }
-        }
-
-        // Set click listeners only for clickable items
-        if (!(holder instanceof AppointmentViewHolder) ||
-                (sectionItem.getAppointment() != null &&
-                        !"confirmed".equalsIgnoreCase(sectionItem.getAppointment().getStatus()))) {
-
-            if(fragmentManager.getClass().getSimpleName().equals("TechnicianDashB")) {
-                holder.itemView.setOnClickListener(v -> {
-                    if (sectionItem.getAppointment() != null) {
-                        Intent i = new Intent(fragmentManager, Appointment_manage.class);
-                        i.putExtra("appointmentId", sectionItem.getAppointment().getId());
-                        i.putExtra("date", sectionItem.getAppointment().getAppointmentDate());
-                        i.putExtra("time", sectionItem.getAppointment().getAppointmentTime());
-                        i.putExtra("totalCost", sectionItem.getAppointment().getTotalCost());
-                        i.putExtra("name", sectionItem.getAppointment().getPatientName());
-                        i.putExtra("services", sectionItem.getAppointment().getServiceID());
-                        i.putExtra("status", sectionItem.getAppointment().getStatus());
-                        i.putExtra("userID", sectionItem.getAppointment().getUserID());
-                        fragmentManager.startActivity(i);
-                    }
-                });
-            } else {
-                holder.itemView.setOnClickListener(v -> {
-                    Intent i = new Intent(fragmentManager, AppointmentDetails.class);
-                    fragmentManager.startActivity(i);
-                });
-            }
-        }
-
-        // Bind the data
         if (holder instanceof HeaderViewHolder) {
             ((HeaderViewHolder) holder).bind(sectionItem.date);
-        } else if (holder instanceof AppointmentViewHolder) {
-            ((AppointmentViewHolder) holder).bind(sectionItem.appointment);
+            return;
+        }
+
+        Appointment appointment = sectionItem.getAppointment();
+        AppointmentViewHolder appHolder = (AppointmentViewHolder) holder;
+        appHolder.bind(appointment);
+
+        String currentActivity = fragmentManager.getClass().getSimpleName();
+        boolean isTechnician = currentActivity.equals("TechnicianDashB");
+        boolean isOwner = currentActivity.equals("OwnerDashboardAct");
+        boolean isConfirmed = "confirmed".equalsIgnoreCase(appointment.getStatus());
+
+        // Default state
+        holder.itemView.setAlpha(1.0f);
+        holder.itemView.setClickable(true);
+        holder.itemView.setFocusable(true);
+
+        // Handle click restrictions
+        if (isTechnician && isConfirmed) {
+            // Disable click for confirmed appointments in Technician view
+            holder.itemView.setAlpha(0.6f);
+            holder.itemView.setClickable(false);
+            holder.itemView.setFocusable(false);
+            holder.itemView.setOnClickListener(null);
+        } else {
+            // Owner or Technician (non-confirmed) can click
+            holder.itemView.setOnClickListener(v -> {
+                Intent intent;
+                if (isOwner) {
+                    intent = new Intent(fragmentManager, AppointmentDetails.class);
+                    intent.putExtra("appointmentId", appointment.getId());
+                    intent.putExtra("date", appointment.getAppointmentDate());
+                    intent.putExtra("time", appointment.getAppointmentTime());
+                    intent.putExtra("price", appointment.getPrice());
+                    intent.putExtra("name", appointment.getPatientName());
+                    intent.putExtra("services", appointment.getServices());
+                } else {
+                    // Technician view (allowed only if not confirmed)
+                    intent = new Intent(fragmentManager, Appointment_manage.class);
+                    intent.putExtra("appointmentId", appointment.getId());
+                    intent.putExtra("date", appointment.getAppointmentDate());
+                    intent.putExtra("time", appointment.getAppointmentTime());
+                    intent.putExtra("price", appointment.getPrice());
+                    intent.putExtra("name", appointment.getPatientName());
+                    intent.putExtra("services", appointment.getServiceID());
+                }
+
+                intent.putExtra("status", appointment.getStatus());
+                intent.putExtra("userID", appointment.getUserID());
+                fragmentManager.startActivity(intent);
+            });
         }
     }
 
@@ -126,13 +131,14 @@ public class appAdapt extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     static class HeaderViewHolder extends RecyclerView.ViewHolder {
         TextView dateText;
+
         public HeaderViewHolder(View itemView) {
             super(itemView);
             dateText = itemView.findViewById(R.id.dateText);
         }
 
         public void bind(String date) {
-            dateText.setText(date); // Set the date for the header
+            dateText.setText(date);
         }
     }
 

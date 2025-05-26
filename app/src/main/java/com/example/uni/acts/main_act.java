@@ -32,8 +32,6 @@ public class main_act extends AppCompatActivity {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth myAuth = FirebaseAuth.getInstance();
 
-    // UI
-    private Button btn1, btn2;
     private RecyclerView recyclerView;
 
     // Data
@@ -49,13 +47,11 @@ public class main_act extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Show welcome/start dialog
-        start_act dialogFragment = new start_act();
+        start_act dialogFragment = new start_act(this);
         dialogFragment.show(getSupportFragmentManager(), "StartDialog");
 
         // Initialize UI elements
         recyclerView = findViewById(R.id.appointmentsView);
-        btn1 = findViewById(R.id.appoint1);
-        btn2 = findViewById(R.id.appoint2);
 
         // Initialize adapter and list
         list = new ArrayList<>();
@@ -76,7 +72,7 @@ public class main_act extends AppCompatActivity {
                     if ("user".equals(role)) {
                         startActivity(new Intent(this, OwnerDashboardAct.class));
                         finish();
-                    } else if ("manager".equals(role)) {
+                    } else if ("technician".equals(role)) {
                         startActivity(new Intent(this, TechnicianDashB.class));
                         finish();
                     } else if ("admin".equals(role)) {
@@ -119,12 +115,12 @@ public class main_act extends AppCompatActivity {
     }
 
     public void onLogClick(View view) {
-        start_act menu = new start_act();
+        start_act menu = new start_act(this);
         menu.show(getSupportFragmentManager(), "MenuDialog");
     }
 
     public void onResClick(View view) {
-        start_act menu = new start_act();
+        start_act menu = new start_act(this);
         menu.show(getSupportFragmentManager(), "MenuDialog");
     }
 }

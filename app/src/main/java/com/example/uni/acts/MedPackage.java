@@ -17,6 +17,7 @@ import com.example.uni.entities.Service;
 import com.example.uni.fragments.addService;
 import com.example.uni.fragments.ownerLoginAct;
 import com.example.uni.fragments.ownerRegisterAct;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -27,6 +28,7 @@ public class MedPackage  extends AppCompatActivity {
     private ArrayList<Service> list;
     private packageAdapt Adaptor;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth myauth = FirebaseAuth.getInstance();
 
     @SuppressLint("SetTextI18n")
     @Override

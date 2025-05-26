@@ -11,7 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Appointment_manage extends AppCompatActivity {
     private String date, time, name, services, appointmentId, status , userID;
-    private double totalCost;
+    private String totalCost;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -24,7 +24,7 @@ public class Appointment_manage extends AppCompatActivity {
             appointmentId = getIntent().getStringExtra("appointmentId");
             date = getIntent().getStringExtra("date");
             time = getIntent().getStringExtra("time");
-            totalCost = getIntent().getDoubleExtra("totalCost", 0.0);
+            totalCost = getIntent().getStringExtra("price");
             name = getIntent().getStringExtra("name");
             services = getIntent().getStringExtra("services");
             status = getIntent().getStringExtra("status");
@@ -39,7 +39,7 @@ public class Appointment_manage extends AppCompatActivity {
 
         Date.setText(date);
         Time.setText(time);
-        tCost.setText(String.format("%.2f", totalCost));
+        tCost.setText(totalCost);
         service.setText(services);
 
         findViewById(R.id.confirm).setOnClickListener(v -> updateStatus("Confirmed"));
@@ -47,7 +47,6 @@ public class Appointment_manage extends AppCompatActivity {
     }
 
     private void updateStatus(String status) {
-        Toast.makeText(this, "Appointment " + userID, Toast.LENGTH_SHORT).show();
 
         db.collection("Appointments").document(appointmentId)
                 .update("status", status)

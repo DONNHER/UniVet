@@ -15,16 +15,19 @@ import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.example.uni.R;
 
 public class start_act extends DialogFragment {
     private TextView costumer;
     private TextView manager;
-    private TextView admin;
     private TextView guest;
-
+    FragmentActivity fragmentActivity;
     private String role;
+    public start_act(FragmentActivity fragmentActivity){
+        this.fragmentActivity= fragmentActivity;
+    }
 
 
 
@@ -37,21 +40,18 @@ public class start_act extends DialogFragment {
 
         costumer = view.findViewById(R.id.costumer);
         manager = view.findViewById(R.id.manager);
-        admin = view.findViewById(R.id.admin);
 
         guest = view.findViewById(R.id.guest);
 
         // Set the action for the "Get Started" button
         costumer.setOnClickListener(v -> select(costumer));
         manager.setOnClickListener(v -> select(manager));
-        admin.setOnClickListener(v -> select(admin));
-        guest.setOnClickListener(v -> select(guest));
+        guest.setOnClickListener(v -> dismiss());
 
         btnGetStarted.setOnClickListener(v -> {
-            Toast.makeText(getContext(),role, Toast.LENGTH_SHORT).show();
 
             if(role == null){
-                Toast.makeText(getContext(),"Please select a role", Toast.LENGTH_SHORT).show();
+                Toast.makeText(fragmentActivity,"Please select a role", Toast.LENGTH_SHORT).show();
             } else if (role.equals("I'm a Costumer.")) {
                 Intent intent = new Intent(getContext(), ownerLoginAct.class);
                 startActivity(intent);
@@ -61,12 +61,6 @@ public class start_act extends DialogFragment {
                 dialogFragment.show(getParentFragmentManager(), "Dialog");
                 dismiss();
             }
-            else if (role.equals("I'm a Admin.")) {
-                AdminLogin dialogFragment = new AdminLogin();
-                dialogFragment.show(getParentFragmentManager(), "LogIn");
-                dismiss();
-            }
-            dismiss();
         });
         return view;
     }
@@ -74,7 +68,6 @@ public class start_act extends DialogFragment {
     private void select(TextView view){
         costumer.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.blue,null));
         manager.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.blue,null));
-        admin.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.blue,null));
         view.setBackground(ResourcesCompat.getDrawable(getResources(),R.drawable.edit_background,null));
         role = view.getText().toString();
     }
