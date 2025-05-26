@@ -6,7 +6,7 @@ public class Technician {
         private String email;
         private String phone;
         private String address;
-
+        private String image;
         private String password;
         // Constructor
         public Technician( String email, String password) {
@@ -79,4 +79,12 @@ public class Technician {
                     ", address='" + address + '\'' +
                     '}';
         }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        image = image;
+    }
 }

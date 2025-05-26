@@ -46,10 +46,7 @@ public class product_adapt  extends   RecyclerView.Adapter<product_adapt.ViewHol
         Glide.with(holder.pic.getContext())
                 .load(item.getImage())
                 .into(holder.pic);
-        holder.itemView.setOnClickListener(view -> {
-            product_management dialogFragment = new product_management();
-            dialogFragment.show(fragmentActivity.getSupportFragmentManager(), "AppointmentDialog");
-        });
+
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.uni.R;
 import com.example.uni.fragments.ownerLoginAct;
+import com.example.uni.fragments.start_act;
 import com.example.uni.helper.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,12 +41,16 @@ public class techProfile extends AppCompatActivity {
 
         imageView = findViewById(R.id.profile_image);
         edit = findViewById(R.id.edit);
-
+        Button logout = findViewById(R.id.logout);
+        logout.setOnClickListener(v->{
+            myAuth.signOut();
+            startActivity(new Intent(this, main_act.class));
+            finish();
+        });
         FirebaseUser user = myAuth.getCurrentUser();
         if (user == null) {
-            startActivity(new Intent(this, ownerLoginAct.class));
-            finish();
-            return;
+            start_act dialogFragment = new start_act(this);
+            dialogFragment.show(getSupportFragmentManager(), "StartDialog");
         }
 
         // Load existing image from Firestore
@@ -56,7 +62,10 @@ public class techProfile extends AppCompatActivity {
                 result -> {
                     if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
                         selectedImageUri = result.getData().getData();
-                        imageView.setImageURI(selectedImageUri);  // Show the image
+                        imageView.setImageURI(selectedImageUri);
+                        // Show the image
+                        Toast.makeText(this, "Image selected please wait " , Toast.LENGTH_SHORT).show();
+
                         uploadImageToFirebase(selectedImageUri);  // Upload and save to Firestore
                     }
                 }
@@ -68,7 +77,7 @@ public class techProfile extends AppCompatActivity {
 
     private void loadUserProfileImage() {
         String uid = myAuth.getCurrentUser().getUid();
-        DocumentReference docRef = db.collection("users").document("user").collection("account").document(uid);
+        DocumentReference docRef = db.collection("users").document("technician").collection("account").document(uid);
 
         docRef.get().addOnSuccessListener(snapshot -> {
             if (snapshot.exists()) {
@@ -95,7 +104,7 @@ public class techProfile extends AppCompatActivity {
             @Override
             public void onSuccess(String imageUrl) {
                 String uid = myAuth.getCurrentUser().getUid();
-                DocumentReference docRef = db.collection("users").document("user").collection("account").document(uid);
+                DocumentReference docRef = db.collection("users").document("technician").collection("account").document(uid);
 
                 Map<String, Object> update = new HashMap<>();
                 update.put("image", imageUrl);
