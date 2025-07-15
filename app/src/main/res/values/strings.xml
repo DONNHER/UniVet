@@ -48,6 +48,7 @@
     <string name="or">- OR -</string>
     <string name="log">Login</string>
     <string name="i_accept_privacy_policy_amp_term_of_use"><![CDATA[I accept Privacy Policy & Term of Use]]></string>
+    <string name="app_name_new">UniVet</string>
     <string name="show_password">Show Password</string>
     <string name="passw">Password</string>
     <string name="sign_up_with_facebook">Sign Up with Facebook</string>
