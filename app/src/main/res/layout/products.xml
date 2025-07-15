@@ -1,45 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/admin"
+    android:id="@+id/products_scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    >
-
-    <ImageView
-        android:layout_width="142dp"
-        android:layout_height="wrap_content"
-        android:layout_row="1"
-        android:layout_column="0"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center_vertical|start"
-        android:adjustViewBounds="true"
-        android:src="@drawable/b3">
-
-    </ImageView>
-
-    <ImageView
-        android:layout_width="164dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom|end"
-        android:adjustViewBounds="true"
-        android:src="@drawable/download">
-
-    </ImageView>
-
-    <Button
-        android:id="@+id/add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="55dp"
-        android:layout_marginLeft="135dp"
-        android:background="@drawable/blue"
-        android:onClick="add"
-        android:text="Edit Products"
-        android:layout_gravity="bottom"/>
+    android:background="@color/background_light"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,7 +14,202 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Top Greeting Section -->
+        <!-- Header Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="20dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/primary_button"
+                android:src="@drawable/sidemenu"
+                android:padding="8dp"
+                android:onClick="onside"
+                android:contentDescription="Menu" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pet Products"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_products_desc"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/logo"
+                android:contentDescription="@string/dog_image" />
+
+        </LinearLayout>
+
+        <!-- Search and Filter Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_background"
+            android:layout_marginBottom="20dp"
+            android:elevation="4dp">
+
+            <!-- Search Bar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <EditText
+                    android:id="@+id/search_products"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:hint="Search products..."
+                    android:background="@drawable/edit_background"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:drawableStart="@android:drawable/ic_menu_search"
+                    android:drawablePadding="12dp"
+                    android:textColorHint="@color/text_secondary"
+                    android:singleLine="true"
+                    android:autofillHints="search" />
+
+                <Button
+                    android:id="@+id/filter_button"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/accent_button"
+                    android:text="⚙"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <!-- Category Chips -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp">
+
+                    <Button
+                        android:id="@+id/category_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/primary_button"
+                        android:text="@string/all_categories"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp" />
+
+                    <Button
+                        android:id="@+id/category_food"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/edit_background"
+                        android:text="@string/food_nutrition"
+                        android:textColor="@color/text_primary"
+                        android:textSize="12sp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp" />
+
+                    <Button
+                        android:id="@+id/category_toys"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/edit_background"
+                        android:text="@string/toys_accessories"
+                        android:textColor="@color/text_primary"
+                        android:textSize="12sp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp" />
+
+                    <Button
+                        android:id="@+id/category_health"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/edit_background"
+                        android:text="@string/health_medicine"
+                        android:textColor="@color/text_primary"
+                        android:textSize="12sp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp" />
+
+                    <Button
+                        android:id="@+id/category_grooming"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:background="@drawable/edit_background"
+                        android:text="@string/grooming_supplies"
+                        android:textColor="@color/text_primary"
+                        android:textSize="12sp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp" />
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+        <!-- Featured Products Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/featured_products"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_marginBottom="12dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/featured_products_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:orientation="horizontal"
+                android:scrollbars="horizontal" />
+
+        </LinearLayout>
+
+        <!-- All Products Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,62 +217,47 @@
             android:gravity="center_vertical"
             android:layout_marginBottom="16dp">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:text="All Products"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary" />
 
-                <GridLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+            <Spinner
+                android:id="@+id/sort_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/edit_background"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
 
-                    <Button
-                        android:layout_width="47dp"
-                        android:layout_height="34dp"
-                        android:layout_row="0"
-                        android:layout_column="0"
-                        android:background="@drawable/sidemenu"
-                        android:onClick="onside"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="106dp"
-                        android:layout_height="60dp"
-                        android:layout_row="0"
-                        android:layout_column="3"
-                        android:layout_gravity="right"
-                        android:layout_marginEnd="12dp"
-                        android:contentDescription="@string/dog_image"
-                        android:src="@drawable/logo" />
-
-                </GridLayout>
-
-
-            </LinearLayout>
         </LinearLayout>
 
-        <!-- Search Bar -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Inventory"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textColorHint="#888888"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            tools:ignore="RtlSymmetry" />
-
+        <!-- Products Grid -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/Products_Recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_column="0"
             android:scrollbars="vertical"
-            />
+            android:clipToPadding="false"
+            android:paddingBottom="80dp" />
+
+        <!-- Admin Edit Button -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_edit_products"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:src="@drawable/add"
+            android:backgroundTint="@color/accent_orange"
+            android:onClick="add"
+            android:contentDescription="Edit Products"
+            android:visibility="gone" />
 
     </LinearLayout>
 
-</FrameLayout>
+</ScrollView>
