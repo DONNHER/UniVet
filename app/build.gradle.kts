@@ -76,4 +76,10 @@ dependencies {
 //    implementation("com.google.cloud:google-cloud-firestore:3.17.0")
     implementation ("com.squareup.okhttp3:okhttp:4.12.0")
     implementation ("com.google.code.gson:gson:2.10.1")
+    
+    // Google Sign-In
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
+    
+    // Firebase Storage for profile images
+    implementation("com.google.firebase:firebase-storage:21.0.1")
 }

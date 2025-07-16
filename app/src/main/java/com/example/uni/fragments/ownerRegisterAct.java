@@ -1,9 +1,11 @@
 package com.example.uni.fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -12,12 +14,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.uni.R;
+import com.example.uni.acts.OwnerDashboardAct;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseNetworkException;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -27,6 +39,9 @@ public class ownerRegisterAct extends AppCompatActivity {
 
     private FirebaseFirestore db;
     private FirebaseAuth myAuth;
+    private GoogleSignInClient googleSignInClient;
+    private static final int RC_SIGN_IN = 9001;
+    private static final String TAG = "GoogleAuth";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +50,13 @@ public class ownerRegisterAct extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         myAuth = FirebaseAuth.getInstance();
+        
+        // Configure Google Sign-In
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        googleSignInClient = GoogleSignIn.getClient(this, gso);
 
         EditText usernameEditText = findViewById(R.id.username);
         EditText passwordEditText = findViewById(R.id.pass);
@@ -42,6 +64,7 @@ public class ownerRegisterAct extends AppCompatActivity {
         TextView login = findViewById(R.id.num_sign);
         CheckBox showPasswordCheckBox = findViewById(R.id.showPasswordCheckBox);
         Button btnSignUp = findViewById(R.id.btnSignUp);
+        Button btnGoogleSignUp = findViewById(R.id.btnGoogleSignUp);
 
         login.setOnClickListener(v -> {
             // Launch Login Activity (you should implement this)
@@ -49,6 +72,9 @@ public class ownerRegisterAct extends AppCompatActivity {
             startActivity(intent);
             finish(); // closes current activity
         });
+
+        // Google Sign-Up functionality
+        btnGoogleSignUp.setOnClickListener(v -> signUpWithGoogle());
 
         btnSignUp.setOnClickListener(v -> {
             String username = usernameEditText.getText().toString().trim();
@@ -99,5 +125,61 @@ public class ownerRegisterAct extends AppCompatActivity {
             passwordEditText.setSelection(passwordEditText.getText().length());
             conPasswordEditText.setSelection(conPasswordEditText.getText().length());
         });
+    }
+
+    private void signUpWithGoogle() {
+        Intent signInIntent = googleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
+                firebaseAuthWithGoogle(account.getIdToken());
+            } catch (ApiException e) {
+                Log.w(TAG, "Google sign in failed", e);
+                Toast.makeText(this, "Google sign up failed", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void firebaseAuthWithGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        myAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "signInWithCredential:success");
+                        FirebaseUser user = myAuth.getCurrentUser();
+                        
+                        // Create user profile in Firestore
+                        Map<String, Object> data = new HashMap<>();
+                        data.put("uid", user.getUid());
+                        data.put("name", user.getDisplayName());
+                        data.put("email", user.getEmail());
+                        data.put("role", "user");
+
+                        db.collection("users").document("user").collection("account").document(user.getUid()).set(data);
+                        
+                        Toast.makeText(this, "Google Sign-Up Successful", Toast.LENGTH_SHORT).show();
+                        
+                        // Save login state
+                        SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                        preferences.edit().putBoolean("isLoggedIn", true).apply();
+                        
+                        // Navigate to dashboard
+                        Intent intent = new Intent(this, OwnerDashboardAct.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Log.w(TAG, "signInWithCredential:failure", task.getException());
+                        Toast.makeText(this, "Authentication Failed.", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }
